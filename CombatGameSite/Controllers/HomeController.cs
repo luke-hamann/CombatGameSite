@@ -4,29 +4,32 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CombatGameSite.Controllers
 {
+    [Area("Default")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public IActionResult Leaderboard()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        [HttpGet]
+        public IActionResult Battle()
+        { 
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Battle(int teamID)
+        { //Pass in winning teams ID and add to their score. +10 for win -3 for loss
+            return View();
         }
     }
 }
