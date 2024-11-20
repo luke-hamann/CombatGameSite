@@ -2,6 +2,7 @@
 <html lang="en-us">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"]</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
                         Home
                     </a>
                 </li>
-                @if (Model.currentUser == null)
+                @if (Model.CurrentUser == null)
                 {
                     <li>
                         <a asp-area="Account" asp-controller="Account" asp-action="Login">
@@ -29,7 +30,7 @@
                 else
                 {
                     <li>
-                        Logged in as @Model.currentUser.name
+                        Logged in as @Model.CurrentUser.name
                     </li>
                     <li>
                         <form asp-area="Account" asp-controller="Account" asp-action="Logout" method="post">

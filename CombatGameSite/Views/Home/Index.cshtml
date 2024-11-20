@@ -1,4 +1,43 @@
 ﻿@{
+    Layout = "_LayoutBare";
     ViewData["Title"] = "Combat Game Site";
 }
 
+<ul>
+    <li>
+        <a asp-controller="Home" asp-action="Battle">
+            Fight
+        </a>
+    </li>
+    <li>
+        <a asp-controller="Home" asp-action="Leaderboard">
+            Leaderboard
+        </a>
+    </li>
+    @if (Model.CurrentUser == null)
+    {
+        <li>
+            <a asp-area="Account" asp-controller="Account" asp-action="Login">
+                Login
+            </a>
+        </li>
+        <li>
+            <a asp-area="Account" asp-controller="Account" asp-action="Register">
+                Register
+            </a>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a>
+                Characters
+            </a>
+        </li>
+        <li>
+            <a>
+                Teams
+            </a>
+        </li>
+    }
+</ul>

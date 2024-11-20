@@ -1,17 +1,28 @@
-using System.Diagnostics;
 using CombatGameSite.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CombatGameSite.Controllers
 {
-    [Area("Default")]
     public class HomeController : Controller
     {
+        private readonly CombatContext _context;
+
+        public HomeController(CombatContext context)
+        {
+            _context = context;
+        }
+
+        [NonAction]
+        private User? GetCurrentUser()
+        {
+            return _context.Users.Find(HttpContext.Session.GetInt32("userId"));
+        }
 
         [HttpGet]
+        [Route("/")]
         public IActionResult Index()
         {
-            return View();
+            return View(new { CurrentUser = GetCurrentUser() });
         }
 
         [HttpGet]
