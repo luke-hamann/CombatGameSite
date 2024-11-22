@@ -3,9 +3,11 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
+<h1>
+    Login
+</h1>
 
-<form asp-area="Account" asp-controller="Account" asp-action="Login" method="post">
+<form asp-action="Login" method="post">
     <div asp-validation-for="All"></div>
     <div>
         <label asp-for="Name">
@@ -17,7 +19,7 @@
         <label asp-for="Password">
             Password
         </label>
-        <input asp-for="Password" />
+        <input type="password" asp-for="Password" />
     </div>
     <div>
         <input type="submit" value="Login" />

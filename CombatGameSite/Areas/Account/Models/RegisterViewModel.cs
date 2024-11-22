@@ -14,6 +14,18 @@ namespace CombatGameSite.Areas.Account.Models
         [Required]
         public string? PasswordConfirm { get; set; }
 
-        public User? currentUser { get; set; }
+        public string? Tagline { get; set; }
+
+        public User? CurrentUser { get; set; }
+
+        public User toUser()
+        {
+            var user = new User();
+            user.Id = 0;
+            user.Name = Username ?? "";
+            user.Password = Password ?? "";
+            user.Tagline = Tagline ?? "";
+            return user;
+        }
     }
 }

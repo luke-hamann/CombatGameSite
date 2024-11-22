@@ -2,3 +2,38 @@
 @{
     ViewData["Title"] = "Register";
 }
+
+<h1>
+    Register
+</h1>
+
+<form asp-action="Register" method="post">
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label asp-for="Username">
+            Username
+        </label>
+        <input asp-for="Username" />
+    </div>
+    <div>
+        <label asp-for="Password">
+            Password
+        </label>
+        <input type="password" asp-for="Password" />
+    </div>
+    <div>
+        <label asp-for="PasswordConfirm">
+            Confirm Password
+        </label>
+        <input type="password" asp-for="PasswordConfirm" />
+    </div>
+    <div>
+        <label asp-for="Tagline">
+            Tagline
+        </label>
+        <input asp-for="Tagline" />
+    </div>
+    <div>
+        <input type="submit" value="Register" />
+    </div>
+</form>
