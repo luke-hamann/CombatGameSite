@@ -30,26 +30,6 @@ namespace CombatGameSite.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teams",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Score = table.Column<int>(type: "int", nullable: false),
-                    EntityId1 = table.Column<int>(type: "int", nullable: false),
-                    EntityId2 = table.Column<int>(type: "int", nullable: false),
-                    EntityId3 = table.Column<int>(type: "int", nullable: false),
-                    EntityId4 = table.Column<int>(type: "int", nullable: false),
-                    EntityId5 = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Teams", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -105,6 +85,51 @@ namespace CombatGameSite.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Teams",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    Score = table.Column<int>(type: "int", nullable: true),
+                    Combatant1Id = table.Column<int>(type: "int", nullable: true),
+                    Combatant2Id = table.Column<int>(type: "int", nullable: true),
+                    Combatant3Id = table.Column<int>(type: "int", nullable: true),
+                    Combatant4Id = table.Column<int>(type: "int", nullable: true),
+                    Combatant5Id = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teams", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Teams_Combatants_Combatant1Id",
+                        column: x => x.Combatant1Id,
+                        principalTable: "Combatants",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Teams_Combatants_Combatant2Id",
+                        column: x => x.Combatant2Id,
+                        principalTable: "Combatants",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Teams_Combatants_Combatant3Id",
+                        column: x => x.Combatant3Id,
+                        principalTable: "Combatants",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Teams_Combatants_Combatant4Id",
+                        column: x => x.Combatant4Id,
+                        principalTable: "Combatants",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Teams_Combatants_Combatant5Id",
+                        column: x => x.Combatant5Id,
+                        principalTable: "Combatants",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Skills",
                 columns: new[] { "Id", "Attack", "Cost", "DefenseMultiplier", "Description", "Name", "TypeId" },
@@ -152,25 +177,6 @@ namespace CombatGameSite.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Teams",
-                columns: new[] { "Id", "EntityId1", "EntityId2", "EntityId3", "EntityId4", "EntityId5", "Name", "Score", "UserId" },
-                values: new object[,]
-                {
-                    { 1, 1, 2, 3, 4, 5, "Water Warriors", 150, 1 },
-                    { 2, 6, 7, 8, 9, 10, "Fire Phoenixes", 120, 2 },
-                    { 3, 11, 12, 13, 14, 15, "Wind Striders", 140, 3 },
-                    { 4, 16, 17, 18, 19, 20, "Earth Guardians", 160, 4 },
-                    { 5, 21, 22, 23, 24, 25, "Aqua Knights", 130, 1 },
-                    { 6, 2, 5, 7, 10, 6, "Inferno Lords", 110, 2 },
-                    { 7, 3, 8, 12, 13, 11, "Storm Warriors", 135, 3 },
-                    { 8, 14, 16, 17, 19, 20, "Quake Defenders", 125, 4 },
-                    { 9, 22, 23, 1, 4, 5, "Tidal Fury", 145, 1 },
-                    { 10, 9, 10, 6, 2, 7, "Blazing Souls", 115, 2 },
-                    { 11, 13, 11, 8, 15, 12, "Whirlwind Vanguards", 150, 3 },
-                    { 12, 18, 14, 19, 20, 16, "Rock Titans", 160, 4 }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Name", "Password", "Tagline" },
                 values: new object[,]
@@ -213,6 +219,25 @@ namespace CombatGameSite.Migrations
                     { 25, 0, 90, "Water Sorceress", "A9", "A5", "D3", "Sorceress", 1, 1 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Teams",
+                columns: new[] { "Id", "Combatant1Id", "Combatant2Id", "Combatant3Id", "Combatant4Id", "Combatant5Id", "Name", "Score", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1, 2, 3, 4, 5, "Water Warriors", 150, 1 },
+                    { 2, 6, 7, 8, 9, 10, "Fire Phoenixes", 120, 2 },
+                    { 3, 11, 12, 13, 14, 15, "Wind Striders", 140, 3 },
+                    { 4, 16, 17, 18, 19, 20, "Earth Guardians", 160, 4 },
+                    { 5, 21, 22, 23, 24, 25, "Aqua Knights", 130, 1 },
+                    { 6, 2, 5, 7, 10, 6, "Inferno Lords", 110, 2 },
+                    { 7, 3, 8, 12, 13, 11, "Storm Warriors", 135, 3 },
+                    { 8, 14, 16, 17, 19, 20, "Quake Defenders", 125, 4 },
+                    { 9, 22, 23, 1, 4, 5, "Tidal Fury", 145, 1 },
+                    { 10, 9, 10, 6, 2, 7, "Blazing Souls", 115, 2 },
+                    { 11, 13, 11, 8, 15, 12, "Whirlwind Vanguards", 150, 3 },
+                    { 12, 18, 14, 19, 20, 16, "Rock Titans", 160, 4 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Combatants_SkillPrimaryId",
                 table: "Combatants",
@@ -232,16 +257,41 @@ namespace CombatGameSite.Migrations
                 name: "IX_Combatants_UserId",
                 table: "Combatants",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_Combatant1Id",
+                table: "Teams",
+                column: "Combatant1Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_Combatant2Id",
+                table: "Teams",
+                column: "Combatant2Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_Combatant3Id",
+                table: "Teams",
+                column: "Combatant3Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_Combatant4Id",
+                table: "Teams",
+                column: "Combatant4Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_Combatant5Id",
+                table: "Teams",
+                column: "Combatant5Id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Combatants");
+                name: "Teams");
 
             migrationBuilder.DropTable(
-                name: "Teams");
+                name: "Combatants");
 
             migrationBuilder.DropTable(
                 name: "Skills");

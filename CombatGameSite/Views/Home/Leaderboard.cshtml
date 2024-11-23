@@ -1,0 +1,45 @@
+﻿@model LeaderboardViewModel
+@{
+    ViewData["Title"] = "Leaderboard";
+}
+
+<h1>
+    @ViewData["Title"]
+</h1>
+
+@{ int counter = 1; }
+@foreach (Team team in Model.Teams)
+{
+    <div>
+        <h2>
+            @counter. @team.Name
+        </h2>
+        <p>
+            User: @team.User.Name
+        </p>
+        <p>
+            Score: @team.Score
+        </p>
+        <p>
+            Combatants:
+        </p>
+        <ul>
+            <li>
+                @team.Combatant1.Name
+            </li>
+            <li>
+                @team.Combatant2.Name
+            </li>
+            <li>
+                @team.Combatant3.Name
+            </li>
+            <li>
+                @team.Combatant4.Name
+            </li>
+            <li>
+                @team.Combatant5.Name
+            </li>
+        </ul>
+    </div>
+    counter++;
+}

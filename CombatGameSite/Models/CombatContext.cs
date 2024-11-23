@@ -115,18 +115,18 @@ namespace CombatGameSite.Models
             );
 
             modelBuilder.Entity<Team>().HasData(
-                new Team { Id = 1, UserId = 1, EntityId1 = 1, EntityId2 = 2, EntityId3 = 3, EntityId4 = 4, EntityId5 = 5, Name = "Water Warriors", Score = 150 },
-                new Team { Id = 2, UserId = 2, EntityId1 = 6, EntityId2 = 7, EntityId3 = 8, EntityId4 = 9, EntityId5 = 10, Name = "Fire Phoenixes", Score = 120 },
-                new Team { Id = 3, UserId = 3, EntityId1 = 11, EntityId2 = 12, EntityId3 = 13, EntityId4 = 14, EntityId5 = 15, Name = "Wind Striders", Score = 140 },
-                new Team { Id = 4, UserId = 4, EntityId1 = 16, EntityId2 = 17, EntityId3 = 18, EntityId4 = 19, EntityId5 = 20, Name = "Earth Guardians", Score = 160 },
-                new Team { Id = 5, UserId = 1, EntityId1 = 21, EntityId2 = 22, EntityId3 = 23, EntityId4 = 24, EntityId5 = 25, Name = "Aqua Knights", Score = 130 },
-                new Team { Id = 6, UserId = 2, EntityId1 = 2, EntityId2 = 5, EntityId3 = 7, EntityId4 = 10, EntityId5 = 6, Name = "Inferno Lords", Score = 110 },
-                new Team { Id = 7, UserId = 3, EntityId1 = 3, EntityId2 = 8, EntityId3 = 12, EntityId4 = 13, EntityId5 = 11, Name = "Storm Warriors", Score = 135 },
-                new Team { Id = 8, UserId = 4, EntityId1 = 14, EntityId2 = 16, EntityId3 = 17, EntityId4 = 19, EntityId5 = 20, Name = "Quake Defenders", Score = 125 },
-                new Team { Id = 9, UserId = 1, EntityId1 = 22, EntityId2 = 23, EntityId3 = 1, EntityId4 = 4, EntityId5 = 5, Name = "Tidal Fury", Score = 145 },
-                new Team { Id = 10, UserId = 2, EntityId1 = 9, EntityId2 = 10, EntityId3 = 6, EntityId4 = 2, EntityId5 = 7, Name = "Blazing Souls", Score = 115 },
-                new Team { Id = 11, UserId = 3, EntityId1 = 13, EntityId2 = 11, EntityId3 = 8, EntityId4 = 15, EntityId5 = 12, Name = "Whirlwind Vanguards", Score = 150 },
-                new Team { Id = 12, UserId = 4, EntityId1 = 18, EntityId2 = 14, EntityId3 = 19, EntityId4 = 20, EntityId5 = 16, Name = "Rock Titans", Score = 160 }
+                new Team { Id = 1, UserId = 1, Combatant1Id = 1, Combatant2Id = 2, Combatant3Id = 3, Combatant4Id = 4, Combatant5Id = 5, Name = "Water Warriors", Score = 150 },
+                new Team { Id = 2, UserId = 2, Combatant1Id = 6, Combatant2Id = 7, Combatant3Id = 8, Combatant4Id = 9, Combatant5Id = 10, Name = "Fire Phoenixes", Score = 120 },
+                new Team { Id = 3, UserId = 3, Combatant1Id = 11, Combatant2Id = 12, Combatant3Id = 13, Combatant4Id = 14, Combatant5Id = 15, Name = "Wind Striders", Score = 140 },
+                new Team { Id = 4, UserId = 4, Combatant1Id = 16, Combatant2Id = 17, Combatant3Id = 18, Combatant4Id = 19, Combatant5Id = 20, Name = "Earth Guardians", Score = 160 },
+                new Team { Id = 5, UserId = 1, Combatant1Id = 21, Combatant2Id = 22, Combatant3Id = 23, Combatant4Id = 24, Combatant5Id = 25, Name = "Aqua Knights", Score = 130 },
+                new Team { Id = 6, UserId = 2, Combatant1Id = 2, Combatant2Id = 5, Combatant3Id = 7, Combatant4Id = 10, Combatant5Id = 6, Name = "Inferno Lords", Score = 110 },
+                new Team { Id = 7, UserId = 3, Combatant1Id = 3, Combatant2Id = 8, Combatant3Id = 12, Combatant4Id = 13, Combatant5Id = 11, Name = "Storm Warriors", Score = 135 },
+                new Team { Id = 8, UserId = 4, Combatant1Id = 14, Combatant2Id = 16, Combatant3Id = 17, Combatant4Id = 19, Combatant5Id = 20, Name = "Quake Defenders", Score = 125 },
+                new Team { Id = 9, UserId = 1, Combatant1Id = 22, Combatant2Id = 23, Combatant3Id = 1, Combatant4Id = 4, Combatant5Id = 5, Name = "Tidal Fury", Score = 145 },
+                new Team { Id = 10, UserId = 2, Combatant1Id = 9, Combatant2Id = 10, Combatant3Id = 6, Combatant4Id = 2, Combatant5Id = 7, Name = "Blazing Souls", Score = 115 },
+                new Team { Id = 11, UserId = 3, Combatant1Id = 13, Combatant2Id = 11, Combatant3Id = 8, Combatant4Id = 15, Combatant5Id = 12, Name = "Whirlwind Vanguards", Score = 150 },
+                new Team { Id = 12, UserId = 4, Combatant1Id = 18, Combatant2Id = 14, Combatant3Id = 19, Combatant4Id = 20, Combatant5Id = 16, Name = "Rock Titans", Score = 160 }
             );
         }
     }
