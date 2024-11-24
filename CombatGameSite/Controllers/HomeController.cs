@@ -29,17 +29,19 @@ namespace CombatGameSite.Controllers
         [HttpGet]
         public IActionResult Leaderboard()
         {
-            var model = new LeaderboardViewModel();
-            model.CurrentUser = GetCurrentUser();
-            model.Teams = _context.Teams
-                .Include(t => t.User)
-                .Include(t => t.Combatant1)
-                .Include(t => t.Combatant2)
-                .Include(t => t.Combatant3)
-                .Include(t => t.Combatant4)
-                .Include(t => t.Combatant5)
-                .OrderByDescending(t => t.Score)
-                .ToList();
+            var model = new LeaderboardViewModel()
+            {
+                CurrentUser = GetCurrentUser(),
+                Teams = _context.Teams
+                    .Include(t => t.User)
+                    .Include(t => t.Combatant1)
+                    .Include(t => t.Combatant2)
+                    .Include(t => t.Combatant3)
+                    .Include(t => t.Combatant4)
+                    .Include(t => t.Combatant5)
+                    .OrderByDescending(t => t.Score)
+                    .ToList()
+            };
 
             return View(model);
         }

@@ -30,12 +30,12 @@
     else
     {
         <li>
-            <a>
-                Characters
+            <a asp-controller="User" asp-action="Index" asp-route-id="@Model.CurrentUser.Id" asp-route-section="combatants">
+                Combatants
             </a>
         </li>
         <li>
-            <a>
+            <a asp-controller="User" asp-action="Index" asp-route-id="@Model.CurrentUser.Id" asp-route-section="teams">
                 Teams
             </a>
         </li>
