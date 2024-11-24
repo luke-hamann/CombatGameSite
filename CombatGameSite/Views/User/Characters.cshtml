@@ -1,0 +1,27 @@
+﻿@model UserCombatantsViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = Model.SelectedUser.Name;
+}
+
+<h1>
+    @Model.SelectedUser.Name
+</h1>
+<blockquote>
+    @Model.SelectedUser.Tagline
+</blockquote>
+<p>
+    <a asp-action="Characters">Combatants</a>
+    <a asp-action="Teams">Teams</a>
+</p>
+<h2>
+    Combatants
+</h2>
+<p>
+    @Model.Combatants.Count combatant@(Model.Combatants.Count == 1 ? "" : "s")
+</p>
+@foreach (Combatant combatant in Model.Combatants) {
+    <p>
+        @combatant.Name
+    </p>
+}

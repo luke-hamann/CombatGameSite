@@ -15,7 +15,10 @@
             @counter. @team.Name
         </h2>
         <p>
-            User: @team.User.Name
+            User:
+            <a asp-controller="User" asp-action="Characters" asp-route-id="@team.User.Id">
+                @team.User.Name
+            </a>
         </p>
         <p>
             Score: @team.Score
