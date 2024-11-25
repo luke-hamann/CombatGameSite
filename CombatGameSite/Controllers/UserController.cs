@@ -11,6 +11,7 @@ namespace CombatGameSite.Controllers
         [HttpGet]
         public IActionResult Character()
         {
+
             return View();
         }
         [HttpGet]
