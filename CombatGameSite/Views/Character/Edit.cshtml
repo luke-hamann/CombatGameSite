@@ -1,0 +1,97 @@
+﻿@model CharacterEditViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = Model.Mode + " Character";
+}
+
+<h1>
+    @ViewData["Title"]
+</h1>
+
+<form asp-controller="Character" asp-action="@Model.Mode" method="post">
+    <div asp-validation-summary="All"></div>
+    <div>
+        You can distribute no more than 50 skill points.
+    </div>
+    <div>
+        <label asp-for="@Model.Combatant.Name">
+            Name
+        </label>
+        <input asp-for="@Model.Combatant.Name" />
+    </div>
+    <div>
+        <label asp-for="@Model.Combatant.Health">
+            Health
+        </label>
+        <input asp-for="@Model.Combatant.Health" />
+    </div>
+    <div>
+        <label asp-for="@Model.Combatant.TypeId">
+            Type
+        </label>
+        <select asp-for="@Model.Combatant.TypeId">
+            <option value="0">-</option>
+            <option value="1">Water</option>
+            <option value="2">Fire</option>
+            <option value="3">Wind</option>
+            <option value="4">Earth</option>
+        </select>
+    </div>
+    <div>
+        <label asp-for="@Model.Combatant.Defense">
+            Defense
+        </label>
+        <input asp-for="@Model.Combatant.Defense" />
+    </div>
+    <div>
+        <label asp-for="@Model.Combatant.Species">
+            Species
+        </label>
+        <input asp-for="@Model.Combatant.Species" />
+    </div>
+    <div>
+        <label asp-for="@Model.Combatant.SkillPrimaryId">
+            Primary Skill
+        </label>
+        <select asp-for="@Model.Combatant.SkillPrimaryId">
+            <option value="">-</option>
+            @foreach (Skill skill in Model.Skills)
+            {
+                <option value="@skill.Id">
+                    @skill.Name | $@skill.Cost | @skill.Description
+                </option>
+            }
+        </select>
+    </div>
+    <div>
+        <label asp-for="@Model.Combatant.SkillSecondaryId">
+            Secondary Skill
+        </label>
+        <select asp-for="@Model.Combatant.SkillSecondaryId">
+            <option value="">-</option>
+            @foreach (Skill skill in Model.Skills)
+            {
+                <option value="@skill.Id">
+                    @skill.Name | $@skill.Cost | @skill.Description
+                </option>
+            }
+        </select>
+    </div>
+    <div>
+        <label asp-for="@Model.Combatant.SkillTertiaryId">
+            Tertiary Skill
+        </label>
+        <select asp-for="@Model.Combatant.SkillTertiaryId">
+            <option value="">-</option>
+            @foreach (Skill skill in Model.Skills)
+            {
+                <option value="@skill.Id">
+                    @skill.Name | $@skill.Cost | @skill.Description
+                </option>
+            }
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Submit" />
+    </div>
+</form>

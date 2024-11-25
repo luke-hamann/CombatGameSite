@@ -1,0 +1,80 @@
+﻿@model CharacterIndexViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = Model.Combatant!.Name;
+}
+
+<h1>
+    @Model.Combatant.Name
+</h1>
+<p>
+    User:
+    <a asp-controller="User" asp-action="Index" asp-route-id="@Model.Combatant.User.Id">
+        @Model.Combatant.User.Name
+    </a>
+</p>
+<p>
+    Health: @Model.Combatant.Health
+</p>
+<p>
+    Type: @Model.Combatant.GetType()
+</p>
+<p>
+    Defense: @Model.Combatant.Defense
+</p>
+<p>
+    Species: @Model.Combatant.Species
+</p>
+<h2>
+    Skills
+</h2>
+<ul>
+    <li>
+        @Model.Combatant.SkillPrimary.Name
+        <ul>
+            <li>
+                @Model.Combatant.SkillPrimary.Description
+            </li>
+            <li>
+                Attack:
+                @Model.Combatant.SkillPrimary.Attack
+            </li>
+            <li>
+                Defense Multiplier:
+                @Model.Combatant.SkillPrimary.DefenseMultiplier
+            </li>
+        </ul>
+    </li>
+    <li>
+        @Model.Combatant.SkillSecondary.Name
+        <ul>
+            <li>
+                @Model.Combatant.SkillSecondary.Description
+            </li>
+            <li>
+                Attack:
+                @Model.Combatant.SkillSecondary.Attack
+            </li>
+            <li>
+                Defense Multiplier:
+                @Model.Combatant.SkillSecondary.DefenseMultiplier
+            </li>
+        </ul>
+    </li>
+    <li>
+        @Model.Combatant.SkillTertiary.Name
+        <ul>
+            <li>
+                @Model.Combatant.SkillTertiary.Description
+            </li>
+            <li>
+                Attack:
+                @Model.Combatant.SkillTertiary.Attack
+            </li>
+            <li>
+                Defense Multiplier:
+                @Model.Combatant.SkillTertiary.DefenseMultiplier
+            </li>
+        </ul>
+    </li>
+</ul>

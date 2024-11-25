@@ -18,6 +18,12 @@
     <h2>
         Combatants
     </h2>
+    @if (Model.CurrentUser.Id == Model.SelectedUser.Id)
+    {
+        <p>
+            <a asp-controller="Character" asp-action="Add">Create Combatant</a>
+        </p>
+    }
     <p>
         @Model.Combatants.Count
         combatant@(Model.Combatants.Count == 1 ? "" : "s")
@@ -34,6 +40,12 @@ else
     <h2>
         Teams
     </h2>
+    @if (Model.CurrentUser.Id == Model.SelectedUser.Id)
+    {
+        <p>
+            <a asp-controller="Team" asp-action="Add">Create Team</a>
+        </p>
+    }
     <p>
         @Model.Teams.Count
         team@(Model.Teams.Count == 1 ? "" : "s")
