@@ -9,22 +9,22 @@ namespace CombatGameSite.Models
         public int? UserId { get; set; }
         public User? User { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a name.")]
         public string? Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a health value.")]
         [Range(0, 100)]
         public int? Health { get; set; }
 
-        [Required]
-        [Range(1, 4)]
+        [Required(ErrorMessage = "Please select an element type.")]
+        [Range(1, 4, ErrorMessage = "Please select an element type.")]
         public int? TypeId { get; set; }
 
-        [Required]
-        [Range(0, 100)]
+        [Required(ErrorMessage = "Please enter a defense value.")]
+        [Range(0, 50, ErrorMessage = "Please enter a defense value between 0 and 50.")]
         public int? Defense { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a species.")]
         public string? Species { get; set; }
 
         public string? SkillPrimaryId { get; set; }
@@ -46,6 +46,17 @@ namespace CombatGameSite.Models
                 case 4: return "Earth";
                 default: return "";
             }
+        }
+
+        public bool hasValidSkillPointDistribution()
+        {
+            int total =
+                (int)((Health ?? 0) +
+                (Defense ?? 0) +
+                (SkillPrimary?.Cost != null ? SkillPrimary.Cost : 0) +
+                (SkillSecondary?.Cost != null ? SkillSecondary.Cost : 0) +
+                (SkillTertiary?.Cost != null ? SkillTertiary.Cost : 0));
+            return total <= 50;
         }
     }
 }

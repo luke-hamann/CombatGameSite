@@ -93,5 +93,11 @@
     </div>
     <div>
         <input type="submit" value="Submit" />
+        @if (Model.Mode == "Edit")
+        {
+            <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Combatant.Id">
+                Cancel
+            </a>
+        }
     </div>
 </form>

@@ -7,7 +7,7 @@
 namespace CombatGameSite.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,11 +51,11 @@ namespace CombatGameSite.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Health = table.Column<int>(type: "int", nullable: true),
-                    TypeId = table.Column<int>(type: "int", nullable: true),
-                    Defense = table.Column<int>(type: "int", nullable: true),
-                    Species = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Health = table.Column<int>(type: "int", nullable: false),
+                    TypeId = table.Column<int>(type: "int", nullable: false),
+                    Defense = table.Column<int>(type: "int", nullable: false),
+                    Species = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SkillPrimaryId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     SkillSecondaryId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     SkillTertiaryId = table.Column<string>(type: "nvarchar(450)", nullable: true)
@@ -127,6 +127,11 @@ namespace CombatGameSite.Migrations
                         name: "FK_Teams_Combatants_Combatant5Id",
                         column: x => x.Combatant5Id,
                         principalTable: "Combatants",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Teams_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -282,6 +287,11 @@ namespace CombatGameSite.Migrations
                 name: "IX_Teams_Combatant5Id",
                 table: "Teams",
                 column: "Combatant5Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_UserId",
+                table: "Teams",
+                column: "UserId");
         }
 
         /// <inheritdoc />

@@ -19,15 +19,33 @@ namespace CombatGameSite.Controllers
             return _context.Users.Find(HttpContext.Session.GetInt32("userId"));
         }
 
+        [NonAction]
+        private Combatant PopulateCombatantWithSkills(Combatant combatant)
+        {
+            if (combatant.SkillPrimaryId != null)
+            {
+                combatant.SkillPrimary = _context.Skills.Find(combatant.SkillPrimaryId);
+            }
+
+            if (combatant.SkillSecondaryId != null)
+            {
+                combatant.SkillSecondary = _context.Skills.Find(combatant.SkillSecondaryId);
+            }
+
+            if (combatant.SkillTertiaryId != null)
+            {
+                combatant.SkillTertiary = _context.Skills.Find(combatant.SkillTertiaryId);
+            }
+
+            return combatant;
+        }
+
         [HttpGet]
         [Route("/character/{id}/")]
         public IActionResult Index(int id)
         {
             Combatant? combatant = _context.Combatants
                 .Include(c => c.User)
-                .Include(c => c.SkillPrimary)
-                .Include(c => c.SkillSecondary)
-                .Include(c => c.SkillTertiary)
                 .Where(c => c.Id == id)
                 .FirstOrDefault();
 
@@ -35,6 +53,8 @@ namespace CombatGameSite.Controllers
             {
                 return NotFound();
             }
+
+            combatant = PopulateCombatantWithSkills(combatant);
 
             var model = new CharacterIndexViewModel
             {
@@ -49,13 +69,14 @@ namespace CombatGameSite.Controllers
         [Route("/character/add/")]
         public IActionResult Add() 
         {
-            var model = new CharacterEditViewModel();
-
-            model.CurrentUser = GetCurrentUser();
+            var model = new CharacterEditViewModel()
+            {
+                CurrentUser = GetCurrentUser()
+            };
 
             if (model.CurrentUser == null)
             {
-                return RedirectToAction("Login", "Account", new { area = "Account" });
+                return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
 
             model.Mode = "Add";
@@ -70,21 +91,28 @@ namespace CombatGameSite.Controllers
         [Route("/character/add/")]
         public IActionResult Add(CharacterEditViewModel model)
         {
-            model.Mode = "Add";
+            // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
-            model.Skills = _context.Skills
-                .OrderBy(s => s.Name)
-                .ToList();
-
             if (model.CurrentUser == null)
             {
-                return RedirectToAction("Login", "Account", new { area = "Account" });
+                return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
-
             model.Combatant.UserId = model.CurrentUser.Id;
 
+            // Ensure the skill point distribution is valid
+            model.Combatant = PopulateCombatantWithSkills(model.Combatant);
+            if (!model.Combatant.hasValidSkillPointDistribution())
+            {
+                ModelState.AddModelError("", "Not enough skill points.");
+            }
+
+            // Show the form again if there were validation errors
             if (!ModelState.IsValid)
             {
+                model.Mode = "Add";
+                model.Skills = _context.Skills
+                    .OrderBy(s => s.Name)
+                    .ToList();
                 return View("Edit", model);
             }
 
@@ -95,12 +123,82 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpGet]
+        [Route("/character/{id}/edit/")]
+        public IActionResult Edit(int id)
+        {
+            var model = new CharacterEditViewModel()
+            {
+                CurrentUser = GetCurrentUser()
+            };
+
+            if (model.CurrentUser == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "Account" });
+            }
+
+            model.Combatant = _context.Combatants.Find(id);
+
+            if (model.Combatant == null || model.Combatant.UserId != model.CurrentUser.Id)
+            {
+                return NotFound();
+            }
+
+            model.Mode = "Edit";
+            model.Skills = _context.Skills.OrderBy(s => s.Name).ToList();
+            return View("Edit", model);
+        }
+
+        [HttpPost]
+        [Route("/character/{id}/edit/")]
+        public IActionResult Edit(CharacterEditViewModel model, int id)
+        {
+            // Ensure the user is logged in
+            model.CurrentUser = GetCurrentUser();
+            if (model.CurrentUser == null)
+            {
+                return NotFound();
+            }
+
+            // Ensure the combatant exists and is owned by the logged in user
+            var combatant = _context.Combatants.Find(id);
+            if (combatant == null || combatant.UserId != model.CurrentUser.Id)
+            {
+                return NotFound();
+            }
+            _context.ChangeTracker.Clear(); // EF Core can't update the combatant without this
+
+            model.Combatant.Id = id;
+            model.Combatant.UserId = model.CurrentUser.Id;
+
+            // Ensure the skill point distribution is valid
+            model.Combatant = PopulateCombatantWithSkills(model.Combatant);
+            if (!model.Combatant.hasValidSkillPointDistribution())
+            {
+                ModelState.AddModelError("", "Not enough skill points.");
+            }
+
+            // Show the form again if there were validation errors
+            if (!ModelState.IsValid)
+            {
+                model.Mode = "Edit";
+                model.Skills = _context.Skills.OrderBy(s => s.Name).ToList();
+                return View("Edit", model);
+            }
+
+            _context.Update(model.Combatant);
+            _context.SaveChanges();
+            return RedirectToAction("Index", new { id = model.Combatant.Id });
+        }
+
+        [HttpGet]
+        [Route("/character/{id}/delete/")]
         public IActionResult Delete()
         { 
             return View();
         }
 
         [HttpPost]
+        [Route("/character/{id}/delete/")]
         public IActionResult Delete(int character)
         { //Change int to character class once built
             return View();

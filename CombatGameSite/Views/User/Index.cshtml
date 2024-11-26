@@ -18,7 +18,7 @@
     <h2>
         Combatants
     </h2>
-    @if (Model.CurrentUser.Id == Model.SelectedUser.Id)
+    @if (Model.CurrentUser?.Id == Model.SelectedUser.Id)
     {
         <p>
             <a asp-controller="Character" asp-action="Add">Create Combatant</a>
@@ -31,7 +31,7 @@
     @foreach (Combatant combatant in Model.Combatants)
     {
         <p>
-            @combatant.Name
+            <a asp-controller="Character" asp-action="Index" asp-route-id="@combatant.Id">@combatant.Name</a>
         </p>
     }
 }
@@ -40,7 +40,7 @@ else
     <h2>
         Teams
     </h2>
-    @if (Model.CurrentUser.Id == Model.SelectedUser.Id)
+    @if (Model.CurrentUser?.Id == Model.SelectedUser.Id)
     {
         <p>
             <a asp-controller="Team" asp-action="Add">Create Team</a>
@@ -57,19 +57,19 @@ else
         </h3>
         <ul>
             <li>
-                @team.Combatant1.Name
+                <a asp-controller="Character" asp-action="Index" asp-route-id="@team.Combatant1.Id">@team.Combatant1.Name</a>
             </li>
             <li>
-                @team.Combatant2.Name
+                <a asp-controller="Character" asp-action="Index" asp-route-id="@team.Combatant2.Id">@team.Combatant2.Name</a>
             </li>
             <li>
-                @team.Combatant3.Name
+                <a asp-controller="Character" asp-action="Index" asp-route-id="@team.Combatant3.Id">@team.Combatant3.Name</a>
             </li>
             <li>
-                @team.Combatant4.Name
+                <a asp-controller="Character" asp-action="Index" asp-route-id="@team.Combatant4.Id">@team.Combatant4.Name</a>
             </li>
             <li>
-                @team.Combatant5.Name
+                <a asp-controller="Character" asp-action="Index" asp-route-id="@team.Combatant5.Id">@team.Combatant5.Name</a>
             </li>
         </ul>
     }

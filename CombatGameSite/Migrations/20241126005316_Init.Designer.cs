@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CombatGameSite.Migrations
 {
     [DbContext(typeof(CombatContext))]
-    [Migration("20241123001716_init")]
-    partial class init
+    [Migration("20241126005316_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,12 +34,15 @@ namespace CombatGameSite.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
                     b.Property<int?>("Defense")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("Health")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SkillPrimaryId")
@@ -52,9 +55,11 @@ namespace CombatGameSite.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Species")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TypeId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("UserId")
@@ -864,6 +869,8 @@ namespace CombatGameSite.Migrations
 
                     b.HasIndex("Combatant5Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Teams");
 
                     b.HasData(
@@ -1117,6 +1124,10 @@ namespace CombatGameSite.Migrations
                         .WithMany()
                         .HasForeignKey("Combatant5Id");
 
+                    b.HasOne("CombatGameSite.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Combatant1");
 
                     b.Navigation("Combatant2");
@@ -1126,6 +1137,8 @@ namespace CombatGameSite.Migrations
                     b.Navigation("Combatant4");
 
                     b.Navigation("Combatant5");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

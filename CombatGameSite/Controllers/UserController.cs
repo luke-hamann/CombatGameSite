@@ -29,25 +29,28 @@ namespace CombatGameSite.Controllers
                 return NotFound();
             }
 
-            User? selectedUser = _context.Users.Find(id);
+            var model = new UserViewModel()
+            {
+                CurrentUser = GetCurrentUser(),
+                SelectedUser = _context.Users.Find(id),
+                SelectedSection = section
+            };
 
-            if (selectedUser == null)
+            if (model.SelectedUser == null)
             {
                 return NotFound();
             }
 
-            List<Combatant> combatants = [];
-            List<Team> teams = [];
-            if (section == "combatants")
+            if (model.SelectedSection == "combatants")
             {
-                combatants = _context.Combatants
+                model.Combatants = _context.Combatants
                     .Where(c => c.UserId == id)
                     .OrderBy(c => c.Name)
                     .ToList();
             }
             else
             {
-                teams = _context.Teams
+                model.Teams = _context.Teams
                     .Where(t => t.UserId == id)
                     .Include(t => t.Combatant1)
                     .Include(t => t.Combatant2)
@@ -57,15 +60,6 @@ namespace CombatGameSite.Controllers
                     .OrderBy(t => t.Name)
                     .ToList();
             }
-
-            var model = new UserViewModel
-            {
-                CurrentUser = GetCurrentUser(),
-                SelectedUser = selectedUser,
-                SelectedSection = section,
-                Combatants = combatants,
-                Teams = teams
-            };
 
             return View(model);
         }
