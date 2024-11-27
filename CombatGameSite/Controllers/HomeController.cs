@@ -47,13 +47,18 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpGet]
-        public ViewResult Battle()
+        public IActionResult Battle()
         {
-            var model = new BattleFormViewModel();
-            model.CurrentUser = GetCurrentUser();
-            model.Teams = _context.Teams
-                .OrderBy(t => t.Name)
-                .ToList();
+            var model = new BattleFormViewModel
+            {
+                CurrentUser = GetCurrentUser(),
+                Teams = _context.Teams.OrderBy(t => t.Name).ToList()
+            };
+
+            if (model.CurrentUser == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = "Account" });
+            }
 
             return View("BattleForm", model);
         }
