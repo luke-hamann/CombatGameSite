@@ -26,23 +26,7 @@
         <p>
             Combatants:
         </p>
-        <ul>
-            <li>
-                <a asp-controller="Character" asp-action="Index" asp-route-id="@team.Combatant1.Id">@team.Combatant1.Name</a>
-            </li>
-            <li>
-                <a asp-controller="Character" asp-action="Index" asp-route-id="@team.Combatant2.Id">@team.Combatant2.Name</a>
-            </li>
-            <li>
-                <a asp-controller="Character" asp-action="Index" asp-route-id="@team.Combatant3.Id">@team.Combatant3.Name</a>
-            </li>
-            <li>
-                <a asp-controller="Character" asp-action="Index" asp-route-id="@team.Combatant4.Id">@team.Combatant4.Name</a>
-            </li>
-            <li>
-                <a asp-controller="Character" asp-action="Index" asp-route-id="@team.Combatant5.Id">@team.Combatant5.Name</a>
-            </li>
-        </ul>
+        @await Html.PartialAsync("TeamCombatantList", team)
     </div>
     counter++;
 }

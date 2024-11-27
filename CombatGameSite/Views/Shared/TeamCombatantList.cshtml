@@ -1,0 +1,33 @@
+﻿@model Team
+<ul>
+    @if (Model.Combatant1 != null)
+    {
+        <li>
+            <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Combatant1.Id">@Model.Combatant1.Name</a>
+        </li>
+    }
+    @if (Model.Combatant2 != null)
+    {
+        <li>
+            <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Combatant2.Id">@Model.Combatant2.Name</a>
+        </li>
+    }
+    @if (Model.Combatant3 != null)
+    {
+        <li>
+            <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Combatant3.Id">@Model.Combatant3.Name</a>
+        </li>
+    }
+    @if (Model.Combatant4 != null)
+    {
+        <li>
+            <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Combatant4.Id">@Model.Combatant4.Name</a>
+        </li>
+    }
+    @if (Model.Combatant5 != null)
+    {
+        <li>
+            <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Combatant5.Id">@Model.Combatant5.Name</a>
+        </li>
+    }
+</ul>

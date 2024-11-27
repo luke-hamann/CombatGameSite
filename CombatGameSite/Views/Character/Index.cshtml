@@ -7,7 +7,7 @@
 <h1>
     @Model.Combatant.Name
 </h1>
-@if (Model.Combatant.UserId == Model.CurrentUser.Id){
+@if (Model.Combatant.UserId == Model.CurrentUser?.Id){
     <p>
         <a asp-controller="Character" asp-action="Edit" asp-route-id="@Model.Combatant.Id">Edit</a>
         <a asp-controller="Character" asp-action="Delete" asp-route-id="@Model.Combatant.Id">Delete</a>
