@@ -2,14 +2,7 @@
 <html lang="en-us">
 <head>
     <meta charset="utf-8" />
-<<<<<<< Updated upstream
-=======
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="~/css" asp-append-version="true" />
-    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
->>>>>>> Stashed changes
     <title>@ViewData["Title"]</title>
 </head>
 <body>
@@ -21,7 +14,7 @@
                         Home
                     </a>
                 </li>
-                @if (Model.currentUser == null)
+                @if (Model.CurrentUser == null)
                 {
                     <li>
                         <a asp-area="Account" asp-controller="Account" asp-action="Login">
@@ -37,7 +30,7 @@
                 else
                 {
                     <li>
-                        Logged in as @Model.currentUser.name
+                        Logged in as @Model.CurrentUser.Name
                     </li>
                     <li>
                         <form asp-area="Account" asp-controller="Account" asp-action="Logout" method="post">

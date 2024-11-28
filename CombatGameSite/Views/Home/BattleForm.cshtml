@@ -1,0 +1,28 @@
+﻿@model BattleFormViewModel
+@{
+    Layout = "_LayoutBare";
+    ViewData["Title"] = "Battle";
+}
+
+<h1>
+    Battle
+</h1>
+
+<form asp-action="Battle" method="post">
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label asp-for="Team1Id">
+            Team 1
+        </label>
+        <select asp-for="Team1Id" asp-items="@(new SelectList(Model.Teams, "Id", "Name"))"></select>
+    </div>
+    <div>
+        <label asp-for="Team2Id">
+            Team 2
+        </label>
+        <select asp-for="Team2Id" asp-items="@(new SelectList(Model.Teams, "Id", "Name"))"></select>
+    </div>
+    <div>
+        <input type="submit" value="BATTLE!!!" />
+    </div>
+</form>

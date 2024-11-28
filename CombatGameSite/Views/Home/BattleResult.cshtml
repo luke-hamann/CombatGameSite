@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "_LayoutBare";
+    ViewData["Title"] = "Battle Result";
+}
+
+<h1>
+    Battle Result
+</h1>
+<p>
+    @Model.Winner.Name beat @Model.Loser.Name
+</p>
+<p>
+    @Model.Winner.Name: @(Model.Winner.Score - 10) => @Model.Winner.Score
+</p>
+<p>
+    @Model.Loser.Name: @(Model.Loser.Score + 3) => @Model.Loser.Score
+</p>
+<p>
+    <a asp-action="Battle">Play Again</a>
+    <a asp-action="Index">Go Home</a>
+</p>
+@if (Model.CombatLog.Count > 0) {
+    <p>
+        Combat Log:
+    </p>
+    <ol>
+        @foreach (var logEntry in Model.CombatLog) {
+            <li>
+                @logEntry
+            </li>
+        }
+    </ol>
+}

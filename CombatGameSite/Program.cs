@@ -10,6 +10,12 @@ builder.Services.AddDbContext<CombatContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("CombatContext")));
 
+builder.Services.AddRouting(options =>
+{
+    options.LowercaseUrls = true;
+    options.AppendTrailingSlash = true;
+});
+
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 

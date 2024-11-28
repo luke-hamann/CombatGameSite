@@ -24,19 +24,24 @@ namespace CombatGameSite.Areas.Account.Controllers
         [Route("login")]
         public IActionResult Login()
         {
-            if (ViewBag.currentUser != null)
+            var loginViewModel = new LoginViewModel();
+            loginViewModel.CurrentUser = GetCurrentUser();
+
+            if (loginViewModel.CurrentUser != null)
             {
                 return Redirect("/");
             }
-
-            return View(new LoginViewModel());
+            
+            return View(loginViewModel);
         }
 
         [HttpPost]
         [Route("login")]
         public IActionResult Login(LoginViewModel loginViewModel)
         {
-            if (ViewBag.currentUser != null)
+            loginViewModel.CurrentUser = GetCurrentUser();
+
+            if (loginViewModel.CurrentUser != null)
             {
                 return Redirect("/");
             }
@@ -60,9 +65,64 @@ namespace CombatGameSite.Areas.Account.Controllers
             return Redirect("/");
         }
 
+        [HttpGet]
+        [Route("register")]
+        public IActionResult Register()
+        {
+            var registerViewModel = new RegisterViewModel();
+            registerViewModel.CurrentUser = GetCurrentUser();
+
+            if (registerViewModel.CurrentUser != null)
+            {
+                return Redirect("/");
+            }
+
+            return View(registerViewModel);
+        }
+
+        [HttpPost]
+        [Route("register")]
+        public IActionResult Register(RegisterViewModel registerViewModel)
+        {
+            registerViewModel.CurrentUser = GetCurrentUser();
+
+            if (registerViewModel.CurrentUser != null)
+            {
+                return Redirect("/");
+            }
+
+            if (registerViewModel.Username != null)
+            {
+                User? conflictingUser = _context.Users
+                    .Where(u => u.Name == registerViewModel.Username)
+                    .FirstOrDefault();
+                if (conflictingUser != null)
+                {
+                    ModelState.AddModelError("", "Username is taken.");
+                }
+            }
+
+            if (registerViewModel.Password != registerViewModel.PasswordConfirm)
+            {
+                ModelState.AddModelError("", "Passwords do not match.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(registerViewModel);
+            }
+
+            var user = registerViewModel.toUser();
+            _context.Add(user);
+            _context.SaveChanges();
+
+            HttpContext.Session.SetInt32("userId", user.Id);
+            return Redirect("/");
+        }
+
         [HttpPost]
         [Route("logout")]
-        public IActionResult Logout(string returnTo = "/")
+        public RedirectResult Logout(string returnTo = "/")
         {
             HttpContext.Session.SetInt32("userId", 0);
             return Redirect(returnTo);

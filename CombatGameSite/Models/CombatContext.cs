@@ -2,15 +2,12 @@
 
 namespace CombatGameSite.Models
 {
-    public class CombatContext : DbContext
+    public class CombatContext(DbContextOptions<CombatContext> options) : DbContext(options)
     {
-        public CombatContext(DbContextOptions<CombatContext> options)
-            : base(options)
-        { }
-
-        public DbSet<User> Users { get; set; }
-
-        public DbSet<Skill> Skills { get; set; }
+        public required DbSet<User> Users { get; set; }
+        public required DbSet<Skill> Skills { get; set; }
+        public required DbSet<Combatant> Combatants { get; set; }
+        public required DbSet<Team> Teams { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -87,6 +84,49 @@ namespace CombatGameSite.Models
                 new Skill { Id = "A13", TypeId = 3, Cost = 29, Name = "Storm Strike", Description = "A devastating lightning-charged wind attack.", Attack = 37, DefenseMultiplier = 1.0 },
                 new Skill { Id = "D13", TypeId = 1, Cost = 20, Name = "Bubble Shield", Description = "Encases the user in a protective bubble.", Attack = 0, DefenseMultiplier = 1.6 },
                 new Skill { Id = "H13", TypeId = 2, Cost = 12, Name = "Ember Heal", Description = "A healing ember that soothes wounds.", Attack = 0, DefenseMultiplier = 1.1 }
+            );
+
+            modelBuilder.Entity<Combatant>().HasData(
+                new Combatant { Id = 1, UserId = 1, Name = "Aqua Warrior", Health = 100, TypeId = 1, Defense = 0, Species = "Human", SkillPrimaryId = "A1", SkillSecondaryId = "A2", SkillTertiaryId = "D1" },
+                new Combatant { Id = 2, UserId = 2, Name = "Flame Destroyer", Health = 95, TypeId = 2, Defense = 10, Species = "Elf", SkillPrimaryId = "A3", SkillSecondaryId = "A4", SkillTertiaryId = "D3" },
+                new Combatant { Id = 3, UserId = 3, Name = "Wind Ninja", Health = 100, TypeId = 3, Defense = 0, Species = "Ninja", SkillPrimaryId = "A5", SkillSecondaryId = "A6", SkillTertiaryId = "D2" },
+                new Combatant { Id = 4, UserId = 4, Name = "Earth Titan", Health = 100, TypeId = 4, Defense = 20, Species = "Giant", SkillPrimaryId = "A7", SkillSecondaryId = "A8", SkillTertiaryId = "D4" },
+                new Combatant { Id = 5, UserId = 1, Name = "Water Sage", Health = 100, TypeId = 1, Defense = 10, Species = "Mage", SkillPrimaryId = "A9", SkillSecondaryId = "A10", SkillTertiaryId = "H1" },
+                new Combatant { Id = 6, UserId = 2, Name = "Fire Knight", Health = 80, TypeId = 2, Defense = 15, Species = "Knight", SkillPrimaryId = "A11", SkillSecondaryId = "A12", SkillTertiaryId = "D1" },
+                new Combatant { Id = 7, UserId = 3, Name = "Wind Shaman", Health = 100, TypeId = 3, Defense = 0, Species = "Shaman", SkillPrimaryId = "A13", SkillSecondaryId = "A4", SkillTertiaryId = "H2" },
+                new Combatant { Id = 8, UserId = 4, Name = "Earth Wizard", Health = 90, TypeId = 4, Defense = 25, Species = "Wizard", SkillPrimaryId = "A7", SkillSecondaryId = "A6", SkillTertiaryId = "D2" },
+                new Combatant { Id = 9, UserId = 1, Name = "Water Spirit", Health = 85, TypeId = 1, Defense = 5, Species = "Spirit", SkillPrimaryId = "A7", SkillSecondaryId = "A8", SkillTertiaryId = "H3" },
+                new Combatant { Id = 10, UserId = 2, Name = "Flame Phoenix", Health = 100, TypeId = 2, Defense = 5, Species = "Phoenix", SkillPrimaryId = "A9", SkillSecondaryId = "A2", SkillTertiaryId = "D3" },
+                new Combatant { Id = 11, UserId = 3, Name = "Wind Warrior", Health = 80, TypeId = 3, Defense = 10, Species = "Warrior", SkillPrimaryId = "A2", SkillSecondaryId = "A2", SkillTertiaryId = "D4" },
+                new Combatant { Id = 12, UserId = 4, Name = "Earth Golem", Health = 95, TypeId = 4, Defense = 30, Species = "Golem", SkillPrimaryId = "A2", SkillSecondaryId = "A4", SkillTertiaryId = "D1" },
+                new Combatant { Id = 13, UserId = 1, Name = "Water Knight", Health = 90, TypeId = 1, Defense = 20, Species = "Knight", SkillPrimaryId = "A5", SkillSecondaryId = "A6", SkillTertiaryId = "H4" },
+                new Combatant { Id = 14, UserId = 2, Name = "Fire Sorcerer", Health = 100, TypeId = 2, Defense = 5, Species = "Sorcerer", SkillPrimaryId = "A7", SkillSecondaryId = "A8", SkillTertiaryId = "D2" },
+                new Combatant { Id = 15, UserId = 3, Name = "Wind Elf", Health = 80, TypeId = 3, Defense = 15, Species = "Elf", SkillPrimaryId = "A9", SkillSecondaryId = "A3", SkillTertiaryId = "D3" },
+                new Combatant { Id = 16, UserId = 4, Name = "Earth Monk", Health = 100, TypeId = 4, Defense = 35, Species = "Monk", SkillPrimaryId = "A3", SkillSecondaryId = "A2", SkillTertiaryId = "D4" },
+                new Combatant { Id = 17, UserId = 1, Name = "Water Guardian", Health = 90, TypeId = 1, Defense = 10, Species = "Guardian", SkillPrimaryId = "A3", SkillSecondaryId = "A4", SkillTertiaryId = "H5" },
+                new Combatant { Id = 18, UserId = 2, Name = "Fire Wizard", Health = 85, TypeId = 2, Defense = 10, Species = "Wizard", SkillPrimaryId = "A5", SkillSecondaryId = "A6", SkillTertiaryId = "D1" },
+                new Combatant { Id = 19, UserId = 3, Name = "Wind Dragon", Health = 95, TypeId = 3, Defense = 5, Species = "Dragon", SkillPrimaryId = "A7", SkillSecondaryId = "A8", SkillTertiaryId = "D2" },
+                new Combatant { Id = 20, UserId = 4, Name = "Earth Demon", Health = 100, TypeId = 4, Defense = 50, Species = "Demon", SkillPrimaryId = "A9", SkillSecondaryId = "A4", SkillTertiaryId = "D3" },
+                new Combatant { Id = 21, UserId = 1, Name = "Water Monk", Health = 100, TypeId = 1, Defense = 5, Species = "Monk", SkillPrimaryId = "A1", SkillSecondaryId = "A2", SkillTertiaryId = "H6" },
+                new Combatant { Id = 22, UserId = 2, Name = "Fire Samurai", Health = 90, TypeId = 2, Defense = 15, Species = "Samurai", SkillPrimaryId = "A3", SkillSecondaryId = "A4", SkillTertiaryId = "D4" },
+                new Combatant { Id = 23, UserId = 3, Name = "Wind Swordsman", Health = 80, TypeId = 3, Defense = 20, Species = "Swordsman", SkillPrimaryId = "A5", SkillSecondaryId = "A6", SkillTertiaryId = "D1" },
+                new Combatant { Id = 24, UserId = 4, Name = "Earth Beast", Health = 100, TypeId = 4, Defense = 40, Species = "Beast", SkillPrimaryId = "A7", SkillSecondaryId = "A8", SkillTertiaryId = "D2" },
+                new Combatant { Id = 25, UserId = 1, Name = "Water Sorceress", Health = 90, TypeId = 1, Defense = 0, Species = "Sorceress", SkillPrimaryId = "A9", SkillSecondaryId = "A5", SkillTertiaryId = "D3" }
+            );
+
+            modelBuilder.Entity<Team>().HasData(
+                new Team { Id = 1, UserId = 1, Combatant1Id = 1, Combatant2Id = 2, Combatant3Id = 3, Combatant4Id = 4, Combatant5Id = 5, Name = "Water Warriors", Score = 150 },
+                new Team { Id = 2, UserId = 2, Combatant1Id = 6, Combatant2Id = 7, Combatant3Id = 8, Combatant4Id = 9, Combatant5Id = 10, Name = "Fire Phoenixes", Score = 120 },
+                new Team { Id = 3, UserId = 3, Combatant1Id = 11, Combatant2Id = 12, Combatant3Id = 13, Combatant4Id = 14, Combatant5Id = 15, Name = "Wind Striders", Score = 140 },
+                new Team { Id = 4, UserId = 4, Combatant1Id = 16, Combatant2Id = 17, Combatant3Id = 18, Combatant4Id = 19, Combatant5Id = 20, Name = "Earth Guardians", Score = 160 },
+                new Team { Id = 5, UserId = 1, Combatant1Id = 21, Combatant2Id = 22, Combatant3Id = 23, Combatant4Id = 24, Combatant5Id = 25, Name = "Aqua Knights", Score = 130 },
+                new Team { Id = 6, UserId = 2, Combatant1Id = 2, Combatant2Id = 5, Combatant3Id = 7, Combatant4Id = 10, Combatant5Id = 6, Name = "Inferno Lords", Score = 110 },
+                new Team { Id = 7, UserId = 3, Combatant1Id = 3, Combatant2Id = 8, Combatant3Id = 12, Combatant4Id = 13, Combatant5Id = 11, Name = "Storm Warriors", Score = 135 },
+                new Team { Id = 8, UserId = 4, Combatant1Id = 14, Combatant2Id = 16, Combatant3Id = 17, Combatant4Id = 19, Combatant5Id = 20, Name = "Quake Defenders", Score = 125 },
+                new Team { Id = 9, UserId = 1, Combatant1Id = 22, Combatant2Id = 23, Combatant3Id = 1, Combatant4Id = 4, Combatant5Id = 5, Name = "Tidal Fury", Score = 145 },
+                new Team { Id = 10, UserId = 2, Combatant1Id = 9, Combatant2Id = 10, Combatant3Id = 6, Combatant4Id = 2, Combatant5Id = 7, Name = "Blazing Souls", Score = 115 },
+                new Team { Id = 11, UserId = 3, Combatant1Id = 13, Combatant2Id = 11, Combatant3Id = 8, Combatant4Id = 15, Combatant5Id = 12, Name = "Whirlwind Vanguards", Score = 150 },
+                new Team { Id = 12, UserId = 4, Combatant1Id = 18, Combatant2Id = 14, Combatant3Id = 19, Combatant4Id = 20, Combatant5Id = 16, Name = "Rock Titans", Score = 160 }
             );
         }
     }
