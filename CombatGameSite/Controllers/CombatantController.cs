@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CombatGameSite.Controllers
 {
-    public class CharacterController : Controller
+    public class CombatantController : Controller
     {
         private CombatContext _context;
 
-        public CharacterController(CombatContext context)
+        public CombatantController(CombatContext context)
         {
             _context = context;
         }
@@ -41,7 +41,7 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpGet]
-        [Route("/character/{id}/")]
+        [Route("/combatant/{id}/")]
         public IActionResult Index(int id)
         {
             Combatant? combatant = _context.Combatants
@@ -56,7 +56,7 @@ namespace CombatGameSite.Controllers
 
             combatant = PopulateCombatantWithSkills(combatant);
 
-            var model = new CharacterIndexViewModel
+            var model = new CombatantIndexViewModel
             {
                 CurrentUser = GetCurrentUser(),
                 Combatant = combatant
@@ -66,10 +66,10 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpGet]
-        [Route("/character/add/")]
+        [Route("/combatant/add/")]
         public IActionResult Add() 
         {
-            var model = new CharacterEditViewModel()
+            var model = new CombatantEditViewModel()
             {
                 CurrentUser = GetCurrentUser()
             };
@@ -88,8 +88,8 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpPost]
-        [Route("/character/add/")]
-        public IActionResult Add(CharacterEditViewModel model)
+        [Route("/combatant/add/")]
+        public IActionResult Add(CombatantEditViewModel model)
         {
             // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
@@ -98,6 +98,16 @@ namespace CombatGameSite.Controllers
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
             model.Combatant.UserId = model.CurrentUser.Id;
+
+            // Ensure the combatant name is unique
+            var combatant = _context.Combatants
+                .Where(c => c.UserId == model.CurrentUser.Id && c.Name == model.Combatant.Name)
+                .FirstOrDefault();
+            _context.ChangeTracker.Clear();
+            if (combatant != null)
+            {
+                ModelState.AddModelError("Combatant.Name", "You already have a combatant with that name.");
+            }
 
             // Ensure the skill point distribution is valid
             model.Combatant = PopulateCombatantWithSkills(model.Combatant);
@@ -123,10 +133,11 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpGet]
-        [Route("/character/{id}/edit/")]
+        [Route("/combatant/{id}/edit/")]
         public IActionResult Edit(int id)
         {
-            var model = new CharacterEditViewModel()
+            // Ensure the user is logged in
+            var model = new CombatantEditViewModel()
             {
                 CurrentUser = GetCurrentUser()
             };
@@ -136,21 +147,22 @@ namespace CombatGameSite.Controllers
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
 
+            // Ensure the combatant exists and is owned by the logged in user
             model.Combatant = _context.Combatants.Find(id);
-
             if (model.Combatant == null || model.Combatant.UserId != model.CurrentUser.Id)
             {
                 return NotFound();
             }
 
+            // Show the combatant edit form
             model.Mode = "Edit";
             model.Skills = _context.Skills.OrderBy(s => s.Name).ToList();
             return View("Edit", model);
         }
 
         [HttpPost]
-        [Route("/character/{id}/edit/")]
-        public IActionResult Edit(CharacterEditViewModel model, int id)
+        [Route("/combatant/{id}/edit/")]
+        public IActionResult Edit(CombatantEditViewModel model, int id)
         {
             // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
@@ -165,10 +177,21 @@ namespace CombatGameSite.Controllers
             {
                 return NotFound();
             }
-            _context.ChangeTracker.Clear(); // EF Core can't update the combatant without this
+            _context.ChangeTracker.Clear();
 
+            // Update the model with the necessary ids
             model.Combatant.Id = id;
             model.Combatant.UserId = model.CurrentUser.Id;
+
+            // Ensure the combatant name is unique
+            combatant = _context.Combatants
+                .Where(c => c.Name == model.Combatant.Name && c.Id != id)
+                .FirstOrDefault();
+            if (combatant != null)
+            {
+                ModelState.AddModelError("Combatant.Name", "You already have a combatant with that name.");
+            }
+            _context.ChangeTracker.Clear();
 
             // Ensure the skill point distribution is valid
             model.Combatant = PopulateCombatantWithSkills(model.Combatant);
@@ -185,16 +208,17 @@ namespace CombatGameSite.Controllers
                 return View("Edit", model);
             }
 
+            // Update and save the combatant
             _context.Update(model.Combatant);
             _context.SaveChanges();
             return RedirectToAction("Index", new { id = model.Combatant.Id });
         }
 
         [HttpGet]
-        [Route("/character/{id}/delete/")]
+        [Route("/combatant/{id}/delete/")]
         public IActionResult Delete(int id)
         {
-            var model = new CharacterDeleteViewModel()
+            var model = new CombatantDeleteViewModel()
             {
                 CurrentUser = GetCurrentUser()
             };
@@ -216,21 +240,62 @@ namespace CombatGameSite.Controllers
 
             model.Teams = _context.Teams
                 .Where(t => t.UserId == model.CurrentUser.Id)
+                .Where(t => t.Combatant1Id == id || t.Combatant2Id == id || t.Combatant3Id == id ||
+                            t.Combatant4Id == id || t.Combatant5Id == id)
                 .OrderBy(t => t.Name)
-                .ToList();
-
-            model.Teams = model.Teams
-                .Where(t => t.CombatantIds.Count == 1 && t.CombatantIds[0] == id)
                 .ToList();
 
             return View("Delete", model);
         }
 
         [HttpPost]
-        [Route("/character/{id}/delete/")]
-        public IActionResult Delete(int id, CharacterDeleteViewModel model)
-        { //Change int to character class once built
-            return View();
+        [Route("/combatant/{id}/delete/")]
+        public IActionResult Delete(int id, CombatantDeleteViewModel model)
+        {
+            model.CurrentUser = GetCurrentUser();
+
+            if (model.CurrentUser == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "Account" });
+            }
+
+            var combatant = _context.Combatants
+                .Where(c => c.Id == id && c.UserId == model.CurrentUser.Id)
+                .FirstOrDefault();
+
+            if (combatant == null)
+            {
+                return NotFound();
+            }
+
+            // Remove the combatant from teams they are a part of and
+            // delete teams that only consist of the combatant
+
+            var teams = _context.Teams
+                .Where(t => t.Combatant1Id == combatant.Id || t.Combatant2Id == combatant.Id || t.Combatant3Id == combatant.Id ||
+                            t.Combatant4Id == combatant.Id || t.Combatant5Id == combatant.Id)
+                .ToList();
+
+            foreach (Team team in teams)
+            {
+                if (team.CombatantIds.Count == 1)
+                {
+                    _context.Remove(team);
+                }
+                else
+                {
+                    if (team.Combatant1Id == id) team.Combatant1Id = null;
+                    if (team.Combatant2Id == id) team.Combatant2Id = null;
+                    if (team.Combatant3Id == id) team.Combatant3Id = null;
+                    if (team.Combatant4Id == id) team.Combatant4Id = null;
+                    if (team.Combatant5Id == id) team.Combatant5Id = null;
+                }
+            }
+
+            _context.Remove(combatant);
+            _context.SaveChanges();
+
+            return RedirectToAction("Combatants", "User", new { id = combatant.UserId });
         }
     }
 }

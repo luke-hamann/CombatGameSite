@@ -77,5 +77,43 @@ namespace CombatGameSite.Controllers
 
             return View("Teams", model);
         }
+
+        [HttpGet]
+        [Route("/user/edit/")]
+        public IActionResult Edit()
+        {
+            var model = new UserEditViewModel()
+            {
+                CurrentUser = GetCurrentUser()
+            };
+
+            if (model.CurrentUser == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "Account" });
+            }
+
+            model.User = model.CurrentUser;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("/user/edit/")]
+        public IActionResult Edit(UserEditViewModel model)
+        {
+            model.CurrentUser = GetCurrentUser();
+
+            if (model.CurrentUser == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "Account" });
+            }
+
+            model.CurrentUser.Tagline = model.User.Tagline;
+
+            _context.Update(model.CurrentUser);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "User", new { id = model.CurrentUser.Id });
+        }
     }
 }

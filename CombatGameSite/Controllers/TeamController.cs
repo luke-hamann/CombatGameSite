@@ -21,6 +21,14 @@ namespace CombatGameSite.Controllers
         [NonAction]
         private void ValidateTeamEditViewModel(TeamEditViewModel model)
         {
+            var team = _context.Teams
+                .Where(t => t.Id != model.Team.Id && t.Name == model.Team.Name)
+                .FirstOrDefault();
+            if (team != null)
+            {
+                ModelState.AddModelError("Name", "You already have a team with that name.");
+            }
+
             if (model.Team.CombatantIds.Count() == 0)
             {
                 ModelState.AddModelError("Combatant1Id", "A team must have at least 1 combatant.");
@@ -81,6 +89,7 @@ namespace CombatGameSite.Controllers
 
             ValidateTeamEditViewModel(model);
 
+            // Show the add form again if there were validation errors
             if (!ModelState.IsValid)
             {
                 model.Combatants = _context.Combatants
@@ -90,10 +99,13 @@ namespace CombatGameSite.Controllers
                 return View("Edit", model);
             }
 
-            _context.Add(model.Team!);
+            model.Team!.UserId = model.CurrentUser.Id;
+            model.Team.Score = 0;
+
+            _context.Add(model.Team);
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "User", new { id = model.CurrentUser.Id, section = "teams" });
+            return RedirectToAction("Teams", "User", new { id = model.CurrentUser.Id });
         }
 
         [HttpGet]
@@ -166,7 +178,7 @@ namespace CombatGameSite.Controllers
             _context.Update(model.Team);
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "User", new { id = model.Team.UserId, section = "teams" });
+            return RedirectToAction("Teams", "User", new { id = model.Team.UserId });
         }
 
         [HttpGet]

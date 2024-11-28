@@ -7,9 +7,18 @@
 <h1>
     @Model.SelectedUser.Name
 </h1>
-<blockquote>
-    @Model.SelectedUser.Tagline
-</blockquote>
+@if (Model.SelectedUser.Tagline != null)
+{
+    <blockquote>
+        @Model.SelectedUser.Tagline
+    </blockquote>
+}
+@if (Model.CurrentUser.Id == Model.SelectedUser.Id)
+{
+    <p>
+        <a asp-action="Edit">Edit Tagline</a>
+    </p>
+}
 <p>
     <a asp-action="Combatants" asp-route-id="@Model.SelectedUser.Id">Combatants</a>
     <a asp-action="Teams" asp-route-id="@Model.SelectedUser.Id">Teams</a>

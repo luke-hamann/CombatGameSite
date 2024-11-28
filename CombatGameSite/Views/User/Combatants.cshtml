@@ -8,7 +8,7 @@
 @if (Model.CurrentUser?.Id == Model.SelectedUser.Id)
 {
     <p>
-        <a asp-controller="Character" asp-action="Add">Create Combatant</a>
+        <a asp-controller="Combatant" asp-action="Add">Create Combatant</a>
     </p>
 }
 <p>
@@ -18,6 +18,6 @@
 @foreach (Combatant combatant in Model.Combatants)
 {
     <p>
-        <a asp-controller="Character" asp-action="Index" asp-route-id="@combatant.Id">@combatant.Name</a>
+        <a asp-controller="Combatant" asp-action="Index" asp-route-id="@combatant.Id">@combatant.Name</a>
     </p>
 }

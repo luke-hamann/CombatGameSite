@@ -1,4 +1,4 @@
-﻿@model CharacterIndexViewModel
+﻿@model CombatantIndexViewModel
 @{
     Layout = "_Layout";
     ViewData["Title"] = Model.Combatant!.Name;
@@ -9,8 +9,8 @@
 </h1>
 @if (Model.Combatant.UserId == Model.CurrentUser?.Id){
     <p>
-        <a asp-controller="Character" asp-action="Edit" asp-route-id="@Model.Combatant.Id">Edit</a>
-        <a asp-controller="Character" asp-action="Delete" asp-route-id="@Model.Combatant.Id">Delete</a>
+        <a asp-controller="Combatant" asp-action="Edit" asp-route-id="@Model.Combatant.Id">Edit</a>
+        <a asp-controller="Combatant" asp-action="Delete" asp-route-id="@Model.Combatant.Id">Delete</a>
     </p>
 }
 <p>

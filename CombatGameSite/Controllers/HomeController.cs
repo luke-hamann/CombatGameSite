@@ -27,6 +27,7 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpGet]
+        [Route("/leaderboard/")]
         public IActionResult Leaderboard()
         {
             var model = new LeaderboardViewModel()
@@ -47,6 +48,7 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpGet]
+        [Route("/battle/")]
         public ViewResult Battle()
         {
             var model = new BattleFormViewModel();
@@ -59,6 +61,7 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpPost]
+        [Route("/battle/")]
         public ViewResult Battle(BattleFormViewModel battleFormViewModel)
         { //Pass in winning teams ID and add to their score. +10 for win -3 for loss
             battleFormViewModel.CurrentUser = GetCurrentUser();
