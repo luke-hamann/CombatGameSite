@@ -1,0 +1,68 @@
+﻿
+@font-face {
+    font-family: 'GameFont'; /*a name to be used later*/
+    src: url(../Assets/Bungee-Regular.otf) format('opentype'); /*URL to font*/
+}
+@font-face {
+    font-family: 'HeadingFont'; /*a name to be used later*/
+    src: url(../Assets/BreatheFireIi-2z9W.ttf) format('TrueType'); /*URL to font*/
+}
+
+
+/* General Reset */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensure it covers the full viewport */
+    width: 100%;
+    max-width: 100%; /* Ensures the container can expand to fill the width of the viewport */
+
+    font-family: Arial, sans-serif;
+    background: url(../Assets/png/Background/Background2.png);
+    backdrop-filter: brightness(100%) blur(2px);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: #ffffff;
+}
+
+
+.Button {   
+    background: url(../Assets/png/Button/Rect/Fill/Default.png);
+    background-repeat: no-repeat;
+    background-size: fit;
+    background-position: center;
+    width:14rem;
+    height: 6rem;
+    padding: 0; /* Removes all padding from the <a> */
+
+    font-family: 'GameFont', sans-serif;
+    text-decoration: none;
+    color: #a4925f;
+    text-shadow: 1px 1px 0px #6d644c; /* Subtle shadow */
+    border:none;
+
+}
+
+    .Button:hover {
+        background: url(../Assets/png/Button/Rect/Fill/Hover.png);
+        background-repeat: no-repeat;
+        background-size: fit;
+        background-position: center;
+    }
+
+.heading {
+    color: #484230;
+    text-shadow: 3px 3px 1px #6d644c; /* Subtle shadow */
+
+    font-family: 'HeadingFont', sans-serif;
+    font-size: 6rem;
+}
+
+.Subtext {
+    color: #484230;
+    text-shadow: 1px 1px 0px #6d644c; /* Subtle shadow */
+}
+
+.Button-Form {
+    border:none;
+}
