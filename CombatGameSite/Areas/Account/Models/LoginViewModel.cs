@@ -5,12 +5,10 @@ namespace CombatGameSite.Areas.Account.Models
 {
     public class LoginViewModel
     {
-        public LoginViewModel() { }
-
-        [Required]
+        [Required(ErrorMessage = "Please enter your username.")]
         public string? Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter your password.")]
         public string? Password { get; set; }
 
         public User? CurrentUser { get; set; }

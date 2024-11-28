@@ -24,45 +24,47 @@ namespace CombatGameSite.Areas.Account.Controllers
         [Route("login")]
         public IActionResult Login()
         {
-            var loginViewModel = new LoginViewModel();
-            loginViewModel.CurrentUser = GetCurrentUser();
-
-            if (loginViewModel.CurrentUser != null)
+            var model = new LoginViewModel()
             {
-                return Redirect("/");
+                CurrentUser = GetCurrentUser()
+            };
+
+            if (model.CurrentUser != null)
+            {
+                return RedirectToAction("Index", "Home");
             }
             
-            return View(loginViewModel);
+            return View(model);
         }
 
         [HttpPost]
         [Route("login")]
-        public IActionResult Login(LoginViewModel loginViewModel)
+        public IActionResult Login(LoginViewModel model)
         {
-            loginViewModel.CurrentUser = GetCurrentUser();
+            model.CurrentUser = GetCurrentUser();
 
-            if (loginViewModel.CurrentUser != null)
+            if (model.CurrentUser != null)
             {
-                return Redirect("/");
+                return RedirectToAction("Index", "Home");
             }
 
             if (!ModelState.IsValid)
             {
-                return View(loginViewModel);
+                return View(model);
             }
 
             User? user = _context.Users
-                .Where(u => u.Name == loginViewModel.Name && u.Password == loginViewModel.Password)
+                .Where(u => u.Name == model.Name && u.Password == model.Password)
                 .FirstOrDefault();
 
             if (user == null)
             {
                 ModelState.AddModelError("", "Invalid credentials.");
-                return View(loginViewModel);
+                return View(model);
             }
 
             HttpContext.Session.SetInt32("userId", user.Id);
-            return Redirect("/");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -74,7 +76,7 @@ namespace CombatGameSite.Areas.Account.Controllers
 
             if (registerViewModel.CurrentUser != null)
             {
-                return Redirect("/");
+                return RedirectToAction("Index", "Home");
             }
 
             return View(registerViewModel);
@@ -88,7 +90,7 @@ namespace CombatGameSite.Areas.Account.Controllers
 
             if (registerViewModel.CurrentUser != null)
             {
-                return Redirect("/");
+                return RedirectToAction("Index", "Home");
             }
 
             if (registerViewModel.Username != null)
@@ -117,7 +119,7 @@ namespace CombatGameSite.Areas.Account.Controllers
             _context.SaveChanges();
 
             HttpContext.Session.SetInt32("userId", user.Id);
-            return Redirect("/");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
