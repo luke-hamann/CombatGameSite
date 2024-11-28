@@ -57,11 +57,6 @@ namespace CombatGameSite.Controllers
                 Teams = _context.Teams.OrderBy(t => t.Name).ToList()
             };
 
-            if (model.CurrentUser == null)
-            {
-                return RedirectToAction("Login", "Account", new { area = "Account" });
-            }
-
             return View("BattleForm", model);
         }
 
