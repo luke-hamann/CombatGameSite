@@ -24,12 +24,12 @@ namespace CombatGameSite.Controllers
         [Route("/user/{id}/")]
         public IActionResult Index(int id)
         {
-            return Combatants(id);
+            return Characters(id);
         }
 
         [HttpGet]
-        [Route("/user/{id}/combatants/")]
-        public IActionResult Combatants(int id)
+        [Route("/user/{id}/characters/")]
+        public IActionResult Characters(int id)
         {
             var model = new UserViewModel()
             {
@@ -42,12 +42,12 @@ namespace CombatGameSite.Controllers
                 return NotFound();
             }
 
-            model.Combatants = _context.Combatants
+            model.Characters = _context.Characters
                 .Where(c => c.UserId == model.SelectedUser.Id)
                 .OrderBy(c => c.Name)
                 .ToList();
 
-            return View("Combatants", model);
+            return View("Characters", model);
         }
 
         [HttpGet]
@@ -67,11 +67,11 @@ namespace CombatGameSite.Controllers
 
             model.Teams = _context.Teams
                 .Where(t => t.UserId == id)
-                .Include(t => t.Combatant1)
-                .Include(t => t.Combatant2)
-                .Include(t => t.Combatant3)
-                .Include(t => t.Combatant4)
-                .Include(t => t.Combatant5)
+                .Include(t => t.Character1)
+                .Include(t => t.Character2)
+                .Include(t => t.Character3)
+                .Include(t => t.Character4)
+                .Include(t => t.Character5)
                 .OrderBy(t => t.Name)
                 .ToList();
 

@@ -1,10 +1,10 @@
 ﻿namespace CombatGameSite.Models
 {
-    public class CombatantEditViewModel
+    public class CharacterEditViewModel
     {
         public User? CurrentUser { get; set; }
         public string? Mode { get; set; }
-        public Combatant? Combatant { get; set; }
+        public Character? Character { get; set; }
         public List<Skill>? Skills { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace CombatGameSite.Models
 {
-    public class Combatant
+    public class Character
     {
         public int? Id { get; set; }
 

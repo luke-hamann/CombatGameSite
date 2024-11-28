@@ -1,4 +1,4 @@
-﻿@model CombatantDeleteViewModel
+﻿@model CharacterDeleteViewModel
 @{
     ViewData["Title"] = "Confirm Delete";
 }
@@ -7,7 +7,7 @@
 </h1>
 <form asp-action="Delete" method="post">
     <p>
-        Are you sure you want to delete @Model.Combatant.Name?
+        Are you sure you want to delete @Model.Character.Name?
     </p>
     @if (Model.Teams.Count > 0)
     {
@@ -23,6 +23,6 @@
     }
     <div>
         <input type="submit" value="Yes" />
-        <a asp-controller="Combatant" asp-action="Index" asp-route-id="@Model.Combatant.Id">No</a>
+        <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Character.Id">No</a>
     </div>
 </form>

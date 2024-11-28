@@ -24,9 +24,9 @@
             Score: @team.Score
         </p>
         <p>
-            Combatants:
+            Characters:
         </p>
-        @await Html.PartialAsync("TeamCombatantList", team)
+        @await Html.PartialAsync("TeamCharacterList", team)
     </div>
     counter++;
 }

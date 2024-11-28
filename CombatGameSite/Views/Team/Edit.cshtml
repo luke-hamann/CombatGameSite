@@ -15,47 +15,47 @@
         <input asp-for="Team.Name" />
     </div>
     <div>
-        <label asp-for="Team.Combatant1Id">
-            Combatant 1
+        <label asp-for="Team.Character1Id">
+            Character 1
         </label>
-        <select asp-for="Team.Combatant1Id"
-            asp-items="@(new SelectList(Model.Combatants, "Id", "Name", Model.Team.Combatant1Id))">
+        <select asp-for="Team.Character1Id"
+            asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character1Id))">
             <option value="">-</option>
         </select>
     </div>
     <div>
-        <label asp-for="Team.Combatant2Id">
-            Combatant 2
+        <label asp-for="Team.Character2Id">
+            Character 2
         </label>
-        <select asp-for="Team.Combatant2Id"
-                asp-items="@(new SelectList(Model.Combatants, "Id", "Name", Model.Team.Combatant2Id))">
+        <select asp-for="Team.Character2Id"
+                asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character2Id))">
             <option value="">-</option>
         </select>
     </div>
     <div>
-        <label asp-for="Team.Combatant3Id">
-            Combatant 3
+        <label asp-for="Team.Character3Id">
+            Character 3
         </label>
-        <select asp-for="Team.Combatant3Id"
-                asp-items="@(new SelectList(Model.Combatants, "Id", "Name", Model.Team.Combatant3Id))">
+        <select asp-for="Team.Character3Id"
+                asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character3Id))">
             <option value="">-</option>
         </select>
     </div>
     <div>
-        <label asp-for="Team.Combatant4Id">
-            Combatant 4
+        <label asp-for="Team.Character4Id">
+            Character 4
         </label>
-        <select asp-for="Team.Combatant4Id"
-                asp-items="@(new SelectList(Model.Combatants, "Id", "Name", Model.Team.Combatant4Id))">
+        <select asp-for="Team.Character4Id"
+                asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character4Id))">
             <option value="">-</option>
         </select>
     </div>
     <div>
-        <label asp-for="Team.Combatant5Id">
-            Combatant 5
+        <label asp-for="Team.Character5Id">
+            Character 5
         </label>
-        <select asp-for="Team.Combatant5Id"
-                asp-items="@(new SelectList(Model.Combatants, "Id", "Name", Model.Team.Combatant5Id))">
+        <select asp-for="Team.Character5Id"
+                asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character5Id))">
             <option value="">-</option>
         </select>
     </div>

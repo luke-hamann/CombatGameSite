@@ -29,23 +29,23 @@ namespace CombatGameSite.Controllers
                 ModelState.AddModelError("Name", "You already have a team with that name.");
             }
 
-            if (model.Team.CombatantIds.Count() == 0)
+            if (model.Team.CharacterIds.Count() == 0)
             {
-                ModelState.AddModelError("Combatant1Id", "A team must have at least 1 combatant.");
+                ModelState.AddModelError("Character1Id", "A team must have at least 1 character.");
             }
-            else if (model.Team.CombatantIds.Distinct().Count() != model.Team.CombatantIds.Count())
+            else if (model.Team.CharacterIds.Distinct().Count() != model.Team.CharacterIds.Count())
             {
-                ModelState.AddModelError("Combatant1Id", "A combatant can only appear once.");
+                ModelState.AddModelError("Character1Id", "A character can only appear once.");
             }
 
-            foreach (int id in model.Team.CombatantIds)
+            foreach (int id in model.Team.CharacterIds)
             {
-                var combatant = _context.Combatants
+                var character = _context.Characters
                     .Where(c => c.Id == id && c.UserId == model.CurrentUser.Id)
                     .FirstOrDefault();
-                if (combatant == null)
+                if (character == null)
                 {
-                    ModelState.AddModelError("Combatant1Id", "An unavailable combatant is included.");
+                    ModelState.AddModelError("Character1Id", "An unavailable character is included.");
                     break;
                 }
             }
@@ -67,7 +67,7 @@ namespace CombatGameSite.Controllers
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
 
-            model.Combatants = _context.Combatants
+            model.Characters = _context.Characters
                 .Where(c => c.UserId == model.CurrentUser.Id)
                 .OrderBy(c => c.Name)
                 .ToList();
@@ -92,7 +92,7 @@ namespace CombatGameSite.Controllers
             // Show the add form again if there were validation errors
             if (!ModelState.IsValid)
             {
-                model.Combatants = _context.Combatants
+                model.Characters = _context.Characters
                     .Where(c => c.UserId == model.CurrentUser.Id)
                     .OrderBy(c => c.Name)
                     .ToList();
@@ -132,7 +132,7 @@ namespace CombatGameSite.Controllers
                 return NotFound();
             }
 
-            model.Combatants = _context.Combatants
+            model.Characters = _context.Characters
                 .Where(c => c.UserId == model.CurrentUser.Id)
                 .OrderBy(c => c.Name)
                 .ToList();
@@ -168,7 +168,7 @@ namespace CombatGameSite.Controllers
             if (!ModelState.IsValid)
             {
                 model.Mode = "Edit";
-                model.Combatants = _context.Combatants
+                model.Characters = _context.Characters
                     .Where(c => c.UserId == model.CurrentUser.Id)
                     .OrderBy(c => c.Name)
                     .ToList();

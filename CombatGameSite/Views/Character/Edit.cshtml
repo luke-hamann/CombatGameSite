@@ -1,4 +1,4 @@
-﻿@model CombatantEditViewModel
+﻿@model CharacterEditViewModel
 @{
     Layout = "_Layout";
     ViewData["Title"] = Model.Mode + " Character";
@@ -8,28 +8,28 @@
     @ViewData["Title"]
 </h1>
 
-<form asp-controller="Combatant" asp-action="@Model.Mode" method="post">
+<form asp-controller="Character" asp-action="@Model.Mode" method="post">
     <div asp-validation-summary="All"></div>
     <div>
         You can distribute no more than 50 skill points.
     </div>
     <div>
-        <label asp-for="@Model.Combatant.Name">
+        <label asp-for="@Model.Character.Name">
             Name
         </label>
-        <input asp-for="@Model.Combatant.Name" />
+        <input asp-for="@Model.Character.Name" />
     </div>
     <div>
-        <label asp-for="@Model.Combatant.Health">
+        <label asp-for="@Model.Character.Health">
             Health
         </label>
-        <input asp-for="@Model.Combatant.Health" />
+        <input asp-for="@Model.Character.Health" />
     </div>
     <div>
-        <label asp-for="@Model.Combatant.TypeId">
+        <label asp-for="@Model.Character.TypeId">
             Type
         </label>
-        <select asp-for="@Model.Combatant.TypeId">
+        <select asp-for="@Model.Character.TypeId">
             <option value="0">-</option>
             <option value="1">Water</option>
             <option value="2">Fire</option>
@@ -38,22 +38,22 @@
         </select>
     </div>
     <div>
-        <label asp-for="@Model.Combatant.Defense">
+        <label asp-for="@Model.Character.Defense">
             Defense
         </label>
-        <input asp-for="@Model.Combatant.Defense" />
+        <input asp-for="@Model.Character.Defense" />
     </div>
     <div>
-        <label asp-for="@Model.Combatant.Species">
+        <label asp-for="@Model.Character.Species">
             Species
         </label>
-        <input asp-for="@Model.Combatant.Species" />
+        <input asp-for="@Model.Character.Species" />
     </div>
     <div>
-        <label asp-for="@Model.Combatant.SkillPrimaryId">
+        <label asp-for="@Model.Character.SkillPrimaryId">
             Primary Skill
         </label>
-        <select asp-for="@Model.Combatant.SkillPrimaryId">
+        <select asp-for="@Model.Character.SkillPrimaryId">
             <option value="">-</option>
             @foreach (Skill skill in Model.Skills)
             {
@@ -64,10 +64,10 @@
         </select>
     </div>
     <div>
-        <label asp-for="@Model.Combatant.SkillSecondaryId">
+        <label asp-for="@Model.Character.SkillSecondaryId">
             Secondary Skill
         </label>
-        <select asp-for="@Model.Combatant.SkillSecondaryId">
+        <select asp-for="@Model.Character.SkillSecondaryId">
             <option value="">-</option>
             @foreach (Skill skill in Model.Skills)
             {
@@ -78,10 +78,10 @@
         </select>
     </div>
     <div>
-        <label asp-for="@Model.Combatant.SkillTertiaryId">
+        <label asp-for="@Model.Character.SkillTertiaryId">
             Tertiary Skill
         </label>
-        <select asp-for="@Model.Combatant.SkillTertiaryId">
+        <select asp-for="@Model.Character.SkillTertiaryId">
             <option value="">-</option>
             @foreach (Skill skill in Model.Skills)
             {
@@ -95,7 +95,7 @@
         <input type="submit" value="Submit" />
         @if (Model.Mode == "Edit")
         {
-            <a asp-controller="Combatant" asp-action="Index" asp-route-id="@Model.Combatant.Id">
+            <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Character.Id">
                 Cancel
             </a>
         }

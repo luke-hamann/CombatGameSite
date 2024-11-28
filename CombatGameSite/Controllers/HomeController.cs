@@ -35,11 +35,11 @@ namespace CombatGameSite.Controllers
                 CurrentUser = GetCurrentUser(),
                 Teams = _context.Teams
                     .Include(t => t.User)
-                    .Include(t => t.Combatant1)
-                    .Include(t => t.Combatant2)
-                    .Include(t => t.Combatant3)
-                    .Include(t => t.Combatant4)
-                    .Include(t => t.Combatant5)
+                    .Include(t => t.Character1)
+                    .Include(t => t.Character2)
+                    .Include(t => t.Character3)
+                    .Include(t => t.Character4)
+                    .Include(t => t.Character5)
                     .OrderByDescending(t => t.Score)
                     .ToList()
             };

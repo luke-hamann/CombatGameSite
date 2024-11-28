@@ -22,7 +22,7 @@ namespace CombatGameSite.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CombatGameSite.Models.Combatant", b =>
+            modelBuilder.Entity("CombatGameSite.Models.Character", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,7 +72,7 @@ namespace CombatGameSite.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Combatants");
+                    b.ToTable("Characters");
 
                     b.HasData(
                         new
@@ -830,22 +830,23 @@ namespace CombatGameSite.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
-                    b.Property<int?>("Combatant1Id")
+                    b.Property<int?>("Character1Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Combatant2Id")
+                    b.Property<int?>("Character2Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Combatant3Id")
+                    b.Property<int?>("Character3Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Combatant4Id")
+                    b.Property<int?>("Character4Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Combatant5Id")
+                    b.Property<int?>("Character5Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Score")
@@ -856,15 +857,15 @@ namespace CombatGameSite.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Combatant1Id");
+                    b.HasIndex("Character1Id");
 
-                    b.HasIndex("Combatant2Id");
+                    b.HasIndex("Character2Id");
 
-                    b.HasIndex("Combatant3Id");
+                    b.HasIndex("Character3Id");
 
-                    b.HasIndex("Combatant4Id");
+                    b.HasIndex("Character4Id");
 
-                    b.HasIndex("Combatant5Id");
+                    b.HasIndex("Character5Id");
 
                     b.HasIndex("UserId");
 
@@ -874,11 +875,11 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 1,
-                            Combatant1Id = 1,
-                            Combatant2Id = 2,
-                            Combatant3Id = 3,
-                            Combatant4Id = 4,
-                            Combatant5Id = 5,
+                            Character1Id = 1,
+                            Character2Id = 2,
+                            Character3Id = 3,
+                            Character4Id = 4,
+                            Character5Id = 5,
                             Name = "Water Warriors",
                             Score = 150,
                             UserId = 1
@@ -886,11 +887,11 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 2,
-                            Combatant1Id = 6,
-                            Combatant2Id = 7,
-                            Combatant3Id = 8,
-                            Combatant4Id = 9,
-                            Combatant5Id = 10,
+                            Character1Id = 6,
+                            Character2Id = 7,
+                            Character3Id = 8,
+                            Character4Id = 9,
+                            Character5Id = 10,
                             Name = "Fire Phoenixes",
                             Score = 120,
                             UserId = 2
@@ -898,11 +899,11 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 3,
-                            Combatant1Id = 11,
-                            Combatant2Id = 12,
-                            Combatant3Id = 13,
-                            Combatant4Id = 14,
-                            Combatant5Id = 15,
+                            Character1Id = 11,
+                            Character2Id = 12,
+                            Character3Id = 13,
+                            Character4Id = 14,
+                            Character5Id = 15,
                             Name = "Wind Striders",
                             Score = 140,
                             UserId = 3
@@ -910,11 +911,11 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 4,
-                            Combatant1Id = 16,
-                            Combatant2Id = 17,
-                            Combatant3Id = 18,
-                            Combatant4Id = 19,
-                            Combatant5Id = 20,
+                            Character1Id = 16,
+                            Character2Id = 17,
+                            Character3Id = 18,
+                            Character4Id = 19,
+                            Character5Id = 20,
                             Name = "Earth Guardians",
                             Score = 160,
                             UserId = 4
@@ -922,11 +923,11 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 5,
-                            Combatant1Id = 21,
-                            Combatant2Id = 22,
-                            Combatant3Id = 23,
-                            Combatant4Id = 24,
-                            Combatant5Id = 25,
+                            Character1Id = 21,
+                            Character2Id = 22,
+                            Character3Id = 23,
+                            Character4Id = 24,
+                            Character5Id = 25,
                             Name = "Aqua Knights",
                             Score = 130,
                             UserId = 1
@@ -934,11 +935,11 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 6,
-                            Combatant1Id = 2,
-                            Combatant2Id = 5,
-                            Combatant3Id = 7,
-                            Combatant4Id = 10,
-                            Combatant5Id = 6,
+                            Character1Id = 2,
+                            Character2Id = 5,
+                            Character3Id = 7,
+                            Character4Id = 10,
+                            Character5Id = 6,
                             Name = "Inferno Lords",
                             Score = 110,
                             UserId = 2
@@ -946,11 +947,11 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 7,
-                            Combatant1Id = 3,
-                            Combatant2Id = 8,
-                            Combatant3Id = 12,
-                            Combatant4Id = 13,
-                            Combatant5Id = 11,
+                            Character1Id = 3,
+                            Character2Id = 8,
+                            Character3Id = 12,
+                            Character4Id = 13,
+                            Character5Id = 11,
                             Name = "Storm Warriors",
                             Score = 135,
                             UserId = 3
@@ -958,11 +959,11 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 8,
-                            Combatant1Id = 14,
-                            Combatant2Id = 16,
-                            Combatant3Id = 17,
-                            Combatant4Id = 19,
-                            Combatant5Id = 20,
+                            Character1Id = 14,
+                            Character2Id = 16,
+                            Character3Id = 17,
+                            Character4Id = 19,
+                            Character5Id = 20,
                             Name = "Quake Defenders",
                             Score = 125,
                             UserId = 4
@@ -970,11 +971,11 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 9,
-                            Combatant1Id = 22,
-                            Combatant2Id = 23,
-                            Combatant3Id = 1,
-                            Combatant4Id = 4,
-                            Combatant5Id = 5,
+                            Character1Id = 22,
+                            Character2Id = 23,
+                            Character3Id = 1,
+                            Character4Id = 4,
+                            Character5Id = 5,
                             Name = "Tidal Fury",
                             Score = 145,
                             UserId = 1
@@ -982,11 +983,11 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 10,
-                            Combatant1Id = 9,
-                            Combatant2Id = 10,
-                            Combatant3Id = 6,
-                            Combatant4Id = 2,
-                            Combatant5Id = 7,
+                            Character1Id = 9,
+                            Character2Id = 10,
+                            Character3Id = 6,
+                            Character4Id = 2,
+                            Character5Id = 7,
                             Name = "Blazing Souls",
                             Score = 115,
                             UserId = 2
@@ -994,11 +995,11 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 11,
-                            Combatant1Id = 13,
-                            Combatant2Id = 11,
-                            Combatant3Id = 8,
-                            Combatant4Id = 15,
-                            Combatant5Id = 12,
+                            Character1Id = 13,
+                            Character2Id = 11,
+                            Character3Id = 8,
+                            Character4Id = 15,
+                            Character5Id = 12,
                             Name = "Whirlwind Vanguards",
                             Score = 150,
                             UserId = 3
@@ -1006,11 +1007,11 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 12,
-                            Combatant1Id = 18,
-                            Combatant2Id = 14,
-                            Combatant3Id = 19,
-                            Combatant4Id = 20,
-                            Combatant5Id = 16,
+                            Character1Id = 18,
+                            Character2Id = 14,
+                            Character3Id = 19,
+                            Character4Id = 20,
+                            Character5Id = 16,
                             Name = "Rock Titans",
                             Score = 160,
                             UserId = 4
@@ -1072,7 +1073,7 @@ namespace CombatGameSite.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CombatGameSite.Models.Combatant", b =>
+            modelBuilder.Entity("CombatGameSite.Models.Character", b =>
                 {
                     b.HasOne("CombatGameSite.Models.Skill", "SkillPrimary")
                         .WithMany()
@@ -1101,39 +1102,39 @@ namespace CombatGameSite.Migrations
 
             modelBuilder.Entity("CombatGameSite.Models.Team", b =>
                 {
-                    b.HasOne("CombatGameSite.Models.Combatant", "Combatant1")
+                    b.HasOne("CombatGameSite.Models.Character", "Character1")
                         .WithMany()
-                        .HasForeignKey("Combatant1Id");
+                        .HasForeignKey("Character1Id");
 
-                    b.HasOne("CombatGameSite.Models.Combatant", "Combatant2")
+                    b.HasOne("CombatGameSite.Models.Character", "Character2")
                         .WithMany()
-                        .HasForeignKey("Combatant2Id");
+                        .HasForeignKey("Character2Id");
 
-                    b.HasOne("CombatGameSite.Models.Combatant", "Combatant3")
+                    b.HasOne("CombatGameSite.Models.Character", "Character3")
                         .WithMany()
-                        .HasForeignKey("Combatant3Id");
+                        .HasForeignKey("Character3Id");
 
-                    b.HasOne("CombatGameSite.Models.Combatant", "Combatant4")
+                    b.HasOne("CombatGameSite.Models.Character", "Character4")
                         .WithMany()
-                        .HasForeignKey("Combatant4Id");
+                        .HasForeignKey("Character4Id");
 
-                    b.HasOne("CombatGameSite.Models.Combatant", "Combatant5")
+                    b.HasOne("CombatGameSite.Models.Character", "Character5")
                         .WithMany()
-                        .HasForeignKey("Combatant5Id");
+                        .HasForeignKey("Character5Id");
 
                     b.HasOne("CombatGameSite.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
-                    b.Navigation("Combatant1");
+                    b.Navigation("Character1");
 
-                    b.Navigation("Combatant2");
+                    b.Navigation("Character2");
 
-                    b.Navigation("Combatant3");
+                    b.Navigation("Character3");
 
-                    b.Navigation("Combatant4");
+                    b.Navigation("Character4");
 
-                    b.Navigation("Combatant5");
+                    b.Navigation("Character5");
 
                     b.Navigation("User");
                 });

@@ -1,8 +1,8 @@
 ﻿namespace CombatGameSite.Models
 {
-    public class CombatantIndexViewModel
+    public class CharacterIndexViewModel
     {
         public User? CurrentUser { get; set; }
-        public Combatant? Combatant { get; set; }
+        public Character? Character { get; set; }
     }
 }

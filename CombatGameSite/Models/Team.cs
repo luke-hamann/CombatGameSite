@@ -13,21 +13,21 @@ namespace CombatGameSite.Models
         public int? UserId { get; set; }
         public User? User { get; set; }
         public int? Score { get; set; }
-        public int? Combatant1Id { get; set; }
-        public Combatant? Combatant1 { get; set; }
-        public int? Combatant2Id { get; set; }
-        public Combatant? Combatant2 { get; set; }
-        public int? Combatant3Id { get; set; }
-        public Combatant? Combatant3 { get; set; }
-        public int? Combatant4Id { get; set; }
-        public Combatant? Combatant4 { get; set; }
-        public int? Combatant5Id { get; set; }
-        public Combatant? Combatant5 { get; set; }
+        public int? Character1Id { get; set; }
+        public Character? Character1 { get; set; }
+        public int? Character2Id { get; set; }
+        public Character? Character2 { get; set; }
+        public int? Character3Id { get; set; }
+        public Character? Character3 { get; set; }
+        public int? Character4Id { get; set; }
+        public Character? Character4 { get; set; }
+        public int? Character5Id { get; set; }
+        public Character? Character5 { get; set; }
 
-        public List<int> CombatantIds {
+        public List<int> CharacterIds {
             get
             {
-                return (new List<int?> { Combatant1Id, Combatant2Id, Combatant3Id, Combatant4Id, Combatant5Id })
+                return (new List<int?> { Character1Id, Character2Id, Character3Id, Character4Id, Character5Id })
                     .Where(i => i != null)
                     .Select(i => (int)i!)
                     .ToList();
