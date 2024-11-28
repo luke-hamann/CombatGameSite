@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-using CombatGameSite.Models;
+﻿using CombatGameSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static System.Collections.Specialized.BitVector32;
 
 namespace CombatGameSite.Controllers
 {
@@ -21,19 +21,43 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpGet]
-        [Route("/user/{id}/{section?}")]
-        public IActionResult Index(int id, string section = "combatants")
+        [Route("/user/{id}/")]
+        public IActionResult Index(int id)
         {
-            if (section != "combatants" && section != "teams")
+            return Combatants(id);
+        }
+
+        [HttpGet]
+        [Route("/user/{id}/combatants/")]
+        public IActionResult Combatants(int id)
+        {
+            var model = new UserViewModel()
+            {
+                CurrentUser = GetCurrentUser(),
+                SelectedUser = _context.Users.Find(id)
+            };
+
+            if (model.SelectedUser ==  null)
             {
                 return NotFound();
             }
 
+            model.Combatants = _context.Combatants
+                .Where(c => c.UserId == model.SelectedUser.Id)
+                .OrderBy(c => c.Name)
+                .ToList();
+
+            return View("Combatants", model);
+        }
+
+        [HttpGet]
+        [Route("/user/{id}/teams/")]
+        public IActionResult Teams(int id)
+        {
             var model = new UserViewModel()
             {
                 CurrentUser = GetCurrentUser(),
-                SelectedUser = _context.Users.Find(id),
-                SelectedSection = section
+                SelectedUser = _context.Users.Find(id)
             };
 
             if (model.SelectedUser == null)
@@ -41,27 +65,17 @@ namespace CombatGameSite.Controllers
                 return NotFound();
             }
 
-            if (model.SelectedSection == "combatants")
-            {
-                model.Combatants = _context.Combatants
-                    .Where(c => c.UserId == id)
-                    .OrderBy(c => c.Name)
-                    .ToList();
-            }
-            else
-            {
-                model.Teams = _context.Teams
-                    .Where(t => t.UserId == id)
-                    .Include(t => t.Combatant1)
-                    .Include(t => t.Combatant2)
-                    .Include(t => t.Combatant3)
-                    .Include(t => t.Combatant4)
-                    .Include(t => t.Combatant5)
-                    .OrderBy(t => t.Name)
-                    .ToList();
-            }
+            model.Teams = _context.Teams
+                .Where(t => t.UserId == id)
+                .Include(t => t.Combatant1)
+                .Include(t => t.Combatant2)
+                .Include(t => t.Combatant3)
+                .Include(t => t.Combatant4)
+                .Include(t => t.Combatant5)
+                .OrderBy(t => t.Name)
+                .ToList();
 
-            return View(model);
+            return View("Teams", model);
         }
     }
 }

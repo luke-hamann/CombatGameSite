@@ -1,0 +1,18 @@
+﻿@model UserViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = Model.SelectedUser!.Name;
+}
+
+<h1>
+    @Model.SelectedUser.Name
+</h1>
+<blockquote>
+    @Model.SelectedUser.Tagline
+</blockquote>
+<p>
+    <a asp-action="Combatants" asp-route-id="@Model.SelectedUser.Id">Combatants</a>
+    <a asp-action="Teams" asp-route-id="@Model.SelectedUser.Id">Teams</a>
+</p>
+
+@RenderBody()

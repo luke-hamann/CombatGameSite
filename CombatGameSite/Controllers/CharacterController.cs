@@ -192,17 +192,45 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/character/{id}/delete/")]
-        public IActionResult Delete()
-        { 
-            return View();
+        public IActionResult Delete(int id)
+        {
+            var model = new CharacterDeleteViewModel()
+            {
+                CurrentUser = GetCurrentUser()
+            };
+
+            if (model.CurrentUser == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "Account" });
+            }
+
+            model.Combatant = _context.Combatants
+                .Where(c => c.Id == id && c.UserId == model.CurrentUser.Id)
+                .FirstOrDefault();
+            _context.ChangeTracker.Clear();
+
+            if (model.Combatant == null)
+            {
+                return NotFound();
+            }
+
+            model.Teams = _context.Teams
+                .Where(t => t.UserId == model.CurrentUser.Id)
+                .OrderBy(t => t.Name)
+                .ToList();
+
+            model.Teams = model.Teams
+                .Where(t => t.CombatantIds.Count == 1 && t.CombatantIds[0] == id)
+                .ToList();
+
+            return View("Delete", model);
         }
 
         [HttpPost]
         [Route("/character/{id}/delete/")]
-        public IActionResult Delete(int character)
+        public IActionResult Delete(int id, CharacterDeleteViewModel model)
         { //Change int to character class once built
             return View();
         }
-
     }
 }

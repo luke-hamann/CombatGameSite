@@ -84,7 +84,7 @@ namespace CombatGameSite.Controllers
 
             // Battle calculations
 
-            Boolean team1Won = (new Random()).Next(1) == 0;
+            bool team1Won = (new Random()).Next(1) == 0;
 
             if (team1Won)
             {

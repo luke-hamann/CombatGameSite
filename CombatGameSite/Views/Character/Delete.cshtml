@@ -1,0 +1,27 @@
+﻿@model CharacterDeleteViewModel
+@{
+    ViewData["Title"] = "Confirm Delete";
+}
+<h1>
+    Confirm Delete
+</h1>
+<form asp-action="Delete" method="post">
+    <p>
+        Are you sure you want to delete @Model.Combatant.Name?
+    </p>
+    <p>
+        Warning: This will remove the combatant from all teams they are part of.
+    </p>
+    @if (Model.Teams.Count > 0)
+    {
+        <p>
+            It will also cause the following teams to be deleted:
+        </p>
+        <ul>
+            @foreach (Team team in Model.Teams)
+            {
+                <li>@team.Name</li>
+            }
+        </ul>
+    }
+</form>
