@@ -39,6 +39,8 @@ body {
     text-decoration: none;
     color: #a4925f;
     text-shadow: 1px 1px 0px #6d644c; /* Subtle shadow */
+    border:none;
+
 }
 
     .Button:hover {
@@ -59,4 +61,8 @@ body {
 .Subtext {
     color: #484230;
     text-shadow: 1px 1px 0px #6d644c; /* Subtle shadow */
+}
+
+.Button-Form {
+    border:none;
 }

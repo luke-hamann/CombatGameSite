@@ -38,7 +38,7 @@
         else
         {
             <div class="row container justify-content-center">
-                <a asp-controller="User" asp-action="Index" asp-route-id="@Model.CurrentUser.Id" asp-route-section="combatants" class="Button d-flex justify-content-center align-items-center  px-4  fs-3">Combatants</a>
+                <a asp-controller="User" asp-action="Index" asp-route-id="@Model.CurrentUser.Id" asp-route-section="combatants" class="Button d-flex justify-content-center align-items-center  px-4  fs-4">Combatants</a>
 
             </div>
             <div class="row container justify-content-center">
@@ -47,7 +47,7 @@
             </div>
             <div class="row container justify-content-center">
 
-                <form asp-area="Account" asp-controller="Account" asp-action="Logout" method="post">
+                <form asp-area="Account" asp-controller="Account" class="Button Button-Form" asp-action="Logout" method="post">
                     <input type="submit" value="Logout" class="logout-btn Button d-flex justify-content-center align-items-center  px-4  fs-3" />
                 </form>
             </div>
