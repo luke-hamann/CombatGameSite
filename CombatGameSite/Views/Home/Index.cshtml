@@ -2,3 +2,48 @@
     ViewData["Title"] = "Combat Game Site";
 }
 
+<<<<<<< Updated upstream
+=======
+<div class="container">
+    <header class="header">
+        <h1>Combat Game Site</h1>
+        <nav>
+            <ul class="menu">
+                <li>
+                    <a asp-controller="Home" asp-action="Battle">Fight</a>
+                </li>
+                <li>
+                    <a asp-controller="Home" asp-action="Leaderboard">Leaderboard</a>
+                </li>
+                @if (Model.CurrentUser == null)
+                {
+                    <li>
+                        <a asp-area="Account" asp-controller="Account" asp-action="Login">Login</a>
+                    </li>
+                    <li>
+                        <a asp-area="Account" asp-controller="Account" asp-action="Register">Register</a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a asp-controller="User" asp-action="Index" asp-route-id="@Model.CurrentUser.Id" asp-route-section="combatants">Combatants</a>
+                    </li>
+                    <li>
+                        <a asp-controller="User" asp-action="Index" asp-route-id="@Model.CurrentUser.Id" asp-route-section="teams">Teams</a>
+                    </li>
+                    <li>
+                        <form asp-area="Account" asp-controller="Account" asp-action="Logout" method="post">
+                            <input type="submit" value="Logout" class="logout-btn" />
+                        </form>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content">
+        <p>Welcome to the Combat Game Site. Choose an option from the menu.</p>
+    </main>
+</div>
+>>>>>>> Stashed changes
