@@ -1,0 +1,28 @@
+﻿@model CharacterDeleteViewModel
+@{
+    ViewData["Title"] = "Confirm Delete";
+}
+<h1>
+    Confirm Delete
+</h1>
+<form asp-action="Delete" method="post">
+    <p>
+        Are you sure you want to delete @Model.Character.Name?
+    </p>
+    @if (Model.Teams.Count > 0)
+    {
+        <p>
+            Warning: The following teams will be affected:
+        </p>
+        <ul>
+            @foreach (Team team in Model.Teams)
+            {
+                <li>@team.Name</li>
+            }
+        </ul>
+    }
+    <div>
+        <input type="submit" value="Yes" />
+        <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Character.Id">No</a>
+    </div>
+</form>

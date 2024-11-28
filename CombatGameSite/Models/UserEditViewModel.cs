@@ -1,8 +1,8 @@
 ﻿namespace CombatGameSite.Models
 {
-    public class LeaderboardViewModel
+    public class UserEditViewModel
     {
         public User? CurrentUser { get; set; }
-        public List<Team>? Teams { get; set; }
+        public User? User { get; set; }
     }
 }

@@ -16,7 +16,7 @@
         </h2>
         <p>
             User:
-            <a asp-controller="User" asp-action="Index" asp-route-id="@team.User.Id" asp-route-section="combatants">
+            <a asp-controller="User" asp-action="Index" asp-route-id="@team.User.Id">
                 @team.User.Name
             </a>
         </p>
@@ -24,25 +24,9 @@
             Score: @team.Score
         </p>
         <p>
-            Combatants:
+            Characters:
         </p>
-        <ul>
-            <li>
-                @team.Combatant1.Name
-            </li>
-            <li>
-                @team.Combatant2.Name
-            </li>
-            <li>
-                @team.Combatant3.Name
-            </li>
-            <li>
-                @team.Combatant4.Name
-            </li>
-            <li>
-                @team.Combatant5.Name
-            </li>
-        </ul>
+        @await Html.PartialAsync("TeamCharacterList", team)
     </div>
     counter++;
 }

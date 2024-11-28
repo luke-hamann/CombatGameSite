@@ -1,0 +1,66 @@
+﻿@model TeamEditViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = Model.Mode + " Team";
+}
+<h1>
+    @ViewData["Title"]
+</h1>
+<form asp-action="@Model.Mode" method="post">
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label asp-for="Team.Name">
+            Name
+        </label>
+        <input asp-for="Team.Name" />
+    </div>
+    <div>
+        <label asp-for="Team.Character1Id">
+            Character 1
+        </label>
+        <select asp-for="Team.Character1Id"
+            asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character1Id))">
+            <option value="">-</option>
+        </select>
+    </div>
+    <div>
+        <label asp-for="Team.Character2Id">
+            Character 2
+        </label>
+        <select asp-for="Team.Character2Id"
+                asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character2Id))">
+            <option value="">-</option>
+        </select>
+    </div>
+    <div>
+        <label asp-for="Team.Character3Id">
+            Character 3
+        </label>
+        <select asp-for="Team.Character3Id"
+                asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character3Id))">
+            <option value="">-</option>
+        </select>
+    </div>
+    <div>
+        <label asp-for="Team.Character4Id">
+            Character 4
+        </label>
+        <select asp-for="Team.Character4Id"
+                asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character4Id))">
+            <option value="">-</option>
+        </select>
+    </div>
+    <div>
+        <label asp-for="Team.Character5Id">
+            Character 5
+        </label>
+        <select asp-for="Team.Character5Id"
+                asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character5Id))">
+            <option value="">-</option>
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Submit" />
+        <a asp-controller="User" asp-action="Teams" asp-route-id="@Model.CurrentUser.Id">Cancel</a>
+    </div>
+</form>

@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-using CombatGameSite.Models;
+﻿using CombatGameSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static System.Collections.Specialized.BitVector32;
 
 namespace CombatGameSite.Controllers
 {
@@ -21,53 +21,99 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpGet]
-        [Route("/user/{id}/{section?}")]
-        public IActionResult Index(int id, string section = "combatants")
+        [Route("/user/{id}/")]
+        public IActionResult Index(int id)
         {
-            if (section != "combatants" && section != "teams")
-            {
-                return NotFound();
-            }
+            return Characters(id);
+        }
 
-            User? selectedUser = _context.Users.Find(id);
-
-            if (selectedUser == null)
-            {
-                return NotFound();
-            }
-
-            List<Combatant> combatants = [];
-            List<Team> teams = [];
-            if (section == "combatants")
-            {
-                combatants = _context.Combatants
-                    .Where(c => c.UserId == id)
-                    .OrderBy(c => c.Name)
-                    .ToList();
-            }
-            else
-            {
-                teams = _context.Teams
-                    .Where(t => t.UserId == id)
-                    .Include(t => t.Combatant1)
-                    .Include(t => t.Combatant2)
-                    .Include(t => t.Combatant3)
-                    .Include(t => t.Combatant4)
-                    .Include(t => t.Combatant5)
-                    .OrderBy(t => t.Name)
-                    .ToList();
-            }
-
-            var model = new UserViewModel
+        [HttpGet]
+        [Route("/user/{id}/characters/")]
+        public IActionResult Characters(int id)
+        {
+            var model = new UserViewModel()
             {
                 CurrentUser = GetCurrentUser(),
-                SelectedUser = selectedUser,
-                SelectedSection = section,
-                Combatants = combatants,
-                Teams = teams
+                SelectedUser = _context.Users.Find(id)
             };
 
+            if (model.SelectedUser ==  null)
+            {
+                return NotFound();
+            }
+
+            model.Characters = _context.Characters
+                .Where(c => c.UserId == model.SelectedUser.Id)
+                .OrderBy(c => c.Name)
+                .ToList();
+
+            return View("Characters", model);
+        }
+
+        [HttpGet]
+        [Route("/user/{id}/teams/")]
+        public IActionResult Teams(int id)
+        {
+            var model = new UserViewModel()
+            {
+                CurrentUser = GetCurrentUser(),
+                SelectedUser = _context.Users.Find(id)
+            };
+
+            if (model.SelectedUser == null)
+            {
+                return NotFound();
+            }
+
+            model.Teams = _context.Teams
+                .Where(t => t.UserId == id)
+                .Include(t => t.Character1)
+                .Include(t => t.Character2)
+                .Include(t => t.Character3)
+                .Include(t => t.Character4)
+                .Include(t => t.Character5)
+                .OrderBy(t => t.Name)
+                .ToList();
+
+            return View("Teams", model);
+        }
+
+        [HttpGet]
+        [Route("/user/edit/")]
+        public IActionResult Edit()
+        {
+            var model = new UserEditViewModel()
+            {
+                CurrentUser = GetCurrentUser()
+            };
+
+            if (model.CurrentUser == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "Account" });
+            }
+
+            model.User = model.CurrentUser;
+
             return View(model);
+        }
+
+        [HttpPost]
+        [Route("/user/edit/")]
+        public IActionResult Edit(UserEditViewModel model)
+        {
+            model.CurrentUser = GetCurrentUser();
+
+            if (model.CurrentUser == null)
+            {
+                return RedirectToAction("Login", "Account", new { Area = "Account" });
+            }
+
+            model.CurrentUser.Tagline = model.User.Tagline;
+
+            _context.Update(model.CurrentUser);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "User", new { id = model.CurrentUser.Id });
         }
     }
 }

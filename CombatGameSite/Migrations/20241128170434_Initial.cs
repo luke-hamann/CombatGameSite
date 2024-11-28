@@ -7,7 +7,7 @@
 namespace CombatGameSite.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,41 +45,41 @@ namespace CombatGameSite.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Combatants",
+                name: "Characters",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Health = table.Column<int>(type: "int", nullable: true),
-                    TypeId = table.Column<int>(type: "int", nullable: true),
-                    Defense = table.Column<int>(type: "int", nullable: true),
-                    Species = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Health = table.Column<int>(type: "int", nullable: false),
+                    TypeId = table.Column<int>(type: "int", nullable: false),
+                    Defense = table.Column<int>(type: "int", nullable: false),
+                    Species = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SkillPrimaryId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     SkillSecondaryId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     SkillTertiaryId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Combatants", x => x.Id);
+                    table.PrimaryKey("PK_Characters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Combatants_Skills_SkillPrimaryId",
+                        name: "FK_Characters_Skills_SkillPrimaryId",
                         column: x => x.SkillPrimaryId,
                         principalTable: "Skills",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Combatants_Skills_SkillSecondaryId",
+                        name: "FK_Characters_Skills_SkillSecondaryId",
                         column: x => x.SkillSecondaryId,
                         principalTable: "Skills",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Combatants_Skills_SkillTertiaryId",
+                        name: "FK_Characters_Skills_SkillTertiaryId",
                         column: x => x.SkillTertiaryId,
                         principalTable: "Skills",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Combatants_Users_UserId",
+                        name: "FK_Characters_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id");
@@ -91,42 +91,47 @@ namespace CombatGameSite.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     Score = table.Column<int>(type: "int", nullable: true),
-                    Combatant1Id = table.Column<int>(type: "int", nullable: true),
-                    Combatant2Id = table.Column<int>(type: "int", nullable: true),
-                    Combatant3Id = table.Column<int>(type: "int", nullable: true),
-                    Combatant4Id = table.Column<int>(type: "int", nullable: true),
-                    Combatant5Id = table.Column<int>(type: "int", nullable: true)
+                    Character1Id = table.Column<int>(type: "int", nullable: true),
+                    Character2Id = table.Column<int>(type: "int", nullable: true),
+                    Character3Id = table.Column<int>(type: "int", nullable: true),
+                    Character4Id = table.Column<int>(type: "int", nullable: true),
+                    Character5Id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Teams", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Teams_Combatants_Combatant1Id",
-                        column: x => x.Combatant1Id,
-                        principalTable: "Combatants",
+                        name: "FK_Teams_Characters_Character1Id",
+                        column: x => x.Character1Id,
+                        principalTable: "Characters",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Teams_Combatants_Combatant2Id",
-                        column: x => x.Combatant2Id,
-                        principalTable: "Combatants",
+                        name: "FK_Teams_Characters_Character2Id",
+                        column: x => x.Character2Id,
+                        principalTable: "Characters",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Teams_Combatants_Combatant3Id",
-                        column: x => x.Combatant3Id,
-                        principalTable: "Combatants",
+                        name: "FK_Teams_Characters_Character3Id",
+                        column: x => x.Character3Id,
+                        principalTable: "Characters",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Teams_Combatants_Combatant4Id",
-                        column: x => x.Combatant4Id,
-                        principalTable: "Combatants",
+                        name: "FK_Teams_Characters_Character4Id",
+                        column: x => x.Character4Id,
+                        principalTable: "Characters",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Teams_Combatants_Combatant5Id",
-                        column: x => x.Combatant5Id,
-                        principalTable: "Combatants",
+                        name: "FK_Teams_Characters_Character5Id",
+                        column: x => x.Character5Id,
+                        principalTable: "Characters",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Teams_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -188,7 +193,7 @@ namespace CombatGameSite.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Combatants",
+                table: "Characters",
                 columns: new[] { "Id", "Defense", "Health", "Name", "SkillPrimaryId", "SkillSecondaryId", "SkillTertiaryId", "Species", "TypeId", "UserId" },
                 values: new object[,]
                 {
@@ -221,7 +226,7 @@ namespace CombatGameSite.Migrations
 
             migrationBuilder.InsertData(
                 table: "Teams",
-                columns: new[] { "Id", "Combatant1Id", "Combatant2Id", "Combatant3Id", "Combatant4Id", "Combatant5Id", "Name", "Score", "UserId" },
+                columns: new[] { "Id", "Character1Id", "Character2Id", "Character3Id", "Character4Id", "Character5Id", "Name", "Score", "UserId" },
                 values: new object[,]
                 {
                     { 1, 1, 2, 3, 4, 5, "Water Warriors", 150, 1 },
@@ -239,49 +244,54 @@ namespace CombatGameSite.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Combatants_SkillPrimaryId",
-                table: "Combatants",
+                name: "IX_Characters_SkillPrimaryId",
+                table: "Characters",
                 column: "SkillPrimaryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Combatants_SkillSecondaryId",
-                table: "Combatants",
+                name: "IX_Characters_SkillSecondaryId",
+                table: "Characters",
                 column: "SkillSecondaryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Combatants_SkillTertiaryId",
-                table: "Combatants",
+                name: "IX_Characters_SkillTertiaryId",
+                table: "Characters",
                 column: "SkillTertiaryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Combatants_UserId",
-                table: "Combatants",
+                name: "IX_Characters_UserId",
+                table: "Characters",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teams_Combatant1Id",
+                name: "IX_Teams_Character1Id",
                 table: "Teams",
-                column: "Combatant1Id");
+                column: "Character1Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teams_Combatant2Id",
+                name: "IX_Teams_Character2Id",
                 table: "Teams",
-                column: "Combatant2Id");
+                column: "Character2Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teams_Combatant3Id",
+                name: "IX_Teams_Character3Id",
                 table: "Teams",
-                column: "Combatant3Id");
+                column: "Character3Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teams_Combatant4Id",
+                name: "IX_Teams_Character4Id",
                 table: "Teams",
-                column: "Combatant4Id");
+                column: "Character4Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teams_Combatant5Id",
+                name: "IX_Teams_Character5Id",
                 table: "Teams",
-                column: "Combatant5Id");
+                column: "Character5Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_UserId",
+                table: "Teams",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -291,7 +301,7 @@ namespace CombatGameSite.Migrations
                 name: "Teams");
 
             migrationBuilder.DropTable(
-                name: "Combatants");
+                name: "Characters");
 
             migrationBuilder.DropTable(
                 name: "Skills");

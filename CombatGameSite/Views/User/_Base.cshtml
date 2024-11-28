@@ -1,0 +1,27 @@
+﻿@model UserViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = Model.SelectedUser!.Name;
+}
+
+<h1>
+    @Model.SelectedUser.Name
+</h1>
+@if (Model.SelectedUser.Tagline != null)
+{
+    <blockquote>
+        @Model.SelectedUser.Tagline
+    </blockquote>
+}
+@if (Model.CurrentUser.Id == Model.SelectedUser.Id)
+{
+    <p>
+        <a asp-action="Edit">Edit Tagline</a>
+    </p>
+}
+<p>
+    <a asp-action="Characters" asp-route-id="@Model.SelectedUser.Id">Characters</a>
+    <a asp-action="Teams" asp-route-id="@Model.SelectedUser.Id">Teams</a>
+</p>
+
+@RenderBody()

@@ -38,11 +38,11 @@
         else
         {
             <div class="row container justify-content-center">
-                <a asp-controller="User" asp-action="Index" asp-route-id="@Model.CurrentUser.Id" asp-route-section="combatants" class="Button d-flex justify-content-center align-items-center  px-4  fs-4">Combatants</a>
+                <a asp-controller="User" asp-action="Characters" asp-route-id="@Model.CurrentUser.Id" class="Button d-flex justify-content-center align-items-center  px-4  fs-4">Combatants</a>
 
             </div>
             <div class="row container justify-content-center">
-                <a asp-controller="User" asp-action="Index" asp-route-id="@Model.CurrentUser.Id" asp-route-section="teams" class="Button d-flex justify-content-center align-items-center  px-4  fs-3">Teams</a>
+                <a asp-controller="User" asp-action="Teams" asp-route-id="@Model.CurrentUser.Id" class="Button d-flex justify-content-center align-items-center  px-4  fs-3">Teams</a>
 
             </div>
             <div class="row container justify-content-center">

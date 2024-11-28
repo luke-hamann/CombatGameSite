@@ -1,0 +1,34 @@
+﻿@model UserViewModel
+@{
+    Layout = "_Base";
+}
+<h2>
+    Teams
+</h2>
+@if (Model.SelectedUser.Id == Model.CurrentUser?.Id)
+{
+    <p>
+        <a asp-controller="Team" asp-action="Add">Create Team</a>
+    </p>
+}
+<p>
+    @Model.Teams.Count
+    team@(Model.Teams.Count == 1 ? "" : "s")
+</p>
+@foreach (Team team in Model.Teams)
+{
+    <h3>
+        @team.Name
+    </h3>
+    @if (team.UserId == Model.CurrentUser?.Id)
+    {
+        <p>
+            <a asp-controller="Team" asp-action="Edit" asp-route-id="@team.Id">Edit</a>
+            <a asp-controller="Team" asp-action="Delete" asp-route-id="@team.Id">Delete</a>
+        </p>
+    }
+    <p>
+        Score: @team.Score
+    </p>
+    @await Html.PartialAsync("TeamCharacterList", team)
+}

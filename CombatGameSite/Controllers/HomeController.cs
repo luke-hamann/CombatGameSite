@@ -27,6 +27,7 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpGet]
+        [Route("/leaderboard/")]
         public IActionResult Leaderboard()
         {
             var model = new LeaderboardViewModel()
@@ -34,11 +35,11 @@ namespace CombatGameSite.Controllers
                 CurrentUser = GetCurrentUser(),
                 Teams = _context.Teams
                     .Include(t => t.User)
-                    .Include(t => t.Combatant1)
-                    .Include(t => t.Combatant2)
-                    .Include(t => t.Combatant3)
-                    .Include(t => t.Combatant4)
-                    .Include(t => t.Combatant5)
+                    .Include(t => t.Character1)
+                    .Include(t => t.Character2)
+                    .Include(t => t.Character3)
+                    .Include(t => t.Character4)
+                    .Include(t => t.Character5)
                     .OrderByDescending(t => t.Score)
                     .ToList()
             };
@@ -47,7 +48,8 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpGet]
-        public IActionResult Battle()
+        [Route("/battle/")]
+        public ViewResult Battle()
         {
             var model = new BattleFormViewModel
             {
@@ -64,6 +66,7 @@ namespace CombatGameSite.Controllers
         }
 
         [HttpPost]
+        [Route("/battle/")]
         public ViewResult Battle(BattleFormViewModel battleFormViewModel)
         { //Pass in winning teams ID and add to their score. +10 for win -3 for loss
             battleFormViewModel.CurrentUser = GetCurrentUser();
@@ -89,7 +92,7 @@ namespace CombatGameSite.Controllers
 
             // Battle calculations
 
-            Boolean team1Won = (new Random()).Next(1) == 0;
+            bool team1Won = (new Random()).Next(1) == 0;
 
             if (team1Won)
             {

@@ -1,0 +1,16 @@
+﻿@model TeamDeleteViewModel
+@{
+    ViewData["Title"] = "Confirm Deletion";
+}
+<h1>
+    Confirm Deletion
+</h1>
+<form asp-action="Delete" method="post">
+    <p>
+        Are you sure you want to delete @Model.Team.Name?
+    </p>
+    <div>
+        <input type="submit" value="Yes" />
+        <a asp-controller="User" asp-action="Teams" asp-route-id="@Model.Team.UserId">No</a>
+    </div>
+</form>
