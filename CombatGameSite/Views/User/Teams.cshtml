@@ -5,6 +5,12 @@
 <h2>
     Teams
 </h2>
+@if (TempData.Keys.Contains("message"))
+{
+    <p>
+        @TempData["message"]
+    </p>
+}
 @if (Model.SelectedUser.Id == Model.CurrentUser?.Id)
 {
     <p>

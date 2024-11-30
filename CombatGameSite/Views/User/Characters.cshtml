@@ -5,6 +5,12 @@
 <h2>
     Characters
 </h2>
+@if (TempData.Keys.Contains("message"))
+{
+    <p>
+        @TempData["message"]
+    </p>
+}
 @if (Model.CurrentUser?.Id == Model.SelectedUser.Id)
 {
     <p>

@@ -129,7 +129,9 @@ namespace CombatGameSite.Controllers
             _context.Add(model.Character);
             _context.SaveChanges();
 
-            return RedirectToAction("Index", new { id = model.Character.Id });
+            TempData["message"] = $"You just created the character {model.Character.Name}.";
+
+            return RedirectToAction("Characters", "User", new { id = model.Character.UserId });
         }
 
         [HttpGet]
@@ -211,7 +213,10 @@ namespace CombatGameSite.Controllers
             // Update and save the character
             _context.Update(model.Character);
             _context.SaveChanges();
-            return RedirectToAction("Index", new { id = model.Character.Id });
+
+            TempData["message"] = $"You just edited the character {model.Character.Name}.";
+
+            return RedirectToAction("Characters", "User", new { id = model.Character.UserId });
         }
 
         [HttpGet]
@@ -294,6 +299,8 @@ namespace CombatGameSite.Controllers
 
             _context.Remove(character);
             _context.SaveChanges();
+
+            TempData["message"] = $"You just deleted the character {character.Name}.";
 
             return RedirectToAction("Characters", "User", new { id = character.UserId });
         }

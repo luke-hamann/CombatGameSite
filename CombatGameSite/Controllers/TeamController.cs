@@ -105,6 +105,8 @@ namespace CombatGameSite.Controllers
             _context.Add(model.Team);
             _context.SaveChanges();
 
+            TempData["message"] = $"You just added the team {model.Team.Name}.";
+
             return RedirectToAction("Teams", "User", new { id = model.CurrentUser.Id });
         }
 
@@ -178,6 +180,8 @@ namespace CombatGameSite.Controllers
             _context.Update(model.Team);
             _context.SaveChanges();
 
+            TempData["message"] = $"You just edited the team {model.Team.Name}.";
+
             return RedirectToAction("Teams", "User", new { id = model.Team.UserId });
         }
 
@@ -230,6 +234,8 @@ namespace CombatGameSite.Controllers
 
             _context.Remove(team);
             _context.SaveChanges();
+
+            TempData["message"] = $"You just deleted the team {team.Name}.";
 
             return RedirectToAction("Teams", "User", new { id = team.UserId });
         }
