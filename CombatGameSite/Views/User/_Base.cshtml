@@ -13,7 +13,7 @@
         @Model.SelectedUser.Tagline
     </blockquote>
 }
-@if (Model.CurrentUser.Id == Model.SelectedUser.Id)
+@if (Model.CurrentUser?.Id == Model.SelectedUser.Id)
 {
     <p>
         <a asp-action="Edit">Edit Tagline</a>

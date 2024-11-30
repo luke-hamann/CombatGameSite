@@ -4,6 +4,8 @@ namespace CombatGameSite.Models
 {
     public class Character
     {
+        public const int MAX_SKILL_POINTS = 125;
+
         public int? Id { get; set; }
 
         public int? UserId { get; set; }
@@ -12,13 +14,13 @@ namespace CombatGameSite.Models
         [Required(ErrorMessage = "Please enter a name.")]
         public string? Name { get; set; }
 
-        [Required(ErrorMessage = "Please enter a health value.")]
-        [Range(0, 100)]
-        public int? Health { get; set; }
-
         [Required(ErrorMessage = "Please select an element type.")]
         [Range(1, 4, ErrorMessage = "Please select an element type.")]
         public int? TypeId { get; set; }
+
+        [Required(ErrorMessage = "Please enter a health value.")]
+        [Range(0, 100)]
+        public int? Health { get; set; }
 
         [Required(ErrorMessage = "Please enter a defense value.")]
         [Range(0, 50, ErrorMessage = "Please enter a defense value between 0 and 50.")]
@@ -56,7 +58,7 @@ namespace CombatGameSite.Models
                 (SkillPrimary?.Cost != null ? SkillPrimary.Cost : 0) +
                 (SkillSecondary?.Cost != null ? SkillSecondary.Cost : 0) +
                 (SkillTertiary?.Cost != null ? SkillTertiary.Cost : 0));
-            return total <= 50;
+            return total <= MAX_SKILL_POINTS;
         }
     }
 }

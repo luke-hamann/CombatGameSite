@@ -11,7 +11,7 @@
 <form asp-controller="Character" asp-action="@Model.Mode" method="post">
     <div asp-validation-summary="All"></div>
     <div>
-        You can distribute no more than 50 skill points.
+        You can distribute no more than @Character.MAX_SKILL_POINTS skill points.
     </div>
     <div>
         <label asp-for="@Model.Character.Name">

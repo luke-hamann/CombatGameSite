@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CombatGameSite.Migrations
 {
     [DbContext(typeof(CombatContext))]
-    [Migration("20241128170434_Initial")]
+    [Migration("20241130122104_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -81,326 +81,326 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 1,
-                            Defense = 0,
-                            Health = 100,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Aqua Warrior",
                             SkillPrimaryId = "A1",
                             SkillSecondaryId = "A2",
-                            SkillTertiaryId = "D1",
+                            SkillTertiaryId = "H1",
                             Species = "Human",
-                            TypeId = 1,
+                            TypeId = 2,
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Defense = 10,
-                            Health = 95,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Flame Destroyer",
                             SkillPrimaryId = "A3",
                             SkillSecondaryId = "A4",
-                            SkillTertiaryId = "D3",
+                            SkillTertiaryId = "H1",
                             Species = "Elf",
-                            TypeId = 2,
+                            TypeId = 4,
                             UserId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Defense = 0,
-                            Health = 100,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Wind Ninja",
                             SkillPrimaryId = "A5",
                             SkillSecondaryId = "A6",
-                            SkillTertiaryId = "D2",
-                            Species = "Ninja",
-                            TypeId = 3,
+                            SkillTertiaryId = "H1",
+                            Species = "Dwarf",
+                            TypeId = 4,
                             UserId = 3
                         },
                         new
                         {
                             Id = 4,
-                            Defense = 20,
-                            Health = 100,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Earth Titan",
                             SkillPrimaryId = "A7",
                             SkillSecondaryId = "A8",
-                            SkillTertiaryId = "D4",
-                            Species = "Giant",
-                            TypeId = 4,
+                            SkillTertiaryId = "H1",
+                            Species = "Human",
+                            TypeId = 2,
                             UserId = 4
                         },
                         new
                         {
                             Id = 5,
-                            Defense = 10,
-                            Health = 100,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Water Sage",
                             SkillPrimaryId = "A9",
                             SkillSecondaryId = "A10",
                             SkillTertiaryId = "H1",
-                            Species = "Mage",
+                            Species = "Elf",
                             TypeId = 1,
                             UserId = 1
                         },
                         new
                         {
                             Id = 6,
-                            Defense = 15,
-                            Health = 80,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Fire Knight",
                             SkillPrimaryId = "A11",
                             SkillSecondaryId = "A12",
-                            SkillTertiaryId = "D1",
-                            Species = "Knight",
-                            TypeId = 2,
+                            SkillTertiaryId = "H1",
+                            Species = "Dwarf",
+                            TypeId = 3,
                             UserId = 2
                         },
                         new
                         {
                             Id = 7,
-                            Defense = 0,
-                            Health = 100,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Wind Shaman",
                             SkillPrimaryId = "A13",
-                            SkillSecondaryId = "A4",
-                            SkillTertiaryId = "H2",
-                            Species = "Shaman",
-                            TypeId = 3,
+                            SkillSecondaryId = "A13",
+                            SkillTertiaryId = "H1",
+                            Species = "Human",
+                            TypeId = 2,
                             UserId = 3
                         },
                         new
                         {
                             Id = 8,
-                            Defense = 25,
-                            Health = 90,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Earth Wizard",
-                            SkillPrimaryId = "A7",
-                            SkillSecondaryId = "A6",
-                            SkillTertiaryId = "D2",
-                            Species = "Wizard",
-                            TypeId = 4,
+                            SkillPrimaryId = "H1",
+                            SkillSecondaryId = "H1",
+                            SkillTertiaryId = "H1",
+                            Species = "Elf",
+                            TypeId = 1,
                             UserId = 4
                         },
                         new
                         {
                             Id = 9,
-                            Defense = 5,
-                            Health = 85,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Water Spirit",
-                            SkillPrimaryId = "A7",
-                            SkillSecondaryId = "A8",
-                            SkillTertiaryId = "H3",
-                            Species = "Spirit",
-                            TypeId = 1,
+                            SkillPrimaryId = "H1",
+                            SkillSecondaryId = "H1",
+                            SkillTertiaryId = "H1",
+                            Species = "Dwarf",
+                            TypeId = 4,
                             UserId = 1
                         },
                         new
                         {
                             Id = 10,
-                            Defense = 5,
-                            Health = 100,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Flame Phoenix",
-                            SkillPrimaryId = "A9",
-                            SkillSecondaryId = "A2",
-                            SkillTertiaryId = "D3",
-                            Species = "Phoenix",
+                            SkillPrimaryId = "H1",
+                            SkillSecondaryId = "H1",
+                            SkillTertiaryId = "H1",
+                            Species = "Human",
                             TypeId = 2,
                             UserId = 2
                         },
                         new
                         {
                             Id = 11,
-                            Defense = 10,
-                            Health = 80,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Wind Warrior",
-                            SkillPrimaryId = "A2",
+                            SkillPrimaryId = "A1",
                             SkillSecondaryId = "A2",
-                            SkillTertiaryId = "D4",
-                            Species = "Warrior",
-                            TypeId = 3,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Defense = 30,
-                            Health = 95,
-                            Name = "Earth Golem",
-                            SkillPrimaryId = "A2",
-                            SkillSecondaryId = "A4",
-                            SkillTertiaryId = "D1",
-                            Species = "Golem",
-                            TypeId = 4,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Defense = 20,
-                            Health = 90,
-                            Name = "Water Knight",
-                            SkillPrimaryId = "A5",
-                            SkillSecondaryId = "A6",
-                            SkillTertiaryId = "H4",
-                            Species = "Knight",
-                            TypeId = 1,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Defense = 5,
-                            Health = 100,
-                            Name = "Fire Sorcerer",
-                            SkillPrimaryId = "A7",
-                            SkillSecondaryId = "A8",
-                            SkillTertiaryId = "D2",
-                            Species = "Sorcerer",
-                            TypeId = 2,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Defense = 15,
-                            Health = 80,
-                            Name = "Wind Elf",
-                            SkillPrimaryId = "A9",
-                            SkillSecondaryId = "A3",
-                            SkillTertiaryId = "D3",
+                            SkillTertiaryId = "H2",
                             Species = "Elf",
                             TypeId = 3,
                             UserId = 3
                         },
                         new
                         {
-                            Id = 16,
-                            Defense = 35,
-                            Health = 100,
-                            Name = "Earth Monk",
+                            Id = 12,
+                            Defense = 50,
+                            Health = 50,
+                            Name = "Fire Sorcerer",
                             SkillPrimaryId = "A3",
-                            SkillSecondaryId = "A2",
-                            SkillTertiaryId = "D4",
-                            Species = "Monk",
+                            SkillSecondaryId = "A4",
+                            SkillTertiaryId = "H2",
+                            Species = "Dwarf",
                             TypeId = 4,
                             UserId = 4
                         },
                         new
                         {
+                            Id = 13,
+                            Defense = 50,
+                            Health = 50,
+                            Name = "Wind Elf",
+                            SkillPrimaryId = "A5",
+                            SkillSecondaryId = "A6",
+                            SkillTertiaryId = "H2",
+                            Species = "Human",
+                            TypeId = 2,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Defense = 50,
+                            Health = 50,
+                            Name = "Earth Golem",
+                            SkillPrimaryId = "A7",
+                            SkillSecondaryId = "A8",
+                            SkillTertiaryId = "H2",
+                            Species = "Elf",
+                            TypeId = 4,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Defense = 50,
+                            Health = 50,
+                            Name = "Water Knight",
+                            SkillPrimaryId = "A9",
+                            SkillSecondaryId = "A10",
+                            SkillTertiaryId = "H2",
+                            Species = "Dwarf",
+                            TypeId = 2,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Defense = 50,
+                            Health = 50,
+                            Name = "Fire Wizard",
+                            SkillPrimaryId = "A11",
+                            SkillSecondaryId = "A12",
+                            SkillTertiaryId = "H2",
+                            Species = "Human",
+                            TypeId = 2,
+                            UserId = 4
+                        },
+                        new
+                        {
                             Id = 17,
-                            Defense = 10,
-                            Health = 90,
-                            Name = "Water Guardian",
-                            SkillPrimaryId = "A3",
-                            SkillSecondaryId = "A4",
-                            SkillTertiaryId = "H5",
-                            Species = "Guardian",
-                            TypeId = 1,
+                            Defense = 50,
+                            Health = 50,
+                            Name = "Wind Shaman",
+                            SkillPrimaryId = "A13",
+                            SkillSecondaryId = "A13",
+                            SkillTertiaryId = "H2",
+                            Species = "Elf",
+                            TypeId = 3,
                             UserId = 1
                         },
                         new
                         {
                             Id = 18,
-                            Defense = 10,
-                            Health = 85,
-                            Name = "Fire Wizard",
-                            SkillPrimaryId = "A5",
-                            SkillSecondaryId = "A6",
-                            SkillTertiaryId = "D1",
-                            Species = "Wizard",
+                            Defense = 50,
+                            Health = 50,
+                            Name = "Water Guardian",
+                            SkillPrimaryId = "H1",
+                            SkillSecondaryId = "H1",
+                            SkillTertiaryId = "H2",
+                            Species = "Dwarf",
                             TypeId = 2,
                             UserId = 2
                         },
                         new
                         {
                             Id = 19,
-                            Defense = 5,
-                            Health = 95,
-                            Name = "Wind Dragon",
-                            SkillPrimaryId = "A7",
-                            SkillSecondaryId = "A8",
-                            SkillTertiaryId = "D2",
-                            Species = "Dragon",
-                            TypeId = 3,
+                            Defense = 50,
+                            Health = 50,
+                            Name = "Flame Demon",
+                            SkillPrimaryId = "H1",
+                            SkillSecondaryId = "H1",
+                            SkillTertiaryId = "H2",
+                            Species = "Human",
+                            TypeId = 1,
                             UserId = 3
                         },
                         new
                         {
                             Id = 20,
                             Defense = 50,
-                            Health = 100,
-                            Name = "Earth Demon",
-                            SkillPrimaryId = "A9",
-                            SkillSecondaryId = "A4",
-                            SkillTertiaryId = "D3",
-                            Species = "Demon",
-                            TypeId = 4,
+                            Health = 50,
+                            Name = "Wind Demon",
+                            SkillPrimaryId = "H1",
+                            SkillSecondaryId = "H1",
+                            SkillTertiaryId = "H2",
+                            Species = "Elf",
+                            TypeId = 2,
                             UserId = 4
                         },
                         new
                         {
                             Id = 21,
-                            Defense = 5,
-                            Health = 100,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Water Monk",
                             SkillPrimaryId = "A1",
                             SkillSecondaryId = "A2",
-                            SkillTertiaryId = "H6",
-                            Species = "Monk",
-                            TypeId = 1,
+                            SkillTertiaryId = "H3",
+                            Species = "Dwarf",
+                            TypeId = 2,
                             UserId = 1
                         },
                         new
                         {
                             Id = 22,
-                            Defense = 15,
-                            Health = 90,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Fire Samurai",
                             SkillPrimaryId = "A3",
                             SkillSecondaryId = "A4",
-                            SkillTertiaryId = "D4",
-                            Species = "Samurai",
-                            TypeId = 2,
+                            SkillTertiaryId = "H3",
+                            Species = "Human",
+                            TypeId = 1,
                             UserId = 2
                         },
                         new
                         {
                             Id = 23,
-                            Defense = 20,
-                            Health = 80,
-                            Name = "Wind Swordsman",
+                            Defense = 50,
+                            Health = 50,
+                            Name = "Wind Warrior",
                             SkillPrimaryId = "A5",
                             SkillSecondaryId = "A6",
-                            SkillTertiaryId = "D1",
-                            Species = "Swordsman",
+                            SkillTertiaryId = "H3",
+                            Species = "Elf",
                             TypeId = 3,
                             UserId = 3
                         },
                         new
                         {
                             Id = 24,
-                            Defense = 40,
-                            Health = 100,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Earth Beast",
                             SkillPrimaryId = "A7",
                             SkillSecondaryId = "A8",
-                            SkillTertiaryId = "D2",
-                            Species = "Beast",
-                            TypeId = 4,
+                            SkillTertiaryId = "H3",
+                            Species = "Dwarf",
+                            TypeId = 1,
                             UserId = 4
                         },
                         new
                         {
                             Id = 25,
-                            Defense = 0,
-                            Health = 90,
+                            Defense = 50,
+                            Health = 50,
                             Name = "Water Sorceress",
                             SkillPrimaryId = "A9",
-                            SkillSecondaryId = "A5",
-                            SkillTertiaryId = "D3",
-                            Species = "Sorceress",
-                            TypeId = 1,
+                            SkillSecondaryId = "A10",
+                            SkillTertiaryId = "H3",
+                            Species = "Human",
+                            TypeId = 3,
                             UserId = 1
                         });
                 });
@@ -879,144 +879,144 @@ namespace CombatGameSite.Migrations
                         {
                             Id = 1,
                             Character1Id = 1,
-                            Character2Id = 2,
-                            Character3Id = 3,
-                            Character4Id = 4,
-                            Character5Id = 5,
-                            Name = "Water Warriors",
+                            Character2Id = 5,
+                            Character3Id = 9,
+                            Character4Id = 13,
+                            Character5Id = 17,
+                            Name = "Aqua Defenders",
                             Score = 150,
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Character1Id = 6,
-                            Character2Id = 7,
-                            Character3Id = 8,
-                            Character4Id = 9,
-                            Character5Id = 10,
-                            Name = "Fire Phoenixes",
-                            Score = 120,
-                            UserId = 2
+                            Character1Id = 1,
+                            Character2Id = 5,
+                            Character3Id = 9,
+                            Character4Id = 13,
+                            Character5Id = 21,
+                            Name = "Tidal Guardians",
+                            Score = 140,
+                            UserId = 1
                         },
                         new
                         {
                             Id = 3,
-                            Character1Id = 11,
-                            Character2Id = 12,
-                            Character3Id = 13,
-                            Character4Id = 14,
-                            Character5Id = 15,
-                            Name = "Wind Striders",
-                            Score = 140,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Character1Id = 16,
-                            Character2Id = 17,
-                            Character3Id = 18,
-                            Character4Id = 19,
-                            Character5Id = 20,
-                            Name = "Earth Guardians",
-                            Score = 160,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Character1Id = 21,
-                            Character2Id = 22,
-                            Character3Id = 23,
-                            Character4Id = 24,
+                            Character1Id = 9,
+                            Character2Id = 13,
+                            Character3Id = 17,
+                            Character4Id = 21,
                             Character5Id = 25,
-                            Name = "Aqua Knights",
+                            Name = "Water Warriors",
                             Score = 130,
                             UserId = 1
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 4,
                             Character1Id = 2,
-                            Character2Id = 5,
-                            Character3Id = 7,
-                            Character4Id = 10,
-                            Character5Id = 6,
-                            Name = "Inferno Lords",
-                            Score = 110,
+                            Character2Id = 6,
+                            Character3Id = 10,
+                            Character4Id = 14,
+                            Character5Id = 18,
+                            Name = "Blazing Firestorm",
+                            Score = 160,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Character1Id = 2,
+                            Character2Id = 6,
+                            Character3Id = 10,
+                            Character4Id = 14,
+                            Character5Id = 22,
+                            Name = "Inferno Knights",
+                            Score = 140,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Character1Id = 6,
+                            Character2Id = 10,
+                            Character3Id = 14,
+                            Character4Id = 18,
+                            Character5Id = 22,
+                            Name = "Fire Warriors",
+                            Score = 135,
                             UserId = 2
                         },
                         new
                         {
                             Id = 7,
                             Character1Id = 3,
-                            Character2Id = 8,
-                            Character3Id = 12,
-                            Character4Id = 13,
-                            Character5Id = 11,
-                            Name = "Storm Warriors",
-                            Score = 135,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Character1Id = 14,
-                            Character2Id = 16,
-                            Character3Id = 17,
-                            Character4Id = 19,
-                            Character5Id = 20,
-                            Name = "Quake Defenders",
-                            Score = 125,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Character1Id = 22,
-                            Character2Id = 23,
-                            Character3Id = 1,
-                            Character4Id = 4,
-                            Character5Id = 5,
-                            Name = "Tidal Fury",
-                            Score = 145,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Character1Id = 9,
-                            Character2Id = 10,
-                            Character3Id = 6,
-                            Character4Id = 2,
-                            Character5Id = 7,
-                            Name = "Blazing Souls",
-                            Score = 115,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Character1Id = 13,
-                            Character2Id = 11,
-                            Character3Id = 8,
+                            Character2Id = 7,
+                            Character3Id = 11,
                             Character4Id = 15,
-                            Character5Id = 12,
-                            Name = "Whirlwind Vanguards",
+                            Character5Id = 19,
+                            Name = "Wind Strikers",
                             Score = 150,
                             UserId = 3
                         },
                         new
                         {
-                            Id = 12,
-                            Character1Id = 18,
-                            Character2Id = 14,
-                            Character3Id = 19,
-                            Character4Id = 20,
-                            Character5Id = 16,
-                            Name = "Rock Titans",
+                            Id = 8,
+                            Character1Id = 3,
+                            Character2Id = 7,
+                            Character3Id = 11,
+                            Character4Id = 15,
+                            Character5Id = 23,
+                            Name = "Zephyr Champions",
+                            Score = 145,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Character1Id = 7,
+                            Character2Id = 11,
+                            Character3Id = 15,
+                            Character4Id = 19,
+                            Character5Id = 23,
+                            Name = "Sky Protectors",
+                            Score = 140,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Character1Id = 4,
+                            Character2Id = 8,
+                            Character3Id = 12,
+                            Character4Id = 16,
+                            Character5Id = 20,
+                            Name = "Earth Titans",
                             Score = 160,
+                            UserId = 4
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Character1Id = 4,
+                            Character2Id = 8,
+                            Character3Id = 12,
+                            Character4Id = 16,
+                            Character5Id = 24,
+                            Name = "Rock Guardians",
+                            Score = 150,
+                            UserId = 4
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Character1Id = 8,
+                            Character2Id = 12,
+                            Character3Id = 16,
+                            Character4Id = 20,
+                            Character5Id = 24,
+                            Name = "Stone Warriors",
+                            Score = 140,
                             UserId = 4
                         });
                 });
