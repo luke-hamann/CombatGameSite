@@ -66,35 +66,31 @@
             <div class="row">
                 <label>Choose Skills:</label>
                 <div class="skill-catalog">
-                    @foreach (var skill in Model.Skills ?? Enumerable.Empty<Skill>())
-                {
-                        bool isChecked = false;
-
-                        // Ensure that Model.Character is not null before checking its Skill properties
-                        if (Model.Character != null)
+                   @foreach (var skill in Model.Skills ?? Enumerable.Empty<Skill>())
                         {
-                            isChecked = (Model.Character.SkillPrimaryId != null && Model.Character.SkillPrimaryId.Contains(skill.Id)) ||
-                                        (Model.Character.SkillSecondaryId != null && Model.Character.SkillSecondaryId.Contains(skill.Id)) ||
-                                        (Model.Character.SkillTertiaryId != null && Model.Character.SkillTertiaryId.Contains(skill.Id));
+                            bool isChecked = false;
+
+                            // Ensure that Model.Character is not null before checking its Skill properties
+                            if (Model.Character != null)
+                            {
+                                isChecked = (Model.Character.SkillPrimaryId != null && Model.Character.SkillPrimaryId.Contains(skill.Id)) ||
+                                            (Model.Character.SkillSecondaryId != null && Model.Character.SkillSecondaryId.Contains(skill.Id)) ||
+                                            (Model.Character.SkillTertiaryId != null && Model.Character.SkillTertiaryId.Contains(skill.Id));
+                            }
+
+                            <div class="skill-card">
+                                <input type="checkbox" class="skill-checkbox" id="skill-@skill.Id" name="Character.SkillIds" value="@skill.Id" data-cost="@skill.Cost" onchange="updateCost()" @if (isChecked) { @:checked } />
+                                <label for="skill-@skill.Id" class="skill-card-label">
+                                    <h4>@skill.Name</h4>
+                                    <p>@skill.Description</p>
+                                    <p><strong>Cost:</strong> @skill.Cost</p>
+                                </label>
+                            </div>
                         }
+
                         
-                    <div class="skill-card">
-                        <input type="checkbox" 
-                            class="skill-checkbox" 
-                            id="skill-@skill.Id" 
-                            name="Skills" 
-                            value="@skill.Id" 
-                            data-cost="@skill.Cost" 
-                            onchange="updateCost()" 
-                            checked="@isChecked"
-                            @checked(isChecked ? "checked" : null)/>
-                        <label for="skill-@skill.Id" class="skill-card-label">
-                            <h4>@skill.Name</h4>
-                            <p>@skill.Description</p>
-                            <p><strong>Cost:</strong> @skill.Cost</p>
-                        </label>
-                    </div>
-                }
+
+
 
                 </div>
             </div>

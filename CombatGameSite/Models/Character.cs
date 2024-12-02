@@ -38,6 +38,9 @@ namespace CombatGameSite.Models
         public string? SkillTertiaryId { get; set; }   
         public Skill? SkillTertiary { get; set; }
 
+        public List<string> SkillIds { get; set; }
+
+
         public new string GetType()
         {
             switch (TypeId)
