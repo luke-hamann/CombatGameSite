@@ -105,3 +105,182 @@ h2 {
     background-image: url("../assets/png/logotype/NameBack.png");
     background-size: 100% 100%;
 }
+
+/* Character form  */
+
+
+
+
+.skill-catalog {
+    height: 40rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    overflow-y: scroll;
+    border: 3px solid #2b201d;
+    padding: 10px;
+    background-color: #f9f9f900;
+}
+
+.skill-card {
+    position: relative;
+    width: 150px;
+    border: 3px solid #2b201d;
+    box-shadow: 0px 4px 0px black;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    background-color: #b99a90;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.skill-card-label {
+    display: block;
+    cursor: pointer;
+}
+
+.skill-checkbox {
+    display: none;
+}
+
+.skill-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.skill-card:has(.skill-checkbox:checked) {
+    border: 2px solid #d3d150;
+    background-color: #c59718;
+}
+
+
+.skill-card:has(.skill-checkbox:disabled) {
+    border: 2px solid black;
+    background-color: gray;
+}
+
+    .skill-card h4 {
+        margin: 0;
+        font-size: 1rem;
+        color: #2b201d;
+    }
+
+.skill-card p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #2b201d;
+}
+
+
+
+
+.background-layer {
+    position: absolute;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    top: -2px;
+    width: 100%;
+    z-index: -1;
+    height: 100lvh; /* Stands for "large viewport height" */
+}
+
+.form-container {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0%;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.name-health-set {
+    padding-inline: 6rem;
+}
+
+.skill-set {
+    padding: 6rem;
+    padding-left: 9rem;
+}
+
+.max-height {
+    height: 90%;
+    max-height: 100%;
+}
+
+.char-input input {
+    background-color: transparent;
+    border-radius: 0%;
+    color: white;
+    border: none;
+    border-bottom: 2px #e2cac3 solid;
+}
+
+.char-input label {
+    border: none;
+    color: #e2cac3 !important;
+}
+
+    .char-input input:focus, .char-input label::after {
+        background-color: transparent !important;
+        color: white;
+    }
+
+.char-image {
+    height: 25rem;
+}
+
+.Back-Btn {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    margin: 1rem;
+    z-index: 3;
+    background: url(../Assets/png/Button/Square/Fill/Default.png);
+    background-repeat: no-repeat;
+    background-size: fit;
+    background-position: center;
+    width: 6rem;
+    height: 6rem;
+    padding: 0; /* Removes all padding from the <a> */
+
+    font-family: 'GameFont', sans-serif;
+    text-decoration: none;
+    color: #a4925f;
+    text-shadow: 1px 1px 0px #6d644c; /* Subtle shadow */
+    border: none;
+}
+
+    .Back-Btn svg {
+        margin-bottom:1rem;
+        height:90%;
+        width:auto;
+    }
+
+    .Char-Submit-Btn {
+        position: absolute;
+        top: 1rem;
+        left: 10rem;
+        margin: 1rem;
+        z-index: 3;
+    }
+
+    .Back-Btn:hover {
+        background: url(../Assets/png/Button/Square/Fill/Hover.png);
+        background-repeat: no-repeat;
+        background-size: fit;
+        background-position: center;
+    }
+
+.Validation {
+    position: absolute;
+    top: 3rem;
+    right: 10rem;
+    margin: 2rem;
+    z-index: 3;
+    color: red;
+}
