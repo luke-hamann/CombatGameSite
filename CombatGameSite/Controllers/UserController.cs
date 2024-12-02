@@ -10,13 +10,13 @@ namespace CombatGameSite.Controllers
         private CombatContext _context;
 
         public UserController(CombatContext context)
-        {
+        {//Constructor method. Stores context into private variable _context
             _context = context;
         }
 
         [NonAction]
         public User? GetCurrentUser()
-        {
+        {//Method to get userId from Session data.
             return _context.Users.Find(HttpContext.Session.GetInt32("userId"));
         }
 
