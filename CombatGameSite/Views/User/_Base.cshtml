@@ -4,7 +4,7 @@
     ViewData["Title"] = Model.SelectedUser!.Name;
 }
 
-<h1>
+<h1 class="heading d-flex justify-content-center align-items-center p-0">
     @Model.SelectedUser.Name
 </h1>
 @if (Model.SelectedUser.Tagline != null)
@@ -19,9 +19,9 @@
         <a asp-action="Edit">Edit Tagline</a>
     </p>
 }
-<p>
-    <a asp-action="Characters" asp-route-id="@Model.SelectedUser.Id">Characters</a>
-    <a asp-action="Teams" asp-route-id="@Model.SelectedUser.Id">Teams</a>
-</p>
+<div>
+    <a asp-action="Characters" asp-route-id="@Model.SelectedUser.Id" class="button button-fixed">Characters</a>
+    <a asp-action="Teams" asp-route-id="@Model.SelectedUser.Id" class="button button-fixed">Teams</a>
+</div>
 
 @RenderBody()
