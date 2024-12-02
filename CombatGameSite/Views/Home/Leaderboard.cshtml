@@ -3,30 +3,31 @@
     ViewData["Title"] = "Leaderboard";
 }
 
-<h1>
-    @ViewData["Title"]
-</h1>
+<div class="row">
+    <h1 class="heading d-inline-flex justify-content-center align-items-center p-0">
+        @ViewData["Title"]
+    </h1>
+</div>
 
 @{ int counter = 1; }
 @foreach (Team team in Model.Teams)
 {
-    <div>
-        <h2>
-            @counter. @team.Name
-        </h2>
-        <p>
-            User:
-            <a asp-controller="User" asp-action="Index" asp-route-id="@team.User.Id">
-                @team.User.Name
-            </a>
-        </p>
-        <p>
-            Score: @team.Score
-        </p>
-        <p>
-            Characters:
-        </p>
-        @await Html.PartialAsync("TeamCharacterList", team)
+    <div class="row">
+        <div class="col-md-6 offset-md-3 p-5 wooden-form">
+            <h2>
+                @counter. @team.Name (@team.Score points)
+            </h2>
+            <p>
+                User:
+                <a asp-controller="User" asp-action="Index" asp-route-id="@team.User.Id" class="text-light text-decoration-none">
+                    @team.User.Name
+                </a>
+            </p>
+            <p>
+                Characters:
+            </p>
+            @await Html.PartialAsync("TeamCharacterList", team)
+        </div>
     </div>
     counter++;
 }
