@@ -7,7 +7,14 @@
         public Character? Character { get; set; }
         public List<Skill>? Skills { get; set; }
 
-        public List<string> SkillIds { get; set; }
+        public List<String>? SkillIds { get; set; }
 
+        public void SetSkills()
+        {
+            Character.SkillPrimaryId = SkillIds.ElementAtOrDefault(0);
+            Character.SkillSecondaryId = SkillIds.ElementAtOrDefault(1);
+            Character.SkillTertiaryId = SkillIds.ElementAtOrDefault(2);
+
+        }
     }
 }

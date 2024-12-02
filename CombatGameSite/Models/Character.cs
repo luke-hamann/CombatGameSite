@@ -34,7 +34,6 @@ namespace CombatGameSite.Models
         public string? SkillTertiaryId { get; set; }   
         public Skill? SkillTertiary { get; set; }
 
-        public List<string> SkillIds { get; set; }
 
 
         public new string GetType()
@@ -51,8 +50,7 @@ namespace CombatGameSite.Models
 
         public bool hasValidSkillPointDistribution()
         {
-            int total =(int)(
-                (Health ?? 0) +
+            int total =(int)(((Health ?? 0) - 100) / 2 +
                 (SkillPrimary?.Cost != null ? SkillPrimary.Cost : 0) +
                 (SkillSecondary?.Cost != null ? SkillSecondary.Cost : 0) +
                 (SkillTertiary?.Cost != null ? SkillTertiary.Cost : 0)
