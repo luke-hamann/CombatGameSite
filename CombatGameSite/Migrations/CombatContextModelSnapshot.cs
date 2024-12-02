@@ -955,6 +955,15 @@ namespace CombatGameSite.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("FavoriteBook")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FavoriteGame")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FavoriteMovie")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -964,7 +973,6 @@ namespace CombatGameSite.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Tagline")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -975,6 +983,9 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 1,
+                            FavoriteBook = "Alice in Wonderland",
+                            FavoriteGame = "Kingdom Hearts 2",
+                            FavoriteMovie = "The Lion King",
                             Name = "alice",
                             Password = "password",
                             Tagline = "Hello, world!"
@@ -982,6 +993,9 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 2,
+                            FavoriteBook = "The Unofficial Guide to Fortnite",
+                            FavoriteGame = "Fortnite",
+                            FavoriteMovie = "Fortnite: The Movie",
                             Name = "bob",
                             Password = "password",
                             Tagline = "Catchphrase."
@@ -989,6 +1003,9 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 3,
+                            FavoriteBook = "Jumpmap",
+                            FavoriteGame = "Super Mario Bros",
+                            FavoriteMovie = "Terminator",
                             Name = "charlie",
                             Password = "password",
                             Tagline = "Super smashing success."
@@ -996,9 +1013,12 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 4,
+                            FavoriteBook = "x86 For Professionals",
+                            FavoriteGame = "Roller Coaster Tycoon",
+                            FavoriteMovie = "A Student Film",
                             Name = "dave",
                             Password = "password",
-                            Tagline = "Game on."
+                            Tagline = "It's not broke. You're just bad."
                         });
                 });
 

@@ -1,5 +1,6 @@
 ﻿using CombatGameSite.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using static System.Collections.Specialized.BitVector32;
 
@@ -108,7 +109,18 @@ namespace CombatGameSite.Controllers
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
 
+            ModelState["User.Name"].ValidationState = ModelValidationState.Valid;
+            ModelState["User.Password"].ValidationState = ModelValidationState.Valid;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             model.CurrentUser.Tagline = model.User.Tagline;
+            model.CurrentUser.FavoriteBook = model.User.FavoriteBook;
+            model.CurrentUser.FavoriteGame = model.User.FavoriteGame;
+            model.CurrentUser.FavoriteMovie = model.User.FavoriteMovie;
 
             _context.Update(model.CurrentUser);
             _context.SaveChanges();

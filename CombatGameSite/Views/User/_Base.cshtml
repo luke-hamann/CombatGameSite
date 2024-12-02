@@ -11,12 +11,21 @@
 <div class="row">
     <div class="col-sm-4 offset-sm-4 wooden-form p-5">
         <div>
-            @(Model.SelectedUser.Tagline != null ? Model.SelectedUser.Tagline : "I haven't set a tagline.")
+            Tagline: @(Model.SelectedUser.Tagline ?? "(none)")
+        </div>
+        <div>
+            Favorite Book: @(Model.SelectedUser.FavoriteBook ?? "(none)")
+        </div>
+        <div>
+            Favorite Game: @(Model.SelectedUser.FavoriteGame ?? "(none)")
+        </div>
+        <div>
+            Favorite Movie: @(Model.SelectedUser.FavoriteMovie ?? "(none)")
         </div>
         @if (Model.CurrentUser?.Id == Model.SelectedUser.Id)
         {
             <div class="text-center mt-5">
-                <a asp-action="Edit" class="button d-inline p-2">Edit Tagline</a>
+                <a asp-action="Edit" class="button d-inline p-2">Edit Profile</a>
             </div>
         }
     </div>
