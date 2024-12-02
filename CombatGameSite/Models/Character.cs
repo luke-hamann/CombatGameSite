@@ -19,7 +19,7 @@ namespace CombatGameSite.Models
         public int? TypeId { get; set; }
 
         [Required(ErrorMessage = "Please enter a health value.")]
-        [Range(0, 100)]
+        [Range(0, 200)]
         public int? Health { get; set; }
 
         [Required(ErrorMessage = "Please enter a species.")]
@@ -33,6 +33,9 @@ namespace CombatGameSite.Models
 
         public string? SkillTertiaryId { get; set; }   
         public Skill? SkillTertiary { get; set; }
+
+        public List<string> SkillIds { get; set; }
+
 
         public new string GetType()
         {

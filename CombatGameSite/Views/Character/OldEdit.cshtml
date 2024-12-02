@@ -1,0 +1,89 @@
+﻿@model CharacterEditViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = Model.Mode + " Character";
+}
+
+<h1>
+    @ViewData["Title"]
+</h1>
+
+<form asp-controller="Character" asp-action="@Model.Mode" method="post">
+    <div asp-validation-summary="All"></div>
+    <div>
+        You can distribute no more than 125 skill points.
+    </div>
+    <div>
+        <h3>Current Points Spent: <span id="totalCost">0</span></h3>
+    </div>
+    <div>
+        <label asp-for="@Model.Character.Name">
+            Name
+        </label>
+        <input asp-for="@Model.Character.Name" />
+    </div>
+    <div>
+        <label asp-for="@Model.Character.Health">
+            Health
+        </label>
+        <input asp-for="@Model.Character.Health" id="health" onchange="updateCost()" />
+    </div>
+    <div>
+        <label>Choose Skills:</label>
+        <div class="skill-catalog">
+            @foreach (var skill in Model.Skills)
+            {
+                <div class="skill-card">
+                    <input type="checkbox" class="skill-checkbox" id="skill-@skill.Id" name="Skills" value="@skill.Id" data-cost="@skill.Cost" onchange="updateCost()" />
+                    <label for="skill-@skill.Id" class="skill-card-label">
+                        <h4>@skill.Name</h4>
+                        <p>@skill.Description</p>
+                        <p><strong>Cost:</strong> @skill.Cost</p>
+                    </label>
+                </div>
+            }
+        </div>
+    </div>
+    <div>
+        <input type="hidden" asp-for="@Model.Character.Defense" value="0" />
+
+        <input type="submit" value="Submit" id="submitButton" />
+        @if (Model.Mode == "Edit")
+        {
+            <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Character.Id">
+                Cancel
+            </a>
+        }
+    </div>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function updateCost() {
+        var totalCost = 0;
+        const maxSkillPoints = @Character.MAX_SKILL_POINTS;
+
+        // Calculate cost of selected skills
+        $('.skill-checkbox:checked').each(function () {
+            totalCost += parseInt($(this).data('cost')) || 0;
+        });
+
+        // Add health cost (assuming 1 point = 2 health)
+        var healthCost = $('#health').val() / 2;
+        totalCost += parseInt(healthCost) || 0;
+
+        // Update the total cost display
+        $('#totalCost').text(totalCost + ' / ' + maxSkillPoints);
+
+        // Disable the submit button if total cost exceeds max points
+        if (totalCost > maxSkillPoints) {
+            $('#submitButton').prop('disabled', true);
+        } else {
+            $('#submitButton').prop('disabled', false);
+        }
+    }
+
+    $(document).ready(function () {
+        updateCost(); // Update the cost on page load
+    });
+</script>
