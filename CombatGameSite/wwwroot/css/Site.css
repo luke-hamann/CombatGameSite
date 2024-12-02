@@ -12,7 +12,7 @@
     src: url(../assets/BreatheFireIi-2z9W.ttf) format('TrueType'); /*URL to font*/
 }
 
-/* Root element */
+/* Body element */
 
 body {
     min-height: 100vh; /* Ensure it covers the full viewport */
@@ -61,11 +61,18 @@ body {
 
 /* Headings and subtext */
 
+h1 {
+    font-size: 6rem;
+}
+
+h2 {
+    font-size: 4rem;
+}
+
 .heading {
     color: #484230;
     text-shadow: 3px 3px 1px #6d644c; /* Subtle shadow */
     font-family: 'HeadingFont', sans-serif;
-    font-size: 6rem;
 }
 
 .subtext {

@@ -7,21 +7,24 @@
 <h1 class="heading d-flex justify-content-center align-items-center p-0">
     @Model.SelectedUser.Name
 </h1>
-@if (Model.SelectedUser.Tagline != null)
-{
-    <blockquote>
-        @Model.SelectedUser.Tagline
-    </blockquote>
-}
-@if (Model.CurrentUser?.Id == Model.SelectedUser.Id)
-{
-    <p>
-        <a asp-action="Edit">Edit Tagline</a>
-    </p>
-}
-<div>
-    <a asp-action="Characters" asp-route-id="@Model.SelectedUser.Id" class="button button-fixed">Characters</a>
-    <a asp-action="Teams" asp-route-id="@Model.SelectedUser.Id" class="button button-fixed">Teams</a>
+
+<div class="row">
+    <div class="col-sm-4 offset-sm-4 wooden-form p-5">
+        <div>
+            @(Model.SelectedUser.Tagline != null ? Model.SelectedUser.Tagline : "I haven't set a tagline.")
+        </div>
+        @if (Model.CurrentUser?.Id == Model.SelectedUser.Id)
+        {
+            <div class="text-center mt-5">
+                <a asp-action="Edit" class="button d-inline p-2">Edit Tagline</a>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="d-flex flex-column flex-md-row justify-content-center align-items-center">
+    <a asp-action="Characters" asp-route-id="@Model.SelectedUser.Id" class="button button-fixed m-3 fs-5">Characters</a>
+    <a asp-action="Teams" asp-route-id="@Model.SelectedUser.Id" class="button button-fixed m-3 fs-5">Teams</a>
 </div>
 
 @RenderBody()

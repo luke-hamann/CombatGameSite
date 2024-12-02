@@ -3,9 +3,13 @@
     Layout = "_Layout";
     ViewData["Title"] = Model.Mode + " Team";
 }
-<h1>
-    @ViewData["Title"]
-</h1>
+
+<div class="row">
+    <h1 class="heading d-flex justify-content-center align-items-center p-0">
+        @ViewData["Title"]
+    </h1>
+</div>
+
 <form asp-action="@Model.Mode" method="post">
     <div asp-validation-summary="All"></div>
     <div>
