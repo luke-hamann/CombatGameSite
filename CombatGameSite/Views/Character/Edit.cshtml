@@ -74,9 +74,9 @@
                             // Ensure that Model.Character is not null before checking its Skill properties
                             if (Model.Character != null)
                             {
-                                isChecked = (Model.Character.SkillPrimaryId != null && Model.Character.SkillPrimaryId.Contains(skill.Id)) ||
-                                            (Model.Character.SkillSecondaryId != null && Model.Character.SkillSecondaryId.Contains(skill.Id)) ||
-                                            (Model.Character.SkillTertiaryId != null && Model.Character.SkillTertiaryId.Contains(skill.Id));
+                                isChecked = (Model.Character.SkillPrimaryId.Contains(skill.Id)) ||
+                                            (Model.Character.SkillSecondaryId.Contains(skill.Id)) ||
+                                            (Model.Character.SkillTertiaryId.Contains(skill.Id));
                             }
 
                             <div class="skill-card">
@@ -87,6 +87,8 @@
                                     value="@skill.Id" 
                                     data-cost="@skill.Cost"
                                     onchange="updateCost()"
+                                    checked="@isChecked"
+                            @checked(isChecked ? "checked" : null)
                                     />
                                 <label for="@skill.Id" class="skill-card-label">
                                     <h4>@skill.Name</h4>
