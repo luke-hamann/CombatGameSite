@@ -1,103 +1,261 @@
 ﻿@model CharacterEditViewModel
 @{
-    Layout = "_Layout";
+    Layout = "_LayoutBare";
     ViewData["Title"] = Model.Mode + " Character";
 }
 
-<h1>
-    @ViewData["Title"]
-</h1>
+ 
+    <a class="Back-Btn fs-4 d-flex justify-content-center align-items-center " href="javascript:history.back()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"></path>
+        </svg>
+    </a>  
+    <form asp-controller="Character" asp-action="@Model.Mode" method="post" class="form-container">
+    <div class="Validation" asp-validation-summary="All"></div>
 
-<form asp-controller="Character" asp-action="@Model.Mode" method="post">
-    <div asp-validation-summary="All"></div>
-    <div>
-        You can distribute no more than @Character.MAX_SKILL_POINTS skill points.
-    </div>
-    <div>
-        <label asp-for="@Model.Character.Name">
-            Name
-        </label>
-        <input asp-for="@Model.Character.Name" />
-    </div>
-    <div>
-        <label asp-for="@Model.Character.Health">
-            Health
-        </label>
-        <input asp-for="@Model.Character.Health" />
-    </div>
-    <div>
-        <label asp-for="@Model.Character.TypeId">
+    <div class="row m-5 max-height">
+
+    <div class="col-4 name-health-set d-flex flex-column"> 
+        <div class="form-floating row my-5 char-input" >
+            <input asp-for="@Model.Character.Name"  class="form-control" placeholder="Name"/>
+            <label asp-for="@Model.Character.Name" class="col-form-label">Name </label>
+        </div>
+        <div class="row char-image">
+            <img src="~/Assets/PlayerModule.png" alt="Image of character">
+        </div>
+        <div class="form-floating row my-3 char-input">
+            <input asp-for="@Model.Character.Health" id="health" onchange="updateCost()"  class="form-control" value="100"/>
+            <label asp-for="@Model.Character.Health" class="col-form-label" >
+                Health
+            </label>
+        </div>
+        <div class="form-floating row my-3 char-input">
+            <input asp-for="@Model.Character.Species" class="form-control" placeholder="Species"/>
+            <label asp-for="@Model.Character.Species" class="col-form-label">Species</label>
+        </div>
+        <div class="row my-2 char-input">
+        <label asp-for="@Model.Character.TypeId" class="col-form-label">
             Type
         </label>
-        <select asp-for="@Model.Character.TypeId">
+        <select asp-for="@Model.Character.TypeId" class="form-select">
             <option value="0">-</option>
             <option value="1">Water</option>
             <option value="2">Fire</option>
             <option value="3">Wind</option>
             <option value="4">Earth</option>
         </select>
-    </div>
-    <div>
-        <label asp-for="@Model.Character.Defense">
-            Defense
-        </label>
-        <input asp-for="@Model.Character.Defense" />
-    </div>
-    <div>
-        <label asp-for="@Model.Character.Species">
-            Species
-        </label>
-        <input asp-for="@Model.Character.Species" />
-    </div>
-    <div>
-        <label asp-for="@Model.Character.SkillPrimaryId">
-            Primary Skill
-        </label>
-        <select asp-for="@Model.Character.SkillPrimaryId">
-            <option value="">-</option>
-            @foreach (Skill skill in Model.Skills)
+        </div>
+        <div class="row">
+            <input type="hidden" asp-for="@Model.Character.Defense" value="0" />
+            <input type="submit" value="Submit" id="submitButton"  class="Button Char-Submit-Btn fs-3 m-auto"/>
+            @if (Model.Mode == "Edit")
             {
-                <option value="@skill.Id">
-                    @skill.Name | $@skill.Cost | @skill.Description
-                </option>
+                <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Character.Id">
+                    Cancel
+                </a>
             }
-        </select>
-    </div>
-    <div>
-        <label asp-for="@Model.Character.SkillSecondaryId">
-            Secondary Skill
-        </label>
-        <select asp-for="@Model.Character.SkillSecondaryId">
-            <option value="">-</option>
-            @foreach (Skill skill in Model.Skills)
-            {
-                <option value="@skill.Id">
-                    @skill.Name | $@skill.Cost | @skill.Description
-                </option>
+             
+        </div>
+
+        </div>
+        
+        <div class="col-8 skill-set">
+            <div class="row">
+                <h3>Current Points Spent: <span id="totalCost">0</span> /125 </h3>
+            </div>
+            <div class="row">
+                <label>Choose Skills:</label>
+                <div class="skill-catalog">
+                    @foreach (var skill in Model.Skills ?? Enumerable.Empty<Skill>())
+                {
+                        bool isChecked = false;
+
+                        // Ensure that Model.Character is not null before checking its Skill properties
+                        if (Model.Character != null)
+                        {
+                            isChecked = (Model.Character.SkillPrimaryId != null && Model.Character.SkillPrimaryId.Contains(skill.Id)) ||
+                                        (Model.Character.SkillSecondaryId != null && Model.Character.SkillSecondaryId.Contains(skill.Id)) ||
+                                        (Model.Character.SkillTertiaryId != null && Model.Character.SkillTertiaryId.Contains(skill.Id));
+                        }
+                        
+                    <div class="skill-card">
+                        <input type="checkbox" 
+                            class="skill-checkbox" 
+                            id="skill-@skill.Id" 
+                            name="Skills" 
+                            value="@skill.Id" 
+                            data-cost="@skill.Cost" 
+                            onchange="updateCost()" 
+                            checked="@isChecked"
+                            @checked(isChecked ? "checked" : null)/>
+                        <label for="skill-@skill.Id" class="skill-card-label">
+                            <h4>@skill.Name</h4>
+                            <p>@skill.Description</p>
+                            <p><strong>Cost:</strong> @skill.Cost</p>
+                        </label>
+                    </div>
+                }
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    const maxSkillSelections = 3; // Maximum allowed skills
+
+    function updateCost() {
+        let totalCost = 0;
+
+        // Calculate cost of selected skills
+        const selectedSkills = $('.skill-checkbox:checked');
+        selectedSkills.each(function () {
+            totalCost += parseInt($(this).data('cost')) || 0;
+        });
+
+        // Add health cost (assuming 1 point = 2 health)
+        const healthCost = ($('#health').val() - 100) / 2;
+        totalCost += parseInt(healthCost) || 0;
+
+        // Update the total cost display
+        $('#totalCost').text(totalCost);
+
+        // Disable the submit button if total cost exceeds max points
+        const maxSkillPoints = @Character.MAX_SKILL_POINTS;
+        $('#submitButton').prop('disabled', totalCost > maxSkillPoints);
+
+        // Handle enabling/disabling checkboxes based on selection count
+        const selectedCount = selectedSkills.length;
+        $('.skill-checkbox').each(function () {
+            if (!$(this).is(':checked')) {
+                $(this).prop('disabled', selectedCount >= maxSkillSelections);
             }
-        </select>
-    </div>
-    <div>
-        <label asp-for="@Model.Character.SkillTertiaryId">
-            Tertiary Skill
-        </label>
-        <select asp-for="@Model.Character.SkillTertiaryId">
-            <option value="">-</option>
-            @foreach (Skill skill in Model.Skills)
-            {
-                <option value="@skill.Id">
-                    @skill.Name | $@skill.Cost | @skill.Description
-                </option>
-            }
-        </select>
-    </div>
-    <div>
-        <input type="submit" value="Submit" />
-        @if (Model.Mode == "Edit")
-        {
-            <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Character.Id">
-                Cancel
-            </a>
-        }
-    </div>
-</form>
+        });
+    }
+
+    $(document).ready(function () {
+        // Attach change event to skill checkboxes
+        $('.skill-checkbox').on('change', updateCost);
+
+        // Update the cost and checkbox states on page load
+        updateCost();
+    });
+</script>
+
+
+
+
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    <!-- Created with Inkscape (http://www.inkscape.org/) -->
+    
+    <svg
+    preserveAspectRatio="none"
+    class="background-layer "
+       viewBox="0 0 358.68087 297"
+       version="1.1"
+       id="svg1"
+       inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+       sodipodi:docname="container.svg"
+       xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+       xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+       xmlns="http://www.w3.org/2000/svg"
+       xmlns:svg="http://www.w3.org/2000/svg">
+      <sodipodi:namedview
+         id="namedview1"
+         pagecolor="#505050"
+         bordercolor="#eeeeee"
+         borderopacity="1"
+         inkscape:showpageshadow="0"
+         inkscape:pageopacity="0"
+         inkscape:pagecheckerboard="0"
+         inkscape:deskcolor="#505050"
+         inkscape:document-units="mm"
+         inkscape:zoom="0.51717104"
+         inkscape:cx="1050.9096"
+         inkscape:cy="482.43228"
+         inkscape:window-width="1920"
+         inkscape:window-height="1017"
+         inkscape:window-x="-8"
+         inkscape:window-y="-8"
+         inkscape:window-maximized="1"
+         inkscape:current-layer="layer1">
+        <inkscape:page
+           x="0"
+           y="0"
+           width="358.68088"
+           height="297"
+           id="page2"
+           margin="0 0 0 0"
+           bleed="0" />
+      </sodipodi:namedview>
+      <defs
+         id="defs1" />
+      <g
+         inkscape:label="Layer 1"
+         inkscape:groupmode="layer"
+         id="layer1">
+        <g
+           id="g3">
+          <rect
+             style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#725952;fill-opacity:1;stroke:none;stroke-width:16.8698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;paint-order:fill markers stroke"
+             id="rect3"
+             width="360.16452"
+             height="296.21487"
+             x="-0.51159728"
+             y="0.51159734"
+             ry="0" />
+          <path
+             id="rect2-5"
+             style="font-variation-settings:normal;vector-effect:none;fill:#5f443c;fill-opacity:1;stroke-width:16.7271;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;paint-order:fill markers stroke;stop-color:#000000"
+             d="M 16.083067,12.631685 H 131.9612 l 7.30119,11.005697 V 280.94488 c 0,0 -0.57775,11.00571 -0.42202,11.00571 H 16.083067 L 8.7818791,280.94488 V 23.637382 Z"
+             sodipodi:nodetypes="ccccccccc" />
+          <path
+             id="rect2-5-1"
+             style="fill:#96786f;fill-opacity:1;stroke-width:16.8263;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
+             d="M 16.088499,6.6297887 H 131.96818 l 7.30129,0.057763 V 278.13138 c 0,0 -4.02037,11.22691 -3.86463,11.22691 L 16.088499,289.26785 8.7872084,278.13138 V 17.766267 Z"
+             sodipodi:nodetypes="ccccccccc" />
+          <path
+             id="rect2-5-1-2"
+             style="fill:#2b201d;fill-opacity:1;stroke-width:15.8887;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
+             d="M 20.031917,11.947849 H 127.60682 l 6.77802,10.696672 V 272.7272 c 0,0 -6.9226,10.69666 -6.77802,10.69666 H 20.031917 L 13.25389,272.7272 V 22.644521 Z"
+             sodipodi:nodetypes="ccccccccc" />
+          <path
+             id="rect2-5-1-2-8"
+             style="fill:#6e544c;fill-opacity:1;stroke-width:15.8845;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
+             d="M 20.003452,14.162295 H 127.64165 l 6.78201,10.684712 V 274.65 c 0,0 -6.92667,10.6847 -6.78201,10.6847 H 20.003452 L 13.221436,274.65 V 24.847007 Z"
+             sodipodi:nodetypes="ccccccccc" />
+        </g>
+        <g
+           id="g3-9"
+           transform="translate(126.12744,0.12117457)">
+          <path
+             id="rect2-5-7"
+             style="font-variation-settings:normal;vector-effect:none;fill:#5f443c;fill-opacity:1;stroke-width:16.7271;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;paint-order:fill markers stroke;stop-color:#000000"
+             d="M 16.083067,12.631685 H 217.6862 l 7.30119,11.005697 V 280.94488 c 0,0 -7.45692,11.00571 -7.30119,11.00571 L 9.3001802,291.86015 8.7818791,280.94488 V 23.637382 Z"
+             sodipodi:nodetypes="ccccccccc" />
+          <path
+             id="rect2-5-1-9"
+             style="fill:#96786f;fill-opacity:1;stroke-width:16.8263;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
+             d="M 16.088499,6.6297887 H 217.69318 l 7.30129,11.1364783 V 278.13138 c 0,0 -7.45703,11.13647 -7.30129,11.13647 l -209.3823912,-1e-5 C 8.6605954,198.88961 8.0599256,96.976587 8.154139,6.5971135 Z"
+             sodipodi:nodetypes="cccccccc" />
+          <path
+             id="rect2-5-1-2-3"
+             style="fill:#2b201d;fill-opacity:1;stroke-width:15.8887;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
+             d="M 20.031917,11.947849 H 213.33182 l 6.77802,10.696672 V 272.7272 c 0,0 -6.9226,10.69666 -6.77802,10.69666 H 20.031917 L 13.25389,272.7272 V 22.644521 Z"
+             sodipodi:nodetypes="ccccccccc" />
+          <path
+             id="rect2-5-1-2-8-3"
+             style="fill:#6e544c;fill-opacity:1;stroke-width:15.8845;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke"
+             d="M 20.003452,14.162295 H 213.36665 l 6.78201,10.684712 V 274.65 c 0,0 -6.92667,10.6847 -6.78201,10.6847 H 20.003452 L 13.221436,274.65 V 24.847007 Z"
+             sodipodi:nodetypes="ccccccccc" />
+        </g>
+      </g>
+    </svg>
+    
+
+

@@ -19,7 +19,7 @@ namespace CombatGameSite.Models
         public int? TypeId { get; set; }
 
         [Required(ErrorMessage = "Please enter a health value.")]
-        [Range(0, 100)]
+        [Range(0, 200)]
         public int? Health { get; set; }
 
         [Required(ErrorMessage = "Please enter a defense value.")]
@@ -53,7 +53,7 @@ namespace CombatGameSite.Models
         public bool hasValidSkillPointDistribution()
         {
             int total =
-                (int)((Health ?? 0) +
+                (int)(((Health ?? 0)-100 )/2  +
                 (Defense ?? 0) +
                 (SkillPrimary?.Cost != null ? SkillPrimary.Cost : 0) +
                 (SkillSecondary?.Cost != null ? SkillSecondary.Cost : 0) +

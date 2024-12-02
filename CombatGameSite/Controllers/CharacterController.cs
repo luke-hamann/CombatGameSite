@@ -109,12 +109,23 @@ namespace CombatGameSite.Controllers
                 ModelState.AddModelError("Character.Name", "You already have a character with that name.");
             }
 
-            // Ensure the skill point distribution is valid
+            // Ensure the skill point distribution is valid 
             model.Character = PopulateCharacterWithSkills(model.Character);
             if (!model.Character.hasValidSkillPointDistribution())
             {
                 ModelState.AddModelError("", "Not enough skill points.");
             }
+
+            // Process the selected skills
+            if (model.Skills != null && model.Skills.Count > 0)
+            {
+                model.Character.SkillPrimaryId = model.Skills.ElementAtOrDefault(0).Id;
+                model.Character.SkillSecondaryId = model.Skills.ElementAtOrDefault(1).Id;
+                model.Character.SkillTertiaryId = model.Skills.ElementAtOrDefault(2).Id;
+            }
+
+
+
 
             // Show the form again if there were validation errors
             if (!ModelState.IsValid)
