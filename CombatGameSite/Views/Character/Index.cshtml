@@ -1,0 +1,80 @@
+﻿@model CharacterIndexViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = Model.Character!.Name;
+}
+
+<h1>
+    @Model.Character.Name
+</h1>
+@if (Model.Character.UserId == Model.CurrentUser?.Id){
+    <p>
+        <a asp-controller="Character" asp-action="Edit" asp-route-id="@Model.Character.Id">Edit</a>
+        <a asp-controller="Character" asp-action="Delete" asp-route-id="@Model.Character.Id">Delete</a>
+    </p>
+}
+<p>
+    User:
+    <a asp-controller="User" asp-action="Index" asp-route-id="@Model.Character.User.Id">
+        @Model.Character.User.Name
+    </a>
+</p>
+<p>
+    Health: @Model.Character.Health
+</p>
+<p>
+    Type: @Model.Character.GetType()
+</p>
+<p>
+    Species: @Model.Character.Species
+</p>
+<h2>
+    Skills
+</h2>
+<ul>
+    @if (Model.Character.SkillPrimary != null)
+    {
+        <li>
+            @Model.Character.SkillPrimary.Name
+            <ul>
+                <li>
+                    @Model.Character.SkillPrimary.Description
+                </li>
+                <li>
+                    Attack:
+                    @Model.Character.SkillPrimary.Attack
+                </li>
+            </ul>
+        </li>
+    }
+    @if (Model.Character.SkillSecondary != null)
+    {
+        <li>
+            @Model.Character.SkillSecondary.Name
+            <ul>
+                <li>
+                    @Model.Character.SkillSecondary.Description
+                </li>
+                <li>
+                    Attack:
+                    @Model.Character.SkillSecondary.Attack
+                </li>
+            </ul>
+        </li>
+    }
+    @if (Model.Character.SkillTertiary != null)
+    {
+        <li>
+            @Model.Character.SkillTertiary.Name
+            <ul>
+                <li>
+                    @Model.Character.SkillTertiary.Description
+                </li>
+                <li>
+                    Attack:
+                    @Model.Character.SkillTertiary.Attack
+                </li>
+            </ul>
+        </li>
+    }
+</ul>

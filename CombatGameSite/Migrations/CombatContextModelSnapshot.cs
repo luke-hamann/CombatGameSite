@@ -22,7 +22,7 @@ namespace CombatGameSite.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CombatGameSite.Models.Combatant", b =>
+            modelBuilder.Entity("CombatGameSite.Models.Character", b =>
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,13 +30,12 @@ namespace CombatGameSite.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
-                    b.Property<int?>("Defense")
-                        .HasColumnType("int");
-
                     b.Property<int?>("Health")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SkillPrimaryId")
@@ -49,9 +48,11 @@ namespace CombatGameSite.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Species")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TypeId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("UserId")
@@ -67,332 +68,307 @@ namespace CombatGameSite.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Combatants");
+                    b.ToTable("Characters");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Defense = 0,
                             Health = 100,
                             Name = "Aqua Warrior",
                             SkillPrimaryId = "A1",
                             SkillSecondaryId = "A2",
-                            SkillTertiaryId = "D1",
+                            SkillTertiaryId = "H1",
                             Species = "Human",
-                            TypeId = 1,
+                            TypeId = 2,
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Defense = 10,
-                            Health = 95,
+                            Health = 100,
                             Name = "Flame Destroyer",
                             SkillPrimaryId = "A3",
                             SkillSecondaryId = "A4",
-                            SkillTertiaryId = "D3",
+                            SkillTertiaryId = "H1",
                             Species = "Elf",
-                            TypeId = 2,
+                            TypeId = 4,
                             UserId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Defense = 0,
                             Health = 100,
                             Name = "Wind Ninja",
                             SkillPrimaryId = "A5",
                             SkillSecondaryId = "A6",
-                            SkillTertiaryId = "D2",
-                            Species = "Ninja",
-                            TypeId = 3,
+                            SkillTertiaryId = "H1",
+                            Species = "Dwarf",
+                            TypeId = 4,
                             UserId = 3
                         },
                         new
                         {
                             Id = 4,
-                            Defense = 20,
                             Health = 100,
                             Name = "Earth Titan",
                             SkillPrimaryId = "A7",
                             SkillSecondaryId = "A8",
-                            SkillTertiaryId = "D4",
-                            Species = "Giant",
-                            TypeId = 4,
+                            SkillTertiaryId = "H1",
+                            Species = "Human",
+                            TypeId = 2,
                             UserId = 4
                         },
                         new
                         {
                             Id = 5,
-                            Defense = 10,
                             Health = 100,
                             Name = "Water Sage",
                             SkillPrimaryId = "A9",
                             SkillSecondaryId = "A10",
                             SkillTertiaryId = "H1",
-                            Species = "Mage",
+                            Species = "Elf",
                             TypeId = 1,
                             UserId = 1
                         },
                         new
                         {
                             Id = 6,
-                            Defense = 15,
-                            Health = 80,
+                            Health = 100,
                             Name = "Fire Knight",
                             SkillPrimaryId = "A11",
                             SkillSecondaryId = "A12",
-                            SkillTertiaryId = "D1",
-                            Species = "Knight",
-                            TypeId = 2,
+                            SkillTertiaryId = "H1",
+                            Species = "Dwarf",
+                            TypeId = 3,
                             UserId = 2
                         },
                         new
                         {
                             Id = 7,
-                            Defense = 0,
                             Health = 100,
                             Name = "Wind Shaman",
                             SkillPrimaryId = "A13",
-                            SkillSecondaryId = "A4",
-                            SkillTertiaryId = "H2",
-                            Species = "Shaman",
-                            TypeId = 3,
+                            SkillSecondaryId = "A13",
+                            SkillTertiaryId = "H1",
+                            Species = "Human",
+                            TypeId = 2,
                             UserId = 3
                         },
                         new
                         {
                             Id = 8,
-                            Defense = 25,
-                            Health = 90,
+                            Health = 100,
                             Name = "Earth Wizard",
-                            SkillPrimaryId = "A7",
-                            SkillSecondaryId = "A6",
-                            SkillTertiaryId = "D2",
-                            Species = "Wizard",
-                            TypeId = 4,
+                            SkillPrimaryId = "H1",
+                            SkillSecondaryId = "H1",
+                            SkillTertiaryId = "H1",
+                            Species = "Elf",
+                            TypeId = 1,
                             UserId = 4
                         },
                         new
                         {
                             Id = 9,
-                            Defense = 5,
-                            Health = 85,
+                            Health = 100,
                             Name = "Water Spirit",
-                            SkillPrimaryId = "A7",
-                            SkillSecondaryId = "A8",
-                            SkillTertiaryId = "H3",
-                            Species = "Spirit",
-                            TypeId = 1,
+                            SkillPrimaryId = "H1",
+                            SkillSecondaryId = "H1",
+                            SkillTertiaryId = "H1",
+                            Species = "Dwarf",
+                            TypeId = 4,
                             UserId = 1
                         },
                         new
                         {
                             Id = 10,
-                            Defense = 5,
                             Health = 100,
                             Name = "Flame Phoenix",
-                            SkillPrimaryId = "A9",
-                            SkillSecondaryId = "A2",
-                            SkillTertiaryId = "D3",
-                            Species = "Phoenix",
+                            SkillPrimaryId = "H1",
+                            SkillSecondaryId = "H1",
+                            SkillTertiaryId = "H1",
+                            Species = "Human",
                             TypeId = 2,
                             UserId = 2
                         },
                         new
                         {
                             Id = 11,
-                            Defense = 10,
-                            Health = 80,
-                            Name = "Wind Warrior",
-                            SkillPrimaryId = "A2",
-                            SkillSecondaryId = "A2",
-                            SkillTertiaryId = "D4",
-                            Species = "Warrior",
-                            TypeId = 3,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Defense = 30,
-                            Health = 95,
-                            Name = "Earth Golem",
-                            SkillPrimaryId = "A2",
-                            SkillSecondaryId = "A4",
-                            SkillTertiaryId = "D1",
-                            Species = "Golem",
-                            TypeId = 4,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Defense = 20,
-                            Health = 90,
-                            Name = "Water Knight",
-                            SkillPrimaryId = "A5",
-                            SkillSecondaryId = "A6",
-                            SkillTertiaryId = "H4",
-                            Species = "Knight",
-                            TypeId = 1,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Defense = 5,
                             Health = 100,
-                            Name = "Fire Sorcerer",
-                            SkillPrimaryId = "A7",
-                            SkillSecondaryId = "A8",
-                            SkillTertiaryId = "D2",
-                            Species = "Sorcerer",
-                            TypeId = 2,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Defense = 15,
-                            Health = 80,
-                            Name = "Wind Elf",
-                            SkillPrimaryId = "A9",
-                            SkillSecondaryId = "A3",
-                            SkillTertiaryId = "D3",
+                            Name = "Wind Warrior",
+                            SkillPrimaryId = "A1",
+                            SkillSecondaryId = "A2",
+                            SkillTertiaryId = "H2",
                             Species = "Elf",
                             TypeId = 3,
                             UserId = 3
                         },
                         new
                         {
-                            Id = 16,
-                            Defense = 35,
+                            Id = 12,
                             Health = 100,
-                            Name = "Earth Monk",
+                            Name = "Fire Sorcerer",
                             SkillPrimaryId = "A3",
-                            SkillSecondaryId = "A2",
-                            SkillTertiaryId = "D4",
-                            Species = "Monk",
+                            SkillSecondaryId = "A4",
+                            SkillTertiaryId = "H2",
+                            Species = "Dwarf",
                             TypeId = 4,
                             UserId = 4
                         },
                         new
                         {
+                            Id = 13,
+                            Health = 100,
+                            Name = "Wind Elf",
+                            SkillPrimaryId = "A5",
+                            SkillSecondaryId = "A6",
+                            SkillTertiaryId = "H2",
+                            Species = "Human",
+                            TypeId = 2,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Health = 100,
+                            Name = "Earth Golem",
+                            SkillPrimaryId = "A7",
+                            SkillSecondaryId = "A8",
+                            SkillTertiaryId = "H2",
+                            Species = "Elf",
+                            TypeId = 4,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Health = 100,
+                            Name = "Water Knight",
+                            SkillPrimaryId = "A9",
+                            SkillSecondaryId = "A10",
+                            SkillTertiaryId = "H2",
+                            Species = "Dwarf",
+                            TypeId = 2,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Health = 100,
+                            Name = "Fire Wizard",
+                            SkillPrimaryId = "A11",
+                            SkillSecondaryId = "A12",
+                            SkillTertiaryId = "H2",
+                            Species = "Human",
+                            TypeId = 2,
+                            UserId = 4
+                        },
+                        new
+                        {
                             Id = 17,
-                            Defense = 10,
-                            Health = 90,
-                            Name = "Water Guardian",
-                            SkillPrimaryId = "A3",
-                            SkillSecondaryId = "A4",
-                            SkillTertiaryId = "H5",
-                            Species = "Guardian",
-                            TypeId = 1,
+                            Health = 100,
+                            Name = "Wind Shaman",
+                            SkillPrimaryId = "A13",
+                            SkillSecondaryId = "A13",
+                            SkillTertiaryId = "H2",
+                            Species = "Elf",
+                            TypeId = 3,
                             UserId = 1
                         },
                         new
                         {
                             Id = 18,
-                            Defense = 10,
-                            Health = 85,
-                            Name = "Fire Wizard",
-                            SkillPrimaryId = "A5",
-                            SkillSecondaryId = "A6",
-                            SkillTertiaryId = "D1",
-                            Species = "Wizard",
+                            Health = 100,
+                            Name = "Water Guardian",
+                            SkillPrimaryId = "H1",
+                            SkillSecondaryId = "H1",
+                            SkillTertiaryId = "H2",
+                            Species = "Dwarf",
                             TypeId = 2,
                             UserId = 2
                         },
                         new
                         {
                             Id = 19,
-                            Defense = 5,
-                            Health = 95,
-                            Name = "Wind Dragon",
-                            SkillPrimaryId = "A7",
-                            SkillSecondaryId = "A8",
-                            SkillTertiaryId = "D2",
-                            Species = "Dragon",
-                            TypeId = 3,
+                            Health = 100,
+                            Name = "Flame Demon",
+                            SkillPrimaryId = "H1",
+                            SkillSecondaryId = "H1",
+                            SkillTertiaryId = "H2",
+                            Species = "Human",
+                            TypeId = 1,
                             UserId = 3
                         },
                         new
                         {
                             Id = 20,
-                            Defense = 50,
                             Health = 100,
-                            Name = "Earth Demon",
-                            SkillPrimaryId = "A9",
-                            SkillSecondaryId = "A4",
-                            SkillTertiaryId = "D3",
-                            Species = "Demon",
-                            TypeId = 4,
+                            Name = "Wind Demon",
+                            SkillPrimaryId = "H1",
+                            SkillSecondaryId = "H1",
+                            SkillTertiaryId = "H2",
+                            Species = "Elf",
+                            TypeId = 2,
                             UserId = 4
                         },
                         new
                         {
                             Id = 21,
-                            Defense = 5,
                             Health = 100,
                             Name = "Water Monk",
                             SkillPrimaryId = "A1",
                             SkillSecondaryId = "A2",
-                            SkillTertiaryId = "H6",
-                            Species = "Monk",
-                            TypeId = 1,
+                            SkillTertiaryId = "H3",
+                            Species = "Dwarf",
+                            TypeId = 2,
                             UserId = 1
                         },
                         new
                         {
                             Id = 22,
-                            Defense = 15,
-                            Health = 90,
+                            Health = 100,
                             Name = "Fire Samurai",
                             SkillPrimaryId = "A3",
                             SkillSecondaryId = "A4",
-                            SkillTertiaryId = "D4",
-                            Species = "Samurai",
-                            TypeId = 2,
+                            SkillTertiaryId = "H3",
+                            Species = "Human",
+                            TypeId = 1,
                             UserId = 2
                         },
                         new
                         {
                             Id = 23,
-                            Defense = 20,
-                            Health = 80,
-                            Name = "Wind Swordsman",
+                            Health = 100,
+                            Name = "Wind Warrior",
                             SkillPrimaryId = "A5",
                             SkillSecondaryId = "A6",
-                            SkillTertiaryId = "D1",
-                            Species = "Swordsman",
+                            SkillTertiaryId = "H3",
+                            Species = "Elf",
                             TypeId = 3,
                             UserId = 3
                         },
                         new
                         {
                             Id = 24,
-                            Defense = 40,
                             Health = 100,
                             Name = "Earth Beast",
                             SkillPrimaryId = "A7",
                             SkillSecondaryId = "A8",
-                            SkillTertiaryId = "D2",
-                            Species = "Beast",
-                            TypeId = 4,
+                            SkillTertiaryId = "H3",
+                            Species = "Dwarf",
+                            TypeId = 1,
                             UserId = 4
                         },
                         new
                         {
                             Id = 25,
-                            Defense = 0,
-                            Health = 90,
+                            Health = 100,
                             Name = "Water Sorceress",
                             SkillPrimaryId = "A9",
-                            SkillSecondaryId = "A5",
-                            SkillTertiaryId = "D3",
-                            Species = "Sorceress",
-                            TypeId = 1,
+                            SkillSecondaryId = "A10",
+                            SkillTertiaryId = "H3",
+                            Species = "Human",
+                            TypeId = 3,
                             UserId = 1
                         });
                 });
@@ -407,9 +383,6 @@ namespace CombatGameSite.Migrations
 
                     b.Property<int?>("Cost")
                         .HasColumnType("int");
-
-                    b.Property<double?>("DefenseMultiplier")
-                        .HasColumnType("float");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -430,7 +403,6 @@ namespace CombatGameSite.Migrations
                             Id = "H1",
                             Attack = 0,
                             Cost = 10,
-                            DefenseMultiplier = 1.2,
                             Description = "A soothing wave of water heals the target.",
                             Name = "Healing Wave",
                             TypeId = 1
@@ -440,7 +412,6 @@ namespace CombatGameSite.Migrations
                             Id = "A1",
                             Attack = 20,
                             Cost = 15,
-                            DefenseMultiplier = 1.0,
                             Description = "A blazing sphere of fire strikes the enemy.",
                             Name = "Fireball",
                             TypeId = 2
@@ -450,7 +421,6 @@ namespace CombatGameSite.Migrations
                             Id = "D1",
                             Attack = 0,
                             Cost = 12,
-                            DefenseMultiplier = 1.5,
                             Description = "A swirling wind protects against attacks.",
                             Name = "Wind Barrier",
                             TypeId = 3
@@ -460,7 +430,6 @@ namespace CombatGameSite.Migrations
                             Id = "A2",
                             Attack = 25,
                             Cost = 18,
-                            DefenseMultiplier = 1.0,
                             Description = "A fiery explosion dealing massive damage.",
                             Name = "Inferno Burst",
                             TypeId = 2
@@ -470,7 +439,6 @@ namespace CombatGameSite.Migrations
                             Id = "H2",
                             Attack = 0,
                             Cost = 8,
-                            DefenseMultiplier = 1.1000000000000001,
                             Description = "A small burst of water to heal minor wounds.",
                             Name = "Aqua Surge",
                             TypeId = 1
@@ -480,7 +448,6 @@ namespace CombatGameSite.Migrations
                             Id = "D2",
                             Attack = 0,
                             Cost = 14,
-                            DefenseMultiplier = 1.8,
                             Description = "Earth magic hardens the skin for defense.",
                             Name = "Stone Skin",
                             TypeId = 4
@@ -490,7 +457,6 @@ namespace CombatGameSite.Migrations
                             Id = "A3",
                             Attack = 22,
                             Cost = 20,
-                            DefenseMultiplier = 1.0,
                             Description = "A cutting wind attack that pierces defenses.",
                             Name = "Cyclone Slash",
                             TypeId = 3
@@ -500,7 +466,6 @@ namespace CombatGameSite.Migrations
                             Id = "D3",
                             Attack = 0,
                             Cost = 9,
-                            DefenseMultiplier = 1.3999999999999999,
                             Description = "Encases the target in a veil of water for protection.",
                             Name = "Water Veil",
                             TypeId = 1
@@ -510,7 +475,6 @@ namespace CombatGameSite.Migrations
                             Id = "H3",
                             Attack = 0,
                             Cost = 11,
-                            DefenseMultiplier = 1.3,
                             Description = "A gentle wind revitalizes the target.",
                             Name = "Breeze of Life",
                             TypeId = 3
@@ -520,7 +484,6 @@ namespace CombatGameSite.Migrations
                             Id = "A4",
                             Attack = 24,
                             Cost = 17,
-                            DefenseMultiplier = 1.0,
                             Description = "An earth-shaking attack to crush enemies.",
                             Name = "Earthquake Smash",
                             TypeId = 4
@@ -530,7 +493,6 @@ namespace CombatGameSite.Migrations
                             Id = "D4",
                             Attack = 0,
                             Cost = 16,
-                            DefenseMultiplier = 1.6000000000000001,
                             Description = "A shield of fire reduces incoming damage.",
                             Name = "Flame Ward",
                             TypeId = 2
@@ -540,7 +502,6 @@ namespace CombatGameSite.Migrations
                             Id = "H4",
                             Attack = 0,
                             Cost = 13,
-                            DefenseMultiplier = 1.2,
                             Description = "The power of earth heals the target slowly.",
                             Name = "Earthen Rejuvenation",
                             TypeId = 4
@@ -550,7 +511,6 @@ namespace CombatGameSite.Migrations
                             Id = "A5",
                             Attack = 26,
                             Cost = 19,
-                            DefenseMultiplier = 1.0,
                             Description = "A wave crashes on the enemy for damage.",
                             Name = "Tidal Crush",
                             TypeId = 1
@@ -560,7 +520,6 @@ namespace CombatGameSite.Migrations
                             Id = "D5",
                             Attack = 0,
                             Cost = 10,
-                            DefenseMultiplier = 1.7,
                             Description = "A massive wind barrier blocks attacks.",
                             Name = "Wind Fortress",
                             TypeId = 3
@@ -570,7 +529,6 @@ namespace CombatGameSite.Migrations
                             Id = "H5",
                             Attack = 0,
                             Cost = 12,
-                            DefenseMultiplier = 1.1000000000000001,
                             Description = "A fiery warmth restores the target's health.",
                             Name = "Flare Heal",
                             TypeId = 2
@@ -580,7 +538,6 @@ namespace CombatGameSite.Migrations
                             Id = "A6",
                             Attack = 28,
                             Cost = 21,
-                            DefenseMultiplier = 1.0,
                             Description = "Rocks pummel the enemy, causing severe damage.",
                             Name = "Landslide Strike",
                             TypeId = 4
@@ -590,7 +547,6 @@ namespace CombatGameSite.Migrations
                             Id = "D6",
                             Attack = 0,
                             Cost = 15,
-                            DefenseMultiplier = 1.5,
                             Description = "A shield of water dampens damage.",
                             Name = "Aqua Shield",
                             TypeId = 1
@@ -600,7 +556,6 @@ namespace CombatGameSite.Migrations
                             Id = "H6",
                             Attack = 0,
                             Cost = 10,
-                            DefenseMultiplier = 1.1000000000000001,
                             Description = "A calming wind that heals minor injuries.",
                             Name = "Soothing Breeze",
                             TypeId = 3
@@ -610,7 +565,6 @@ namespace CombatGameSite.Migrations
                             Id = "A7",
                             Attack = 30,
                             Cost = 22,
-                            DefenseMultiplier = 1.0,
                             Description = "A sword engulfed in fire slashes the enemy.",
                             Name = "Flaming Blade",
                             TypeId = 2
@@ -620,7 +574,6 @@ namespace CombatGameSite.Migrations
                             Id = "D7",
                             Attack = 0,
                             Cost = 13,
-                            DefenseMultiplier = 1.8999999999999999,
                             Description = "A massive wall of earth defends against attacks.",
                             Name = "Rock Wall",
                             TypeId = 4
@@ -630,7 +583,6 @@ namespace CombatGameSite.Migrations
                             Id = "H7",
                             Attack = 0,
                             Cost = 14,
-                            DefenseMultiplier = 1.2,
                             Description = "Tiny stones infused with healing power.",
                             Name = "Healing Pebbles",
                             TypeId = 4
@@ -640,7 +592,6 @@ namespace CombatGameSite.Migrations
                             Id = "A8",
                             Attack = 32,
                             Cost = 25,
-                            DefenseMultiplier = 1.0,
                             Description = "A sharp blade of water cuts through the enemy.",
                             Name = "Aqua Slash",
                             TypeId = 1
@@ -650,7 +601,6 @@ namespace CombatGameSite.Migrations
                             Id = "D8",
                             Attack = 0,
                             Cost = 18,
-                            DefenseMultiplier = 1.7,
                             Description = "A burning shield reduces damage taken.",
                             Name = "Blazing Barrier",
                             TypeId = 2
@@ -660,7 +610,6 @@ namespace CombatGameSite.Migrations
                             Id = "H8",
                             Attack = 0,
                             Cost = 12,
-                            DefenseMultiplier = 1.2,
                             Description = "A soft breeze heals and rejuvenates.",
                             Name = "Whispering Wind",
                             TypeId = 3
@@ -670,7 +619,6 @@ namespace CombatGameSite.Migrations
                             Id = "A9",
                             Attack = 33,
                             Cost = 23,
-                            DefenseMultiplier = 1.0,
                             Description = "A ferocious wind slashes the enemy.",
                             Name = "Tempest Fang",
                             TypeId = 3
@@ -680,7 +628,6 @@ namespace CombatGameSite.Migrations
                             Id = "D9",
                             Attack = 0,
                             Cost = 15,
-                            DefenseMultiplier = 1.6000000000000001,
                             Description = "A watery shield protects the user.",
                             Name = "Ocean Shield",
                             TypeId = 1
@@ -690,7 +637,6 @@ namespace CombatGameSite.Migrations
                             Id = "H9",
                             Attack = 0,
                             Cost = 10,
-                            DefenseMultiplier = 1.1000000000000001,
                             Description = "A quick burst of fire heals the target.",
                             Name = "Flame Pulse",
                             TypeId = 2
@@ -700,7 +646,6 @@ namespace CombatGameSite.Migrations
                             Id = "A10",
                             Attack = 34,
                             Cost = 24,
-                            DefenseMultiplier = 1.0,
                             Description = "A giant boulder crushes the opponent.",
                             Name = "Boulder Bash",
                             TypeId = 4
@@ -710,7 +655,6 @@ namespace CombatGameSite.Migrations
                             Id = "D10",
                             Attack = 0,
                             Cost = 19,
-                            DefenseMultiplier = 1.8,
                             Description = "A rotating wind reduces damage.",
                             Name = "Cyclone Guard",
                             TypeId = 3
@@ -720,7 +664,6 @@ namespace CombatGameSite.Migrations
                             Id = "H10",
                             Attack = 0,
                             Cost = 14,
-                            DefenseMultiplier = 1.3,
                             Description = "A gentle rain restores the target's health.",
                             Name = "Rain of Healing",
                             TypeId = 1
@@ -730,7 +673,6 @@ namespace CombatGameSite.Migrations
                             Id = "A11",
                             Attack = 35,
                             Cost = 26,
-                            DefenseMultiplier = 1.0,
                             Description = "A fiery wave burns all in its path.",
                             Name = "Flame Surge",
                             TypeId = 2
@@ -740,7 +682,6 @@ namespace CombatGameSite.Migrations
                             Id = "D11",
                             Attack = 0,
                             Cost = 20,
-                            DefenseMultiplier = 1.8,
                             Description = "Earth barriers defend against attacks.",
                             Name = "Rock Shield",
                             TypeId = 4
@@ -750,7 +691,6 @@ namespace CombatGameSite.Migrations
                             Id = "H11",
                             Attack = 0,
                             Cost = 13,
-                            DefenseMultiplier = 1.3,
                             Description = "A rejuvenating wind heals all nearby allies.",
                             Name = "Winds of Renewal",
                             TypeId = 3
@@ -760,7 +700,6 @@ namespace CombatGameSite.Migrations
                             Id = "A12",
                             Attack = 36,
                             Cost = 27,
-                            DefenseMultiplier = 1.0,
                             Description = "A torrent of water smashes the enemy.",
                             Name = "Ocean Blast",
                             TypeId = 1
@@ -770,7 +709,6 @@ namespace CombatGameSite.Migrations
                             Id = "D12",
                             Attack = 0,
                             Cost = 18,
-                            DefenseMultiplier = 1.7,
                             Description = "A barrier of molten fire absorbs damage.",
                             Name = "Lava Shield",
                             TypeId = 2
@@ -780,7 +718,6 @@ namespace CombatGameSite.Migrations
                             Id = "H12",
                             Attack = 0,
                             Cost = 16,
-                            DefenseMultiplier = 1.2,
                             Description = "The earth's power restores health gradually.",
                             Name = "Earth Embrace",
                             TypeId = 4
@@ -790,7 +727,6 @@ namespace CombatGameSite.Migrations
                             Id = "A13",
                             Attack = 37,
                             Cost = 29,
-                            DefenseMultiplier = 1.0,
                             Description = "A devastating lightning-charged wind attack.",
                             Name = "Storm Strike",
                             TypeId = 3
@@ -800,7 +736,6 @@ namespace CombatGameSite.Migrations
                             Id = "D13",
                             Attack = 0,
                             Cost = 20,
-                            DefenseMultiplier = 1.6000000000000001,
                             Description = "Encases the user in a protective bubble.",
                             Name = "Bubble Shield",
                             TypeId = 1
@@ -810,7 +745,6 @@ namespace CombatGameSite.Migrations
                             Id = "H13",
                             Attack = 0,
                             Cost = 12,
-                            DefenseMultiplier = 1.1000000000000001,
                             Description = "A healing ember that soothes wounds.",
                             Name = "Ember Heal",
                             TypeId = 2
@@ -825,22 +759,23 @@ namespace CombatGameSite.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
-                    b.Property<int?>("Combatant1Id")
+                    b.Property<int?>("Character1Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Combatant2Id")
+                    b.Property<int?>("Character2Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Combatant3Id")
+                    b.Property<int?>("Character3Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Combatant4Id")
+                    b.Property<int?>("Character4Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Combatant5Id")
+                    b.Property<int?>("Character5Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Score")
@@ -851,15 +786,17 @@ namespace CombatGameSite.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Combatant1Id");
+                    b.HasIndex("Character1Id");
 
-                    b.HasIndex("Combatant2Id");
+                    b.HasIndex("Character2Id");
 
-                    b.HasIndex("Combatant3Id");
+                    b.HasIndex("Character3Id");
 
-                    b.HasIndex("Combatant4Id");
+                    b.HasIndex("Character4Id");
 
-                    b.HasIndex("Combatant5Id");
+                    b.HasIndex("Character5Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Teams");
 
@@ -867,145 +804,145 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 1,
-                            Combatant1Id = 1,
-                            Combatant2Id = 2,
-                            Combatant3Id = 3,
-                            Combatant4Id = 4,
-                            Combatant5Id = 5,
-                            Name = "Water Warriors",
+                            Character1Id = 1,
+                            Character2Id = 5,
+                            Character3Id = 9,
+                            Character4Id = 13,
+                            Character5Id = 17,
+                            Name = "Aqua Defenders",
                             Score = 150,
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Combatant1Id = 6,
-                            Combatant2Id = 7,
-                            Combatant3Id = 8,
-                            Combatant4Id = 9,
-                            Combatant5Id = 10,
-                            Name = "Fire Phoenixes",
-                            Score = 120,
-                            UserId = 2
+                            Character1Id = 1,
+                            Character2Id = 5,
+                            Character3Id = 9,
+                            Character4Id = 13,
+                            Character5Id = 21,
+                            Name = "Tidal Guardians",
+                            Score = 140,
+                            UserId = 1
                         },
                         new
                         {
                             Id = 3,
-                            Combatant1Id = 11,
-                            Combatant2Id = 12,
-                            Combatant3Id = 13,
-                            Combatant4Id = 14,
-                            Combatant5Id = 15,
-                            Name = "Wind Striders",
-                            Score = 140,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Combatant1Id = 16,
-                            Combatant2Id = 17,
-                            Combatant3Id = 18,
-                            Combatant4Id = 19,
-                            Combatant5Id = 20,
-                            Name = "Earth Guardians",
-                            Score = 160,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Combatant1Id = 21,
-                            Combatant2Id = 22,
-                            Combatant3Id = 23,
-                            Combatant4Id = 24,
-                            Combatant5Id = 25,
-                            Name = "Aqua Knights",
+                            Character1Id = 9,
+                            Character2Id = 13,
+                            Character3Id = 17,
+                            Character4Id = 21,
+                            Character5Id = 25,
+                            Name = "Water Warriors",
                             Score = 130,
                             UserId = 1
                         },
                         new
                         {
+                            Id = 4,
+                            Character1Id = 2,
+                            Character2Id = 6,
+                            Character3Id = 10,
+                            Character4Id = 14,
+                            Character5Id = 18,
+                            Name = "Blazing Firestorm",
+                            Score = 160,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Character1Id = 2,
+                            Character2Id = 6,
+                            Character3Id = 10,
+                            Character4Id = 14,
+                            Character5Id = 22,
+                            Name = "Inferno Knights",
+                            Score = 140,
+                            UserId = 2
+                        },
+                        new
+                        {
                             Id = 6,
-                            Combatant1Id = 2,
-                            Combatant2Id = 5,
-                            Combatant3Id = 7,
-                            Combatant4Id = 10,
-                            Combatant5Id = 6,
-                            Name = "Inferno Lords",
-                            Score = 110,
+                            Character1Id = 6,
+                            Character2Id = 10,
+                            Character3Id = 14,
+                            Character4Id = 18,
+                            Character5Id = 22,
+                            Name = "Fire Warriors",
+                            Score = 135,
                             UserId = 2
                         },
                         new
                         {
                             Id = 7,
-                            Combatant1Id = 3,
-                            Combatant2Id = 8,
-                            Combatant3Id = 12,
-                            Combatant4Id = 13,
-                            Combatant5Id = 11,
-                            Name = "Storm Warriors",
-                            Score = 135,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Combatant1Id = 14,
-                            Combatant2Id = 16,
-                            Combatant3Id = 17,
-                            Combatant4Id = 19,
-                            Combatant5Id = 20,
-                            Name = "Quake Defenders",
-                            Score = 125,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Combatant1Id = 22,
-                            Combatant2Id = 23,
-                            Combatant3Id = 1,
-                            Combatant4Id = 4,
-                            Combatant5Id = 5,
-                            Name = "Tidal Fury",
-                            Score = 145,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Combatant1Id = 9,
-                            Combatant2Id = 10,
-                            Combatant3Id = 6,
-                            Combatant4Id = 2,
-                            Combatant5Id = 7,
-                            Name = "Blazing Souls",
-                            Score = 115,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Combatant1Id = 13,
-                            Combatant2Id = 11,
-                            Combatant3Id = 8,
-                            Combatant4Id = 15,
-                            Combatant5Id = 12,
-                            Name = "Whirlwind Vanguards",
+                            Character1Id = 3,
+                            Character2Id = 7,
+                            Character3Id = 11,
+                            Character4Id = 15,
+                            Character5Id = 19,
+                            Name = "Wind Strikers",
                             Score = 150,
                             UserId = 3
                         },
                         new
                         {
-                            Id = 12,
-                            Combatant1Id = 18,
-                            Combatant2Id = 14,
-                            Combatant3Id = 19,
-                            Combatant4Id = 20,
-                            Combatant5Id = 16,
-                            Name = "Rock Titans",
+                            Id = 8,
+                            Character1Id = 3,
+                            Character2Id = 7,
+                            Character3Id = 11,
+                            Character4Id = 15,
+                            Character5Id = 23,
+                            Name = "Zephyr Champions",
+                            Score = 145,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Character1Id = 7,
+                            Character2Id = 11,
+                            Character3Id = 15,
+                            Character4Id = 19,
+                            Character5Id = 23,
+                            Name = "Sky Protectors",
+                            Score = 140,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Character1Id = 4,
+                            Character2Id = 8,
+                            Character3Id = 12,
+                            Character4Id = 16,
+                            Character5Id = 20,
+                            Name = "Earth Titans",
                             Score = 160,
+                            UserId = 4
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Character1Id = 4,
+                            Character2Id = 8,
+                            Character3Id = 12,
+                            Character4Id = 16,
+                            Character5Id = 24,
+                            Name = "Rock Guardians",
+                            Score = 150,
+                            UserId = 4
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Character1Id = 8,
+                            Character2Id = 12,
+                            Character3Id = 16,
+                            Character4Id = 20,
+                            Character5Id = 24,
+                            Name = "Stone Warriors",
+                            Score = 140,
                             UserId = 4
                         });
                 });
@@ -1065,7 +1002,7 @@ namespace CombatGameSite.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CombatGameSite.Models.Combatant", b =>
+            modelBuilder.Entity("CombatGameSite.Models.Character", b =>
                 {
                     b.HasOne("CombatGameSite.Models.Skill", "SkillPrimary")
                         .WithMany()
@@ -1094,35 +1031,41 @@ namespace CombatGameSite.Migrations
 
             modelBuilder.Entity("CombatGameSite.Models.Team", b =>
                 {
-                    b.HasOne("CombatGameSite.Models.Combatant", "Combatant1")
+                    b.HasOne("CombatGameSite.Models.Character", "Character1")
                         .WithMany()
-                        .HasForeignKey("Combatant1Id");
+                        .HasForeignKey("Character1Id");
 
-                    b.HasOne("CombatGameSite.Models.Combatant", "Combatant2")
+                    b.HasOne("CombatGameSite.Models.Character", "Character2")
                         .WithMany()
-                        .HasForeignKey("Combatant2Id");
+                        .HasForeignKey("Character2Id");
 
-                    b.HasOne("CombatGameSite.Models.Combatant", "Combatant3")
+                    b.HasOne("CombatGameSite.Models.Character", "Character3")
                         .WithMany()
-                        .HasForeignKey("Combatant3Id");
+                        .HasForeignKey("Character3Id");
 
-                    b.HasOne("CombatGameSite.Models.Combatant", "Combatant4")
+                    b.HasOne("CombatGameSite.Models.Character", "Character4")
                         .WithMany()
-                        .HasForeignKey("Combatant4Id");
+                        .HasForeignKey("Character4Id");
 
-                    b.HasOne("CombatGameSite.Models.Combatant", "Combatant5")
+                    b.HasOne("CombatGameSite.Models.Character", "Character5")
                         .WithMany()
-                        .HasForeignKey("Combatant5Id");
+                        .HasForeignKey("Character5Id");
 
-                    b.Navigation("Combatant1");
+                    b.HasOne("CombatGameSite.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("Combatant2");
+                    b.Navigation("Character1");
 
-                    b.Navigation("Combatant3");
+                    b.Navigation("Character2");
 
-                    b.Navigation("Combatant4");
+                    b.Navigation("Character3");
 
-                    b.Navigation("Combatant5");
+                    b.Navigation("Character4");
+
+                    b.Navigation("Character5");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

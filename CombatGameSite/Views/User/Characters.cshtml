@@ -1,0 +1,29 @@
+﻿@model UserViewModel
+@{
+    Layout = "_Base";
+}
+<h2>
+    Characters
+</h2>
+@if (TempData.Keys.Contains("message"))
+{
+    <p>
+        @TempData["message"]
+    </p>
+}
+@if (Model.CurrentUser?.Id == Model.SelectedUser.Id)
+{
+    <p>
+        <a asp-controller="Character" asp-action="Add">Create Character</a>
+    </p>
+}
+<p>
+    @Model.Characters.Count
+    character@(Model.Characters.Count == 1 ? "" : "s")
+</p>
+@foreach (Character character in Model.Characters)
+{
+    <p>
+        <a asp-controller="Character" asp-action="Index" asp-route-id="@character.Id">@character.Name</a>
+    </p>
+}

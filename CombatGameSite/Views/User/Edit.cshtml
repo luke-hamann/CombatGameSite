@@ -1,0 +1,16 @@
+﻿@model UserEditViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Edit Tagline";
+}
+<h1>
+    Edit Tagline
+</h1>
+<form asp-action="Edit" method="post">
+    <div>
+        <input asp-for="User.Tagline" />
+    </div>
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+</form>

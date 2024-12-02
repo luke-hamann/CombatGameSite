@@ -3,46 +3,58 @@
     ViewData["Title"] = "Combat Game Site";
 }
 
-<ul>
-    <li>
-        <a asp-controller="Home" asp-action="Battle">
-            Fight
-        </a>
-    </li>
-    <li>
-        <a asp-controller="Home" asp-action="Leaderboard">
-            Leaderboard
-        </a>
-    </li>
-    @if (Model.CurrentUser == null)
-    {
-        <li>
-            <a asp-area="Account" asp-controller="Account" asp-action="Login">
-                Login
-            </a>
-        </li>
-        <li>
-            <a asp-area="Account" asp-controller="Account" asp-action="Register">
-                Register
-            </a>
-        </li>
-    }
-    else
-    {
-        <li>
-            <a asp-controller="User" asp-action="Index" asp-route-id="@Model.CurrentUser.Id" asp-route-section="combatants">
-                Combatants
-            </a>
-        </li>
-        <li>
-            <a asp-controller="User" asp-action="Index" asp-route-id="@Model.CurrentUser.Id" asp-route-section="teams">
-                Teams
-            </a>
-        </li>
-        <li>
-            <form asp-area="Account" asp-controller="Account" asp-action="Logout" method="post">
-                <input type="submit" value="Logout" />
-            </form>
-        </li>
-    }
-</ul>
+<div class="container d-flex align-items-center justify-content-center vh-100">
+
+
+    <main class="content container col">
+
+
+        <div class="row container  justify-content-center">
+            <h1 class="heading d-inline-flex justify-content-center align-items-center mx-3 p-0 ">Combat Game Site</h1>
+            <p class="Subtext d-inline-flex justify-content-center align-items-center mx-3 p-0 fs-5">Welcome to the Combat Game Site. Choose an option from the menu.</p>
+        </div>
+        <div class="row container justify-content-center">
+            <a asp-controller="Home" asp-action="Battle" class="Button d-inline-flex justify-content-center align-items-center mx-3 p-0 fs-3">Fight</a>
+        </div>
+
+
+        <div class="row container justify-content-center">
+            <a asp-controller="Home" asp-action="Leaderboard" class="Button d-flex justify-content-center align-items-center mx-4  p-0 fs-5">Leaderboard</a>
+
+        </div>                
+
+        @if (Model.CurrentUser == null)
+        {
+            <div class="row container justify-content-center">
+                <a asp-area="Account" asp-controller="Account" asp-action="Login" class="Button d-flex justify-content-center align-items-center  px-4  fs-3">Login</a>
+            </div>
+            <div class="row container justify-content-center">
+                <a asp-area="Account" asp-controller="Account" asp-action="Register" class="Button d-flex justify-content-center align-items-center  px-4  fs-3">Register</a>
+            </div>
+           
+           
+           
+        }
+        else
+        {
+            <div class="row container justify-content-center">
+                <a asp-controller="User" asp-action="Characters" asp-route-id="@Model.CurrentUser.Id" class="Button d-flex justify-content-center align-items-center  px-4  fs-4">Combatants</a>
+
+            </div>
+            <div class="row container justify-content-center">
+                <a asp-controller="User" asp-action="Teams" asp-route-id="@Model.CurrentUser.Id" class="Button d-flex justify-content-center align-items-center  px-4  fs-3">Teams</a>
+
+            </div>
+            <div class="row container justify-content-center">
+
+                <form asp-area="Account" asp-controller="Account" class="Button Button-Form" asp-action="Logout" method="post">
+                    <input type="submit" value="Logout" class="logout-btn Button d-flex justify-content-center align-items-center  px-4  fs-3" />
+                </form>
+            </div>
+
+      
+        }
+
+
+    </main>
+</div>
