@@ -91,6 +91,9 @@ namespace CombatGameSite.Controllers
         [Route("/character/add/")]
         public IActionResult Add(CharacterEditViewModel model)
         {
+
+            model.SetSkills();
+
             // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
             if (model.CurrentUser == null)
@@ -109,6 +112,8 @@ namespace CombatGameSite.Controllers
                 ModelState.AddModelError("Character.Name", "You already have a character with that name.");
             }
 
+
+
             // Ensure the skill point distribution is valid
             model.Character = PopulateCharacterWithSkills(model.Character);
             if (!model.Character.hasValidSkillPointDistribution())
@@ -125,6 +130,7 @@ namespace CombatGameSite.Controllers
                     .ToList();
                 return View("Edit", model);
             }
+
 
             _context.Add(model.Character);
             _context.SaveChanges();
