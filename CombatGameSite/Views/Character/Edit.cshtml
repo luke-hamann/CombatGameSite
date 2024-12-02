@@ -74,9 +74,9 @@
                             // Ensure that Model.Character is not null before checking its Skill properties
                             if (Model.Character != null)
                             {
-                                isChecked = (Model.Character.SkillPrimaryId.Contains(skill.Id)) ||
-                                            (Model.Character.SkillSecondaryId.Contains(skill.Id)) ||
-                                            (Model.Character.SkillTertiaryId.Contains(skill.Id));
+                                isChecked = (Model.Character.SkillPrimaryId == skill.Id) ||
+                                            (Model.Character.SkillSecondaryId == skill.Id) ||
+                                            (Model.Character.SkillTertiaryId == skill.Id);
                             }
 
                             <div class="skill-card">
