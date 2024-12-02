@@ -44,11 +44,34 @@
             <option value="3">Wind</option>
             <option value="4">Earth</option>
         </select>
-        </div>
-        <div class="row">
-            <input type="hidden" asp-for="@Model.Character.Defense" value="0" />
-            <input type="submit" value="Submit" id="submitButton"  class="Button Char-Submit-Btn fs-3 m-auto"/>
-            @if (Model.Mode == "Edit")
+    </div>
+    <div>
+        <label asp-for="@Model.Character.Species">
+            Species
+        </label>
+        <input asp-for="@Model.Character.Species" />
+    </div>
+    <div>
+        <label asp-for="@Model.Character.SkillPrimaryId">
+            Primary Skill
+        </label>
+        <select asp-for="@Model.Character.SkillPrimaryId">
+            <option value="">-</option>
+            @foreach (Skill skill in Model.Skills)
+            {
+                <option value="@skill.Id">
+                    @skill.Name | $@skill.Cost | @skill.Description
+                </option>
+            }
+        </select>
+    </div>
+    <div>
+        <label asp-for="@Model.Character.SkillSecondaryId">
+            Secondary Skill
+        </label>
+        <select asp-for="@Model.Character.SkillSecondaryId">
+            <option value="">-</option>
+            @foreach (Skill skill in Model.Skills)
             {
                 <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Character.Id">
                     Cancel

@@ -30,10 +30,6 @@ namespace CombatGameSite.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
 
-                    b.Property<int?>("Defense")
-                        .IsRequired()
-                        .HasColumnType("int");
-
                     b.Property<int?>("Health")
                         .IsRequired()
                         .HasColumnType("int");
@@ -78,8 +74,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 1,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Aqua Warrior",
                             SkillPrimaryId = "A1",
                             SkillSecondaryId = "A2",
@@ -91,8 +86,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 2,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Flame Destroyer",
                             SkillPrimaryId = "A3",
                             SkillSecondaryId = "A4",
@@ -104,8 +98,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 3,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Wind Ninja",
                             SkillPrimaryId = "A5",
                             SkillSecondaryId = "A6",
@@ -117,8 +110,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 4,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Earth Titan",
                             SkillPrimaryId = "A7",
                             SkillSecondaryId = "A8",
@@ -130,8 +122,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 5,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Water Sage",
                             SkillPrimaryId = "A9",
                             SkillSecondaryId = "A10",
@@ -143,8 +134,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 6,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Fire Knight",
                             SkillPrimaryId = "A11",
                             SkillSecondaryId = "A12",
@@ -156,8 +146,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 7,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Wind Shaman",
                             SkillPrimaryId = "A13",
                             SkillSecondaryId = "A13",
@@ -169,8 +158,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 8,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Earth Wizard",
                             SkillPrimaryId = "H1",
                             SkillSecondaryId = "H1",
@@ -182,8 +170,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 9,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Water Spirit",
                             SkillPrimaryId = "H1",
                             SkillSecondaryId = "H1",
@@ -195,8 +182,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 10,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Flame Phoenix",
                             SkillPrimaryId = "H1",
                             SkillSecondaryId = "H1",
@@ -208,8 +194,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 11,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Wind Warrior",
                             SkillPrimaryId = "A1",
                             SkillSecondaryId = "A2",
@@ -221,8 +206,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 12,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Fire Sorcerer",
                             SkillPrimaryId = "A3",
                             SkillSecondaryId = "A4",
@@ -234,8 +218,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 13,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Wind Elf",
                             SkillPrimaryId = "A5",
                             SkillSecondaryId = "A6",
@@ -247,8 +230,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 14,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Earth Golem",
                             SkillPrimaryId = "A7",
                             SkillSecondaryId = "A8",
@@ -260,8 +242,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 15,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Water Knight",
                             SkillPrimaryId = "A9",
                             SkillSecondaryId = "A10",
@@ -273,8 +254,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 16,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Fire Wizard",
                             SkillPrimaryId = "A11",
                             SkillSecondaryId = "A12",
@@ -286,8 +266,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 17,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Wind Shaman",
                             SkillPrimaryId = "A13",
                             SkillSecondaryId = "A13",
@@ -299,8 +278,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 18,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Water Guardian",
                             SkillPrimaryId = "H1",
                             SkillSecondaryId = "H1",
@@ -312,8 +290,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 19,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Flame Demon",
                             SkillPrimaryId = "H1",
                             SkillSecondaryId = "H1",
@@ -325,8 +302,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 20,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Wind Demon",
                             SkillPrimaryId = "H1",
                             SkillSecondaryId = "H1",
@@ -338,8 +314,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 21,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Water Monk",
                             SkillPrimaryId = "A1",
                             SkillSecondaryId = "A2",
@@ -351,8 +326,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 22,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Fire Samurai",
                             SkillPrimaryId = "A3",
                             SkillSecondaryId = "A4",
@@ -364,8 +338,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 23,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Wind Warrior",
                             SkillPrimaryId = "A5",
                             SkillSecondaryId = "A6",
@@ -377,8 +350,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 24,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Earth Beast",
                             SkillPrimaryId = "A7",
                             SkillSecondaryId = "A8",
@@ -390,8 +362,7 @@ namespace CombatGameSite.Migrations
                         new
                         {
                             Id = 25,
-                            Defense = 50,
-                            Health = 50,
+                            Health = 100,
                             Name = "Water Sorceress",
                             SkillPrimaryId = "A9",
                             SkillSecondaryId = "A10",
@@ -413,9 +384,6 @@ namespace CombatGameSite.Migrations
                     b.Property<int?>("Cost")
                         .HasColumnType("int");
 
-                    b.Property<double?>("DefenseMultiplier")
-                        .HasColumnType("float");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -435,7 +403,6 @@ namespace CombatGameSite.Migrations
                             Id = "H1",
                             Attack = 0,
                             Cost = 10,
-                            DefenseMultiplier = 1.2,
                             Description = "A soothing wave of water heals the target.",
                             Name = "Healing Wave",
                             TypeId = 1
@@ -445,7 +412,6 @@ namespace CombatGameSite.Migrations
                             Id = "A1",
                             Attack = 20,
                             Cost = 15,
-                            DefenseMultiplier = 1.0,
                             Description = "A blazing sphere of fire strikes the enemy.",
                             Name = "Fireball",
                             TypeId = 2
@@ -455,7 +421,6 @@ namespace CombatGameSite.Migrations
                             Id = "D1",
                             Attack = 0,
                             Cost = 12,
-                            DefenseMultiplier = 1.5,
                             Description = "A swirling wind protects against attacks.",
                             Name = "Wind Barrier",
                             TypeId = 3
@@ -465,7 +430,6 @@ namespace CombatGameSite.Migrations
                             Id = "A2",
                             Attack = 25,
                             Cost = 18,
-                            DefenseMultiplier = 1.0,
                             Description = "A fiery explosion dealing massive damage.",
                             Name = "Inferno Burst",
                             TypeId = 2
@@ -475,7 +439,6 @@ namespace CombatGameSite.Migrations
                             Id = "H2",
                             Attack = 0,
                             Cost = 8,
-                            DefenseMultiplier = 1.1000000000000001,
                             Description = "A small burst of water to heal minor wounds.",
                             Name = "Aqua Surge",
                             TypeId = 1
@@ -485,7 +448,6 @@ namespace CombatGameSite.Migrations
                             Id = "D2",
                             Attack = 0,
                             Cost = 14,
-                            DefenseMultiplier = 1.8,
                             Description = "Earth magic hardens the skin for defense.",
                             Name = "Stone Skin",
                             TypeId = 4
@@ -495,7 +457,6 @@ namespace CombatGameSite.Migrations
                             Id = "A3",
                             Attack = 22,
                             Cost = 20,
-                            DefenseMultiplier = 1.0,
                             Description = "A cutting wind attack that pierces defenses.",
                             Name = "Cyclone Slash",
                             TypeId = 3
@@ -505,7 +466,6 @@ namespace CombatGameSite.Migrations
                             Id = "D3",
                             Attack = 0,
                             Cost = 9,
-                            DefenseMultiplier = 1.3999999999999999,
                             Description = "Encases the target in a veil of water for protection.",
                             Name = "Water Veil",
                             TypeId = 1
@@ -515,7 +475,6 @@ namespace CombatGameSite.Migrations
                             Id = "H3",
                             Attack = 0,
                             Cost = 11,
-                            DefenseMultiplier = 1.3,
                             Description = "A gentle wind revitalizes the target.",
                             Name = "Breeze of Life",
                             TypeId = 3
@@ -525,7 +484,6 @@ namespace CombatGameSite.Migrations
                             Id = "A4",
                             Attack = 24,
                             Cost = 17,
-                            DefenseMultiplier = 1.0,
                             Description = "An earth-shaking attack to crush enemies.",
                             Name = "Earthquake Smash",
                             TypeId = 4
@@ -535,7 +493,6 @@ namespace CombatGameSite.Migrations
                             Id = "D4",
                             Attack = 0,
                             Cost = 16,
-                            DefenseMultiplier = 1.6000000000000001,
                             Description = "A shield of fire reduces incoming damage.",
                             Name = "Flame Ward",
                             TypeId = 2
@@ -545,7 +502,6 @@ namespace CombatGameSite.Migrations
                             Id = "H4",
                             Attack = 0,
                             Cost = 13,
-                            DefenseMultiplier = 1.2,
                             Description = "The power of earth heals the target slowly.",
                             Name = "Earthen Rejuvenation",
                             TypeId = 4
@@ -555,7 +511,6 @@ namespace CombatGameSite.Migrations
                             Id = "A5",
                             Attack = 26,
                             Cost = 19,
-                            DefenseMultiplier = 1.0,
                             Description = "A wave crashes on the enemy for damage.",
                             Name = "Tidal Crush",
                             TypeId = 1
@@ -565,7 +520,6 @@ namespace CombatGameSite.Migrations
                             Id = "D5",
                             Attack = 0,
                             Cost = 10,
-                            DefenseMultiplier = 1.7,
                             Description = "A massive wind barrier blocks attacks.",
                             Name = "Wind Fortress",
                             TypeId = 3
@@ -575,7 +529,6 @@ namespace CombatGameSite.Migrations
                             Id = "H5",
                             Attack = 0,
                             Cost = 12,
-                            DefenseMultiplier = 1.1000000000000001,
                             Description = "A fiery warmth restores the target's health.",
                             Name = "Flare Heal",
                             TypeId = 2
@@ -585,7 +538,6 @@ namespace CombatGameSite.Migrations
                             Id = "A6",
                             Attack = 28,
                             Cost = 21,
-                            DefenseMultiplier = 1.0,
                             Description = "Rocks pummel the enemy, causing severe damage.",
                             Name = "Landslide Strike",
                             TypeId = 4
@@ -595,7 +547,6 @@ namespace CombatGameSite.Migrations
                             Id = "D6",
                             Attack = 0,
                             Cost = 15,
-                            DefenseMultiplier = 1.5,
                             Description = "A shield of water dampens damage.",
                             Name = "Aqua Shield",
                             TypeId = 1
@@ -605,7 +556,6 @@ namespace CombatGameSite.Migrations
                             Id = "H6",
                             Attack = 0,
                             Cost = 10,
-                            DefenseMultiplier = 1.1000000000000001,
                             Description = "A calming wind that heals minor injuries.",
                             Name = "Soothing Breeze",
                             TypeId = 3
@@ -615,7 +565,6 @@ namespace CombatGameSite.Migrations
                             Id = "A7",
                             Attack = 30,
                             Cost = 22,
-                            DefenseMultiplier = 1.0,
                             Description = "A sword engulfed in fire slashes the enemy.",
                             Name = "Flaming Blade",
                             TypeId = 2
@@ -625,7 +574,6 @@ namespace CombatGameSite.Migrations
                             Id = "D7",
                             Attack = 0,
                             Cost = 13,
-                            DefenseMultiplier = 1.8999999999999999,
                             Description = "A massive wall of earth defends against attacks.",
                             Name = "Rock Wall",
                             TypeId = 4
@@ -635,7 +583,6 @@ namespace CombatGameSite.Migrations
                             Id = "H7",
                             Attack = 0,
                             Cost = 14,
-                            DefenseMultiplier = 1.2,
                             Description = "Tiny stones infused with healing power.",
                             Name = "Healing Pebbles",
                             TypeId = 4
@@ -645,7 +592,6 @@ namespace CombatGameSite.Migrations
                             Id = "A8",
                             Attack = 32,
                             Cost = 25,
-                            DefenseMultiplier = 1.0,
                             Description = "A sharp blade of water cuts through the enemy.",
                             Name = "Aqua Slash",
                             TypeId = 1
@@ -655,7 +601,6 @@ namespace CombatGameSite.Migrations
                             Id = "D8",
                             Attack = 0,
                             Cost = 18,
-                            DefenseMultiplier = 1.7,
                             Description = "A burning shield reduces damage taken.",
                             Name = "Blazing Barrier",
                             TypeId = 2
@@ -665,7 +610,6 @@ namespace CombatGameSite.Migrations
                             Id = "H8",
                             Attack = 0,
                             Cost = 12,
-                            DefenseMultiplier = 1.2,
                             Description = "A soft breeze heals and rejuvenates.",
                             Name = "Whispering Wind",
                             TypeId = 3
@@ -675,7 +619,6 @@ namespace CombatGameSite.Migrations
                             Id = "A9",
                             Attack = 33,
                             Cost = 23,
-                            DefenseMultiplier = 1.0,
                             Description = "A ferocious wind slashes the enemy.",
                             Name = "Tempest Fang",
                             TypeId = 3
@@ -685,7 +628,6 @@ namespace CombatGameSite.Migrations
                             Id = "D9",
                             Attack = 0,
                             Cost = 15,
-                            DefenseMultiplier = 1.6000000000000001,
                             Description = "A watery shield protects the user.",
                             Name = "Ocean Shield",
                             TypeId = 1
@@ -695,7 +637,6 @@ namespace CombatGameSite.Migrations
                             Id = "H9",
                             Attack = 0,
                             Cost = 10,
-                            DefenseMultiplier = 1.1000000000000001,
                             Description = "A quick burst of fire heals the target.",
                             Name = "Flame Pulse",
                             TypeId = 2
@@ -705,7 +646,6 @@ namespace CombatGameSite.Migrations
                             Id = "A10",
                             Attack = 34,
                             Cost = 24,
-                            DefenseMultiplier = 1.0,
                             Description = "A giant boulder crushes the opponent.",
                             Name = "Boulder Bash",
                             TypeId = 4
@@ -715,7 +655,6 @@ namespace CombatGameSite.Migrations
                             Id = "D10",
                             Attack = 0,
                             Cost = 19,
-                            DefenseMultiplier = 1.8,
                             Description = "A rotating wind reduces damage.",
                             Name = "Cyclone Guard",
                             TypeId = 3
@@ -725,7 +664,6 @@ namespace CombatGameSite.Migrations
                             Id = "H10",
                             Attack = 0,
                             Cost = 14,
-                            DefenseMultiplier = 1.3,
                             Description = "A gentle rain restores the target's health.",
                             Name = "Rain of Healing",
                             TypeId = 1
@@ -735,7 +673,6 @@ namespace CombatGameSite.Migrations
                             Id = "A11",
                             Attack = 35,
                             Cost = 26,
-                            DefenseMultiplier = 1.0,
                             Description = "A fiery wave burns all in its path.",
                             Name = "Flame Surge",
                             TypeId = 2
@@ -745,7 +682,6 @@ namespace CombatGameSite.Migrations
                             Id = "D11",
                             Attack = 0,
                             Cost = 20,
-                            DefenseMultiplier = 1.8,
                             Description = "Earth barriers defend against attacks.",
                             Name = "Rock Shield",
                             TypeId = 4
@@ -755,7 +691,6 @@ namespace CombatGameSite.Migrations
                             Id = "H11",
                             Attack = 0,
                             Cost = 13,
-                            DefenseMultiplier = 1.3,
                             Description = "A rejuvenating wind heals all nearby allies.",
                             Name = "Winds of Renewal",
                             TypeId = 3
@@ -765,7 +700,6 @@ namespace CombatGameSite.Migrations
                             Id = "A12",
                             Attack = 36,
                             Cost = 27,
-                            DefenseMultiplier = 1.0,
                             Description = "A torrent of water smashes the enemy.",
                             Name = "Ocean Blast",
                             TypeId = 1
@@ -775,7 +709,6 @@ namespace CombatGameSite.Migrations
                             Id = "D12",
                             Attack = 0,
                             Cost = 18,
-                            DefenseMultiplier = 1.7,
                             Description = "A barrier of molten fire absorbs damage.",
                             Name = "Lava Shield",
                             TypeId = 2
@@ -785,7 +718,6 @@ namespace CombatGameSite.Migrations
                             Id = "H12",
                             Attack = 0,
                             Cost = 16,
-                            DefenseMultiplier = 1.2,
                             Description = "The earth's power restores health gradually.",
                             Name = "Earth Embrace",
                             TypeId = 4
@@ -795,7 +727,6 @@ namespace CombatGameSite.Migrations
                             Id = "A13",
                             Attack = 37,
                             Cost = 29,
-                            DefenseMultiplier = 1.0,
                             Description = "A devastating lightning-charged wind attack.",
                             Name = "Storm Strike",
                             TypeId = 3
@@ -805,7 +736,6 @@ namespace CombatGameSite.Migrations
                             Id = "D13",
                             Attack = 0,
                             Cost = 20,
-                            DefenseMultiplier = 1.6000000000000001,
                             Description = "Encases the user in a protective bubble.",
                             Name = "Bubble Shield",
                             TypeId = 1
@@ -815,7 +745,6 @@ namespace CombatGameSite.Migrations
                             Id = "H13",
                             Attack = 0,
                             Cost = 12,
-                            DefenseMultiplier = 1.1000000000000001,
                             Description = "A healing ember that soothes wounds.",
                             Name = "Ember Heal",
                             TypeId = 2

@@ -22,10 +22,6 @@ namespace CombatGameSite.Models
         [Range(0, 200)]
         public int? Health { get; set; }
 
-        [Required(ErrorMessage = "Please enter a defense value.")]
-        [Range(0, 50, ErrorMessage = "Please enter a defense value between 0 and 50.")]
-        public int? Defense { get; set; }
-
         [Required(ErrorMessage = "Please enter a species.")]
         public string? Species { get; set; }
 
@@ -55,12 +51,12 @@ namespace CombatGameSite.Models
 
         public bool hasValidSkillPointDistribution()
         {
-            int total =
-                (int)(((Health ?? 0)-100 )/2  +
-                (Defense ?? 0) +
+            int total =(int)(
+                (Health ?? 0) +
                 (SkillPrimary?.Cost != null ? SkillPrimary.Cost : 0) +
                 (SkillSecondary?.Cost != null ? SkillSecondary.Cost : 0) +
-                (SkillTertiary?.Cost != null ? SkillTertiary.Cost : 0));
+                (SkillTertiary?.Cost != null ? SkillTertiary.Cost : 0)
+                );
             return total <= MAX_SKILL_POINTS;
         }
     }
