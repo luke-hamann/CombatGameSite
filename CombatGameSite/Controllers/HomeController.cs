@@ -16,19 +16,20 @@ namespace CombatGameSite.Controllers
         [NonAction]
         private User? GetCurrentUser()
         {
+            // Get the user object for the currently logged in user
             return _context.Users.Find(HttpContext.Session.GetInt32("userId"));
         }
 
         [HttpGet]
         [Route("/")]
-        public IActionResult Index()
+        public ViewResult Index()
         {
             return View(new { CurrentUser = GetCurrentUser() });
         }
 
         [HttpGet]
         [Route("/leaderboard/")]
-        public IActionResult Leaderboard()
+        public ViewResult Leaderboard()
         {
             var model = new LeaderboardViewModel()
             {
@@ -63,14 +64,16 @@ namespace CombatGameSite.Controllers
         [HttpPost]
         [Route("/battle/")]
         public ViewResult Battle(BattleFormViewModel battleFormViewModel)
-        { //Pass in winning teams ID and add to their score. +10 for win -3 for loss
+        {
             battleFormViewModel.CurrentUser = GetCurrentUser();
 
+            // Verify two different teams were selected
             if (battleFormViewModel.Team1Id == battleFormViewModel.Team2Id)
             {
                 ModelState.AddModelError("", "Please select 2 different teams.");
             }
 
+            // Verify both teams exist
             var team1 = _context.Teams.Find(battleFormViewModel.Team1Id);
             var team2 = _context.Teams.Find(battleFormViewModel.Team2Id);
 
@@ -99,6 +102,8 @@ namespace CombatGameSite.Controllers
                 team2!.Score += 10;
                 team1!.Score -= 3;
             }
+
+            // Save the changes to the team scores and display the results
 
             _context.Update(team1);
             _context.Update(team2);

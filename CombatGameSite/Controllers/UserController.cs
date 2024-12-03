@@ -18,6 +18,7 @@ namespace CombatGameSite.Controllers
         [NonAction]
         public User? GetCurrentUser()
         {
+            // Get the user object for the currently logged in user
             return _context.Users.Find(HttpContext.Session.GetInt32("userId"));
         }
 
@@ -109,6 +110,7 @@ namespace CombatGameSite.Controllers
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
 
+            // Ignore the user name and password since the form does not modify them
             ModelState["User.Name"].ValidationState = ModelValidationState.Valid;
             ModelState["User.Password"].ValidationState = ModelValidationState.Valid;
 
@@ -117,6 +119,7 @@ namespace CombatGameSite.Controllers
                 return View(model);
             }
 
+            // Update the current user based on the form
             model.CurrentUser.Tagline = model.User.Tagline;
             model.CurrentUser.FavoriteBook = model.User.FavoriteBook;
             model.CurrentUser.FavoriteGame = model.User.FavoriteGame;

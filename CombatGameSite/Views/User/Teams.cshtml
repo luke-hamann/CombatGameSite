@@ -9,9 +9,10 @@
 
 @if (TempData.Keys.Contains("message"))
 {
-    <p>
+    <div class="col-md-4 offset-md-4 alert alert-info alert-dismissible fade show" role="alert">
         @TempData["message"]
-    </p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 }
 @if (Model.SelectedUser.Id == Model.CurrentUser?.Id)
 {

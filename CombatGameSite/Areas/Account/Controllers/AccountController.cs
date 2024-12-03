@@ -17,6 +17,7 @@ namespace CombatGameSite.Areas.Account.Controllers
         [NonAction]
         private User? GetCurrentUser()
         {
+            // Get the user object for the currently logged in user
             return _context.Users.Find(HttpContext.Session.GetInt32("userId"));
         }
 
@@ -53,6 +54,7 @@ namespace CombatGameSite.Areas.Account.Controllers
                 return View(model);
             }
 
+            // Validate the user's credentials
             User? user = _context.Users
                 .Where(u => u.Name == model.Name && u.Password == model.Password)
                 .FirstOrDefault();
@@ -63,6 +65,7 @@ namespace CombatGameSite.Areas.Account.Controllers
                 return View(model);
             }
 
+            // Update the session
             HttpContext.Session.SetInt32("userId", user.Id);
             return RedirectToAction("Index", "Home");
         }
@@ -71,8 +74,10 @@ namespace CombatGameSite.Areas.Account.Controllers
         [Route("register")]
         public IActionResult Register()
         {
-            var registerViewModel = new RegisterViewModel();
-            registerViewModel.CurrentUser = GetCurrentUser();
+            var registerViewModel = new RegisterViewModel()
+            {
+                CurrentUser = GetCurrentUser()
+            };
 
             if (registerViewModel.CurrentUser != null)
             {
@@ -93,17 +98,20 @@ namespace CombatGameSite.Areas.Account.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            // Verify the user has a unique name
             if (registerViewModel.Username != null)
             {
                 User? conflictingUser = _context.Users
                     .Where(u => u.Name == registerViewModel.Username)
                     .FirstOrDefault();
+
                 if (conflictingUser != null)
                 {
                     ModelState.AddModelError("", "Username is taken.");
                 }
             }
 
+            // Verify the passwords match
             if (registerViewModel.Password != registerViewModel.PasswordConfirm)
             {
                 ModelState.AddModelError("", "Passwords do not match.");
