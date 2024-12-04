@@ -141,7 +141,7 @@ namespace CombatGameSite.Controllers
 
             // Return to the user's character list
             TempData["message"] = $"You just created the character {model.Character.Name}.";
-            return RedirectToAction("Characters", "User", new { id = model.Character.UserId });
+            return RedirectToAction("Index", "Character", new { id = model.Character.Id });
         }
 
         [HttpGet]
@@ -234,7 +234,7 @@ namespace CombatGameSite.Controllers
 
             // Return to the user's character list page
             TempData["message"] = $"You just edited the character {model.Character.Name}.";
-            return RedirectToAction("Characters", "User", new { id = model.Character.UserId });
+            return RedirectToAction("Index", "Character", new { id = model.Character.Id });
         }
 
         [HttpGet]

@@ -9,6 +9,13 @@
         @Model.Character.Name
     </h1>
 </div>
+@if (TempData.Keys.Contains("message"))
+{
+    <div class="col-md-4 offset-md-4 alert alert-info alert-dismissible fade show" role="alert">
+        @TempData["message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
 @if (Model.Character.UserId == Model.CurrentUser?.Id){
     <div class="text-center">
         <a asp-controller="Character" asp-action="Edit" asp-route-id="@Model.Character.Id" class="button d-inline-block p-3">Edit</a>
