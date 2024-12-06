@@ -46,6 +46,14 @@
     </h2>
 </div>
 
+@if (Model.Character.SkillPrimary == null && Model.Character.SkillSecondary == null &&
+    Model.Character.SkillTertiary == null)
+{
+    <div class="col-md-4 offset-md-4 wooden-form p-5">
+        No skills.
+    </div>
+}
+
 @if (Model.Character.SkillPrimary != null)
 {
     <div class="col-md-4 offset-md-4 wooden-form p-5">
