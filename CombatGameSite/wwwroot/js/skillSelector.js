@@ -18,10 +18,10 @@
     $('#submitButton').prop('disabled', totalCost > MAX_SKILL_POINTS);
 
     // Handle enabling/disabling checkboxes based on selection count
-    const selectedCount = selectedSkills.length;
+    const areSkillSelectionsFull = selectedSkills.length >= MAX_SKILL_SELECTIONS;
     $('.skill-checkbox').each(function () {
         if (!$(this).is(':checked')) {
-            $(this).prop('disabled', selectedCount >= MAX_SKILL_SELECTIONS);
+            $(this).prop('disabled', areSkillSelectionsFull);
         }
     });
 }

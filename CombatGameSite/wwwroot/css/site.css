@@ -226,7 +226,6 @@ h2 {
     z-index: 3;
     background-image: url("../assets/robin/png/Button/Square/Fill/Default.png");
     background-repeat: no-repeat;
-    background-size: fit;
     background-position: center;
     width: 6rem;
     height: 6rem;
@@ -240,14 +239,7 @@ h2 {
     &:hover {
         background-image: url("../assets/robin/png/Button/Square/Fill/Hover.png");
         background-repeat: no-repeat;
-        background-size: fit;
         background-position: center;
-    }
-
-    svg {
-        margin-bottom: 1rem;
-        height: 90%;
-        width: auto;
     }
 }
 
