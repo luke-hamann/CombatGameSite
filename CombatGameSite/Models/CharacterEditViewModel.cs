@@ -11,10 +11,9 @@
 
         public void SetSkills()
         {
-            Character.SkillPrimaryId = SkillIds.ElementAtOrDefault(0);
-            Character.SkillSecondaryId = SkillIds.ElementAtOrDefault(1);
-            Character.SkillTertiaryId = SkillIds.ElementAtOrDefault(2);
-
+            Character.SkillPrimaryId = SkillIds?.ElementAtOrDefault(0);
+            Character.SkillSecondaryId = SkillIds?.ElementAtOrDefault(1);
+            Character.SkillTertiaryId = SkillIds?.ElementAtOrDefault(2);
         }
     }
 }
