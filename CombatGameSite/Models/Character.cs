@@ -14,16 +14,16 @@ namespace CombatGameSite.Models
         [Required(ErrorMessage = "Please enter a name.")]
         public string? Name { get; set; }
 
-        [Required(ErrorMessage = "Please select an element type.")]
-        [Range(1, 4, ErrorMessage = "Please select an element type.")]
-        public int? TypeId { get; set; }
-
         [Required(ErrorMessage = "Please enter a health value.")]
         [Range(0, 200, ErrorMessage = "Health must be between 0 and 200.")]
         public int? Health { get; set; }
 
         [Required(ErrorMessage = "Please enter a species.")]
         public string? Species { get; set; }
+
+        [Required(ErrorMessage = "Please select an element type.")]
+        [Range(1, 4, ErrorMessage = "Please select an element type.")]
+        public int? TypeId { get; set; }
 
         public string? SkillPrimaryId { get; set; }
         public Skill? SkillPrimary { get; set; }
