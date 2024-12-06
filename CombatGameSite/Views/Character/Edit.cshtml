@@ -18,7 +18,7 @@
 </a>
 <form asp-controller="Character" asp-action="@Model.Mode" method="post" class="form-container">
     <div class="validation" asp-validation-summary="All"></div>
-    <div class="name-health-set"> 
+    <div class="name-health-set">
         <div class="form-floating char-input" >
             <input asp-for="@Model.Character.Name"  class="form-control" placeholder="Name"/>
             <label asp-for="@Model.Character.Name" class="col-form-label">Name </label>
@@ -27,7 +27,7 @@
             <img src="~/assets/character.png" alt="Image of character">
         </div>
         <div class="form-floating my-3 char-input">
-            <input asp-for="@Model.Character.Health" id="health" onchange="updateCost()" class="form-control" value="100"/>
+            <input asp-for="@Model.Character.Health" id="health" onchange="updateCost()" class="form-control" />
             <label asp-for="@Model.Character.Health" class="col-form-label" >
                 Health
             </label>

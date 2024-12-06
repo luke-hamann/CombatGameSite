@@ -8,7 +8,7 @@
     });
 
     // Add health cost (assuming 1 point = 2 health)
-    const healthCost = Math.max($('#health').val() - 100, 0) / 2;
+    const healthCost = ($('#health').val() - 100) / 2;
     totalCost += parseInt(healthCost) || 0;
 
     // Update the total cost display

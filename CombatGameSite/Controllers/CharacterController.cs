@@ -86,6 +86,8 @@ namespace CombatGameSite.Controllers
 
             // Show the add character form
             model.Mode = "Add";
+            model.Character = new Character();
+            model.Character.Health = 100;
             model.Skills = _context.Skills
                 .OrderBy(s => s.Name)
                 .ToList();
