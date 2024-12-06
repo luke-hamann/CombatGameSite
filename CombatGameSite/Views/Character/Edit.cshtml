@@ -13,12 +13,19 @@
     <script src="~/js/skillSelector.js"></script>
 }
 
-<a class="back-btn d-flex justify-content-center align-items-center" href="javascript:history.back()">
-    <i class="bi bi-arrow-left h1"></i>
-</a>
+@if (Model.Mode == "Add") {
+    <a class="back-btn d-flex justify-content-center align-items-center" asp-controller="User" asp-action="Characters" asp-route-id="@Model.CurrentUser!.Id">
+        <i class="bi bi-arrow-left h1"></i>
+    </a>
+} else if (Model.Mode == "Edit") {
+    <a class="back-btn d-flex justify-content-center align-items-center" asp-controller="Character" asp-action="Index" asp-route-id="@Model.Character!.Id">
+        <i class="bi bi-arrow-left h1"></i>
+    </a>
+}
+
 <form asp-controller="Character" asp-action="@Model.Mode" method="post" class="form-container">
-    <div class="validation" asp-validation-summary="All"></div>
     <div class="name-health-set">
+        <div class="validation" asp-validation-summary="All"></div>
         <div class="form-floating char-input" >
             <input asp-for="@Model.Character.Name"  class="form-control" placeholder="Name"/>
             <label asp-for="@Model.Character.Name" class="col-form-label">Name </label>
