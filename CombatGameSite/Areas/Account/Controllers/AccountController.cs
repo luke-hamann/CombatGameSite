@@ -74,35 +74,35 @@ namespace CombatGameSite.Areas.Account.Controllers
         [Route("register")]
         public IActionResult Register()
         {
-            var registerViewModel = new RegisterViewModel()
+            var model = new RegisterViewModel()
             {
                 CurrentUser = GetCurrentUser()
             };
 
-            if (registerViewModel.CurrentUser != null)
+            if (model.CurrentUser != null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            return View(registerViewModel);
+            return View(model);
         }
 
         [HttpPost]
         [Route("register")]
-        public IActionResult Register(RegisterViewModel registerViewModel)
+        public IActionResult Register(RegisterViewModel model)
         {
-            registerViewModel.CurrentUser = GetCurrentUser();
+            model.CurrentUser = GetCurrentUser();
 
-            if (registerViewModel.CurrentUser != null)
+            if (model.CurrentUser != null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
             // Verify the user has a unique name
-            if (registerViewModel.Username != null)
+            if (model.Username != null)
             {
                 User? conflictingUser = _context.Users
-                    .Where(u => u.Name == registerViewModel.Username)
+                    .Where(u => u.Name == model.Username)
                     .FirstOrDefault();
 
                 if (conflictingUser != null)
@@ -112,17 +112,17 @@ namespace CombatGameSite.Areas.Account.Controllers
             }
 
             // Verify the passwords match
-            if (registerViewModel.Password != registerViewModel.PasswordConfirm)
+            if (model.Password != model.PasswordConfirm)
             {
                 ModelState.AddModelError("", "Passwords do not match.");
             }
 
             if (!ModelState.IsValid)
             {
-                return View(registerViewModel);
+                return View(model);
             }
 
-            var user = registerViewModel.toUser();
+            var user = model.ToUser();
             _context.Add(user);
             _context.SaveChanges();
 
@@ -132,10 +132,10 @@ namespace CombatGameSite.Areas.Account.Controllers
 
         [HttpPost]
         [Route("logout")]
-        public RedirectResult Logout(string returnTo = "/")
+        public RedirectToActionResult Logout()
         {
             HttpContext.Session.SetInt32("userId", 0);
-            return Redirect(returnTo);
+            return RedirectToAction("Index", "Home");
         }
     }
 }
