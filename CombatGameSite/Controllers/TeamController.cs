@@ -59,7 +59,7 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/team/add/")]
-        public IActionResult Add()
+        public ActionResult Add()
         {
             var model = new TeamEditViewModel()
             {
@@ -85,7 +85,7 @@ namespace CombatGameSite.Controllers
 
         [HttpPost]
         [Route("/team/add/")]
-        public IActionResult Add(TeamEditViewModel model)
+        public ActionResult Add(TeamEditViewModel model)
         {
             model.Mode = "Add";
             model.CurrentUser = GetCurrentUser();
@@ -122,7 +122,7 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/team/{id}/edit/")]
-        public IActionResult Edit(int id)
+        public ActionResult Edit(int id)
         {
             var model = new TeamEditViewModel()
             {
@@ -157,7 +157,7 @@ namespace CombatGameSite.Controllers
 
         [HttpPost]
         [Route("/team/{id}/edit/")]
-        public IActionResult Edit(int id, TeamEditViewModel model)
+        public ActionResult Edit(int id, TeamEditViewModel model)
         {
             // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
@@ -206,7 +206,7 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/team/{id}/delete/")]
-        public IActionResult Delete(int id)
+        public ActionResult Delete(int id)
         {
             // Ensure the user is logged in
             var model = new TeamDeleteViewModel()
@@ -234,7 +234,7 @@ namespace CombatGameSite.Controllers
 
         [HttpPost]
         [Route("/team/{id}/delete/")]
-        public IActionResult Delete(int id, TeamDeleteViewModel model)
+        public ActionResult Delete(int id, TeamDeleteViewModel model)
         {
             // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();

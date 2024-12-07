@@ -71,7 +71,7 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/character/{id}/")]
-        public IActionResult Index(int id)
+        public ActionResult Index(int id)
         {
             // Ensure the character exists
             Character? character = _context.Characters
@@ -97,7 +97,7 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/character/add/")]
-        public IActionResult Add() 
+        public ActionResult Add() 
         {
             // Ensure the user is logged in
             var model = new CharacterEditViewModel()
@@ -120,7 +120,7 @@ namespace CombatGameSite.Controllers
 
         [HttpPost]
         [Route("/character/add/")]
-        public IActionResult Add(CharacterEditViewModel model)
+        public ActionResult Add(CharacterEditViewModel model)
         {
             // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
@@ -154,7 +154,7 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/character/{id}/edit/")]
-        public IActionResult Edit(int id)
+        public ActionResult Edit(int id)
         {
             // Ensure the user is logged in
             var model = new CharacterEditViewModel()
@@ -185,7 +185,7 @@ namespace CombatGameSite.Controllers
 
         [HttpPost]
         [Route("/character/{id}/edit/")]
-        public IActionResult Edit(int id, CharacterEditViewModel model)
+        public ActionResult Edit(int id, CharacterEditViewModel model)
         {
             // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
@@ -230,7 +230,7 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/character/{id}/delete/")]
-        public IActionResult Delete(int id)
+        public ActionResult Delete(int id)
         {
             // Ensure the user is logged in
             var model = new CharacterDeleteViewModel()
@@ -266,7 +266,7 @@ namespace CombatGameSite.Controllers
 
         [HttpPost]
         [Route("/character/{id}/delete/")]
-        public IActionResult Delete(int id, CharacterDeleteViewModel model)
+        public ActionResult Delete(int id, CharacterDeleteViewModel model)
         {
             // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();

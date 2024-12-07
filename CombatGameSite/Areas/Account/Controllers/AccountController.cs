@@ -23,7 +23,7 @@ namespace CombatGameSite.Areas.Account.Controllers
 
         [HttpGet]
         [Route("login")]
-        public IActionResult Login()
+        public ActionResult Login()
         {
             var model = new LoginViewModel()
             {
@@ -40,7 +40,7 @@ namespace CombatGameSite.Areas.Account.Controllers
 
         [HttpPost]
         [Route("login")]
-        public IActionResult Login(LoginViewModel model)
+        public ActionResult Login(LoginViewModel model)
         {
             model.CurrentUser = GetCurrentUser();
 
@@ -72,7 +72,7 @@ namespace CombatGameSite.Areas.Account.Controllers
 
         [HttpGet]
         [Route("register")]
-        public IActionResult Register()
+        public ActionResult Register()
         {
             var model = new RegisterViewModel()
             {
@@ -89,7 +89,7 @@ namespace CombatGameSite.Areas.Account.Controllers
 
         [HttpPost]
         [Route("register")]
-        public IActionResult Register(RegisterViewModel model)
+        public ActionResult Register(RegisterViewModel model)
         {
             model.CurrentUser = GetCurrentUser();
 

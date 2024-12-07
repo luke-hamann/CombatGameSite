@@ -24,14 +24,14 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/user/{id}/")]
-        public IActionResult Index(int id)
+        public ActionResult Index(int id)
         {
             return Characters(id);
         }
 
         [HttpGet]
         [Route("/user/{id}/characters/")]
-        public IActionResult Characters(int id)
+        public ActionResult Characters(int id)
         {
             var model = new UserViewModel()
             {
@@ -54,7 +54,7 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/user/{id}/teams/")]
-        public IActionResult Teams(int id)
+        public ActionResult Teams(int id)
         {
             var model = new UserViewModel()
             {
@@ -82,7 +82,7 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/user/edit/")]
-        public IActionResult Edit()
+        public ActionResult Edit()
         {
             var model = new UserEditViewModel()
             {
@@ -101,7 +101,7 @@ namespace CombatGameSite.Controllers
 
         [HttpPost]
         [Route("/user/edit/")]
-        public IActionResult Edit(UserEditViewModel model)
+        public ActionResult Edit(UserEditViewModel model)
         {
             model.CurrentUser = GetCurrentUser();
 
