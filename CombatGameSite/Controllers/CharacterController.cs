@@ -185,7 +185,7 @@ namespace CombatGameSite.Controllers
 
         [HttpPost]
         [Route("/character/{id}/edit/")]
-        public IActionResult Edit(CharacterEditViewModel model, int id)
+        public IActionResult Edit(int id, CharacterEditViewModel model)
         {
             // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
@@ -266,7 +266,7 @@ namespace CombatGameSite.Controllers
 
         [HttpPost]
         [Route("/character/{id}/delete/")]
-        public IActionResult Delete(CharacterDeleteViewModel model, int id)
+        public IActionResult Delete(int id, CharacterDeleteViewModel model)
         {
             // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
