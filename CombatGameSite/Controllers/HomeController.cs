@@ -63,34 +63,35 @@ namespace CombatGameSite.Controllers
 
         [HttpPost]
         [Route("/battle/")]
-        public ViewResult Battle(BattleFormViewModel battleFormViewModel)
+        public ViewResult Battle(BattleFormViewModel model)
         {
-            battleFormViewModel.CurrentUser = GetCurrentUser();
+            model.CurrentUser = GetCurrentUser();
 
             // Verify two different teams were selected
-            if (battleFormViewModel.Team1Id == battleFormViewModel.Team2Id)
+            if (model.Team1Id == model.Team2Id)
             {
                 ModelState.AddModelError("", "Please select 2 different teams.");
             }
 
             // Verify both teams exist
-            var team1 = _context.Teams.Find(battleFormViewModel.Team1Id);
-            var team2 = _context.Teams.Find(battleFormViewModel.Team2Id);
+            var team1 = _context.Teams.Find(model.Team1Id);
+            var team2 = _context.Teams.Find(model.Team2Id);
 
             if (team1 == null || team2 == null)
             {
-                ModelState.AddModelError("", "At least one of those teams does not exist.");
+                ModelState.AddModelError("", "You selected a team that does not exist.");
             }
 
+            // Show the battle form again if validation failed
             if (!ModelState.IsValid)
             {
-                battleFormViewModel.Teams = _context.Teams.OrderBy(t => t.Name).ToList();
-                return View("BattleForm", battleFormViewModel);
+                model.Teams = _context.Teams.OrderBy(t => t.Name).ToList();
+                return View("BattleForm", model);
             }
 
             // Battle calculations
 
-            bool team1Won = (new Random()).Next(1) == 0;
+            bool team1Won = (new Random()).Next(2) == 0;
 
             if (team1Won)
             {
@@ -109,7 +110,7 @@ namespace CombatGameSite.Controllers
             _context.Update(team2);
             _context.SaveChanges();
 
-            var model = new BattleResultViewModel()
+            var result = new BattleResultViewModel()
             {
                 CurrentUser = GetCurrentUser(),
                 Winner = team1Won ? team1 : team2,
@@ -117,7 +118,7 @@ namespace CombatGameSite.Controllers
                 CombatLog = new List<string>(["Smash", "Bash", "Clash"])
             };
 
-            return View("BattleResult", model);
+            return View("BattleResult", result);
         }
     }
 }
