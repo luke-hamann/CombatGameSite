@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
-using static System.Collections.Specialized.BitVector32;
 
 namespace CombatGameSite.Controllers
 {
@@ -39,7 +38,7 @@ namespace CombatGameSite.Controllers
                 SelectedUser = _context.Users.Find(id)
             };
 
-            if (model.SelectedUser ==  null)
+            if (model.SelectedUser == null)
             {
                 return NotFound();
             }
@@ -110,9 +109,9 @@ namespace CombatGameSite.Controllers
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
 
-            // Ignore the user name and password since the form does not modify them
-            ModelState["User.Name"].ValidationState = ModelValidationState.Valid;
-            ModelState["User.Password"].ValidationState = ModelValidationState.Valid;
+            // Ignore the username and password
+            ModelState["User.Name"]!.ValidationState = ModelValidationState.Valid;
+            ModelState["User.Password"]!.ValidationState = ModelValidationState.Valid;
 
             if (!ModelState.IsValid)
             {
@@ -120,7 +119,7 @@ namespace CombatGameSite.Controllers
             }
 
             // Update the current user based on the form
-            model.CurrentUser.Tagline = model.User.Tagline;
+            model.CurrentUser.Tagline = model.User!.Tagline;
             model.CurrentUser.FavoriteBook = model.User.FavoriteBook;
             model.CurrentUser.FavoriteGame = model.User.FavoriteGame;
             model.CurrentUser.FavoriteMovie = model.User.FavoriteMovie;
