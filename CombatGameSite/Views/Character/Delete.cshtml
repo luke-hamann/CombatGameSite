@@ -2,20 +2,14 @@
 @{
     ViewData["Title"] = "Confirm Delete";
 }
-<div class="row">
-    <h1 class="heading text-center">
-        Confirm Delete
-    </h1>
-</div>
+
+<h1 class="heading text-center">Confirm Delete</h1>
+
 <form asp-action="Delete" method="post" class="col-md-4 offset-md-4 wooden-form p-5">
-    <p>
-        Are you sure you want to delete @Model.Character.Name?
-    </p>
-    @if (Model.Teams.Count > 0)
+    <p>Are you sure you want to delete @Model.Character!.Name?</p>
+    @if (Model.Teams!.Count > 0)
     {
-        <p>
-            Warning: The following teams will be affected:
-        </p>
+        <p>Warning: The following teams will be affected:</p>
         <ul>
             @foreach (Team team in Model.Teams)
             {
@@ -25,6 +19,6 @@
     }
     <div class="text-center">
         <input type="submit" value="Yes" class="button d-inline-block p-3" />
-        <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Character.Id" class="button d-inline-block p-3 ms-2">No</a>
+        <a asp-action="Index" asp-route-id="@Model.Character.Id" class="button d-inline-block p-3 ms-2">No</a>
     </div>
 </form>

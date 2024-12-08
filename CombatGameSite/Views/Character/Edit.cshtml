@@ -18,35 +18,32 @@
         <i class="bi bi-arrow-left h1"></i>
     </a>
 } else if (Model.Mode == "Edit") {
-    <a class="back-btn d-flex justify-content-center align-items-center" asp-controller="Character" asp-action="Index" asp-route-id="@Model.Character!.Id">
+    <a class="back-btn d-flex justify-content-center align-items-center" asp-action="Index" asp-route-id="@Model.Character!.Id">
         <i class="bi bi-arrow-left h1"></i>
     </a>
 }
 
-<form asp-controller="Character" asp-action="@Model.Mode" method="post" class="form-container">
+<form asp-action="@Model.Mode" method="post" class="form-container" autocomplete="off">
+    <input type="submit" value="Submit" id="submitButton" class="button button-fixed char-submit-btn fs-3" />
     <div class="name-health-set">
         <div class="validation" asp-validation-summary="All"></div>
-        <div class="form-floating char-input" >
-            <input asp-for="@Model.Character.Name"  class="form-control" placeholder="Name"/>
-            <label asp-for="@Model.Character.Name" class="col-form-label">Name </label>
+        <div class="form-floating char-input">
+            <input asp-for="@Model.Character!.Name" class="form-control" placeholder="Name" />
+            <label asp-for="@Model.Character.Name" class="col-form-label">Name</label>
         </div>
-        <div class="char-image">
+        <div class="char-image pt-2">
             <img src="~/assets/character.png" alt="Image of character">
         </div>
         <div class="form-floating my-3 char-input">
             <input asp-for="@Model.Character.Health" id="health" onchange="updateCost()" class="form-control" />
-            <label asp-for="@Model.Character.Health" class="col-form-label" >
-                Health
-            </label>
+            <label asp-for="@Model.Character.Health" class="col-form-label">Health</label>
         </div>
         <div class="form-floating my-3 char-input">
-            <input asp-for="@Model.Character.Species" class="form-control" placeholder="Species"/>
+            <input asp-for="@Model.Character.Species" class="form-control" placeholder="Species" />
             <label asp-for="@Model.Character.Species" class="col-form-label">Species</label>
         </div>
         <div class="my-2 char-input">
-            <label asp-for="@Model.Character.TypeId" class="col-form-label">
-                Type
-            </label>
+            <label asp-for="@Model.Character.TypeId" class="col-form-label">Type</label>
             <select asp-for="@Model.Character.TypeId" class="form-select">
                 <option value="0">-</option>
                 <option value="1">Water</option>
@@ -55,15 +52,12 @@
                 <option value="4">Earth</option>
             </select>
         </div>
-        <div>
-            <input type="submit" value="Submit" id="submitButton" class="button button-fixed char-submit-btn fs-3"/>
-        </div>
     </div>
     <div class="skill-set">
-        <h3>Current Points Spent: <span id="totalCost">0</span> /125 </h3>
-        <span>Choose Skills:</span>
+        <h3>Current Points Spent: <span id="totalCost">0</span> / @Character.MAX_SKILL_POINTS</h3>
+        <div>Choose Skills:</div>
         <div class="skill-catalog">
-            @foreach (var skill in Model.Skills ?? Enumerable.Empty<Skill>())
+            @foreach (var skill in Model.Skills ?? new List<Skill>())
             {
                 bool isChecked = false;
 
@@ -83,13 +77,12 @@
                         value="@skill.Id" 
                         data-cost="@skill.Cost"
                         onchange="updateCost()"
-                        checked="@isChecked"
-                        @checked(isChecked ? "checked" : null)
+                        @(isChecked ? "checked" : "")
                         />
                     <label for="@skill.Id" class="skill-card-label">
-                        <h4>@skill.Name</h4>
-                        <p>@skill.Description</p>
-                        <p><strong>Cost:</strong> @skill.Cost</p>
+                        <span>@skill.Name</span>
+                        <span>@skill.Description</span>
+                        <span><strong>Cost:</strong> @skill.Cost</span>
                     </label>
                 </div>
             }

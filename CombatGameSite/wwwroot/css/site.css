@@ -144,23 +144,27 @@ h2 {
         border: 2px solid black;
         background-color: gray;
     }
-
-    h4 {
-        margin: 0;
-        font-size: 1rem;
-        color: #2b201d;
-    }
-
-    p {
-        margin: 5px 0;
-        font-size: 0.9rem;
-        color: #2b201d;
-    }
 }
 
 .skill-card-label {
     display: block;
     cursor: pointer;
+
+    span {
+        display: block;
+    }
+
+    span:first-of-type {
+        margin: 0;
+        font-size: 1rem;
+        color: #2b201d;
+    }
+
+    span:nth-of-type(2), span:nth-of-type(3) {
+        margin: 5px 0;
+        font-size: 0.9rem;
+        color: #2b201d;
+    }
 }
 
 .skill-checkbox {
