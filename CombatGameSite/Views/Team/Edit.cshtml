@@ -4,63 +4,57 @@
     ViewData["Title"] = Model.Mode + " Team";
 }
 
-<div class="row">
-    <h1 class="heading d-flex justify-content-center align-items-center p-0">
-        @ViewData["Title"]
-    </h1>
-</div>
+<h1 class="heading text-center">@ViewData["Title"]</h1>
 
-<div class="row">
-    <form asp-action="@Model.Mode" method="post" class="col-md-4 offset-md-4 p-5 wooden-form">
-        <div class="pt-5"></div>
-        <div asp-validation-summary="All"></div>
-        <div class="mb-3">
-            <label asp-for="Team.Name" class="form-label">Name</label>
-            <input asp-for="Team.Name" class="form-control" />
-        </div>
-        <div class="mb-3">
-            <label asp-for="Team.Character1Id" class="form-label">Character 1</label>
-            <select asp-for="Team.Character1Id"
-                    asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character1Id))"
-                    class="form-select">
-                <option value="">-</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Team.Character2Id">Character 2</label>
-            <select asp-for="Team.Character2Id"
-                    asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character2Id))"
-                    class="form-select">
-                <option value="">-</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Team.Character3Id" class="form-label">Character 3</label>
-            <select asp-for="Team.Character3Id"
-                    asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character3Id))"
-                    class="form-select">
-                <option value="">-</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Team.Character4Id">Character 4</label>
-            <select asp-for="Team.Character4Id"
-                    asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character4Id))"
-                    class="form-select">
-                <option value="">-</option>
-            </select>
-        </div>
-        <div class="mb-5">
-            <label asp-for="Team.Character5Id" class="form-label">Character 5</label>
-            <select asp-for="Team.Character5Id"
-                    asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character5Id))"
-                    class="form-select">
-                <option value="">-</option>
-            </select>
-        </div>
-        <div class="text-center mb-5">
-            <input type="submit" value="Submit" class="button d-inline-block p-2" />
-            <a asp-controller="User" asp-action="Teams" asp-route-id="@Model.CurrentUser.Id" class="button d-inline-block p-2 ms-2">Cancel</a>
-        </div>
-    </form>
-</div>
+<form asp-action="@Model.Mode" method="post" class="col-md-4 offset-md-4 p-5 wooden-form">
+    <div class="pt-5"></div>
+    <div asp-validation-summary="All"></div>
+    <div class="mb-3">
+        <label asp-for="Team.Name" class="form-label">Name</label>
+        <input asp-for="Team.Name" class="form-control" autocomplete="off" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Team.Character1Id" class="form-label">Character 1</label>
+        <select asp-for="Team.Character1Id"
+                asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team!.Character1Id))"
+                class="form-select">
+            <option value="">-</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Team.Character2Id" class="form-label">Character 2</label>
+        <select asp-for="Team.Character2Id"
+                asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character2Id))"
+                class="form-select">
+            <option value="">-</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Team.Character3Id" class="form-label">Character 3</label>
+        <select asp-for="Team.Character3Id"
+                asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character3Id))"
+                class="form-select">
+            <option value="">-</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Team.Character4Id" class="form-label">Character 4</label>
+        <select asp-for="Team.Character4Id"
+                asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character4Id))"
+                class="form-select">
+            <option value="">-</option>
+        </select>
+    </div>
+    <div class="mb-5">
+        <label asp-for="Team.Character5Id" class="form-label">Character 5</label>
+        <select asp-for="Team.Character5Id"
+                asp-items="@(new SelectList(Model.Characters, "Id", "Name", Model.Team.Character5Id))"
+                class="form-select">
+            <option value="">-</option>
+        </select>
+    </div>
+    <div class="text-center mb-5">
+        <input type="submit" value="Submit" class="button d-inline-block p-3" />
+        <a asp-controller="User" asp-action="Teams" asp-route-id="@Model.CurrentUser!.Id" class="button d-inline-block p-3 ms-2">Cancel</a>
+    </div>
+</form>
