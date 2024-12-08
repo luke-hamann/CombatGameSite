@@ -63,7 +63,7 @@ namespace CombatGameSite.Controllers
 
             // Ensure the skill point distribution is valid
             model.Character = PopulateCharacterWithSkills(model.Character!);
-            if (!model.Character.hasValidSkillPointDistribution())
+            if (!model.Character.HasValidSkillPointDistribution())
             {
                 ModelState.AddModelError("", "Not enough skill points.");
             }

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CombatGameSite.Models
+﻿namespace CombatGameSite.Models
 {
     public class TeamEditViewModel
     {
