@@ -3,9 +3,7 @@
     Layout = "_Base";
 }
 
-<div class="row">
-    <h2 class="heading d-flex justify-content-center align-items-center p-0">Characters</h2>
-</div>
+<h2 class="heading text-center">Characters</h2>
 
 @if (TempData.Keys.Contains("message"))
 {
@@ -14,17 +12,16 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
-@if (Model.CurrentUser?.Id == Model.SelectedUser.Id)
+
+@if (Model.CurrentUser?.Id == Model.SelectedUser!.Id)
 {
     <div class="col-md-4 offset-md-4">
         <a asp-controller="Character" asp-action="Add" class="button button-fixed mx-auto">Create Character</a>
     </div>
 }
+
 <div class="col-md-4 offset-md-4 wooden-form p-5">
-    <h3>
-        @Model.Characters.Count
-        character@(Model.Characters.Count == 1 ? "" : "s")
-    </h3>
+    <h3>@Model.Characters!.Count character@(Model.Characters.Count == 1 ? "" : "s")</h3>
     @foreach (Character character in Model.Characters)
     {
         <p>

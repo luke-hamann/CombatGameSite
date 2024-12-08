@@ -3,9 +3,7 @@
     Layout = "_Base";
 }
 
-<div class="row">
-    <h2 class="heading d-flex justify-content-center align-items-center p-0">Teams</h2>
-</div>
+<h2 class="heading text-center">Teams</h2>
 
 @if (TempData.Keys.Contains("message"))
 {
@@ -14,31 +12,30 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
-@if (Model.SelectedUser.Id == Model.CurrentUser?.Id)
+
+@if (Model.SelectedUser!.Id == Model.CurrentUser?.Id)
 {
     <div class="col-md-4 offset-md-4">
         <a asp-controller="Team" asp-action="Add" class="button button-fixed mx-auto mb-3">Create Team</a>
     </div>
 }
-<div class="col-md-4 offset-md-4 wooden-form px-5 py-3">
-    @Model.Teams.Count team@(Model.Teams.Count == 1 ? "" : "s")
+
+<div class="col-md-4 offset-md-4 wooden-form p-5">
+    @Model.Teams!.Count team@(Model.Teams.Count == 1 ? "" : "s")
 </div>
+
 @foreach (Team team in Model.Teams)
 {
     <div class="col-md-4 offset-md-4 wooden-form p-5">
-        <h3>
-            @team.Name
-        </h3>
+        <h3>@team.Name</h3>
         @if (team.UserId == Model.CurrentUser?.Id)
         {
             <div>
                 <a asp-controller="Team" asp-action="Edit" asp-route-id="@team.Id" class="button d-inline-block p-3">Edit</a>
-                <a asp-controller="Team" asp-action="Delete" asp-route-id="@team.Id" class="button d-inline-block p-3">Delete</a>
+                <a asp-controller="Team" asp-action="Delete" asp-route-id="@team.Id" class="button d-inline-block p-3 ms-2">Delete</a>
             </div>
         }
-        <p>
-            Score: @team.Score
-        </p>
+        <div class="my-3">Score: @team.Score</div>
         @await Html.PartialAsync("TeamCharacterList", team)
     </div>
 }
