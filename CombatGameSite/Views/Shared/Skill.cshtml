@@ -1,0 +1,10 @@
+﻿@model Skill
+
+<div class="col-md-4 offset-md-4 wooden-form p-5">
+    <h3>@Model.Name</h3>
+    <ul>
+        <li>@Model.Description</li>
+        <li>Type: @Model.GetType()</li>
+        <li>Attack: @Model.Attack</li>
+    </ul>
+</div>
