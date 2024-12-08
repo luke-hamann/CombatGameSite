@@ -9,11 +9,11 @@
 </div>
 
 <div class="row justify-content-center mb-3">
-    <a asp-controller="Home" asp-action="Battle" class="button button-fixed d-flex justify-content-center align-items-center mx-3 p-0 fs-3">Fight</a>
+    <a asp-action="Battle" class="button button-fixed d-flex justify-content-center align-items-center mx-3 p-0 fs-3">Fight</a>
 </div>
 
 <div class="row justify-content-center mb-3">
-    <a asp-controller="Home" asp-action="Leaderboard" class="button button-fixed d-flex justify-content-center align-items-center mx-4 p-0 fs-5">Leaderboard</a>
+    <a asp-action="Leaderboard" class="button button-fixed d-flex justify-content-center align-items-center mx-4 p-0 fs-5">Leaderboard</a>
 </div>                
 
 @if (Model.CurrentUser == null)
@@ -28,12 +28,10 @@
 else
 {
     <div class="row justify-content-center mb-3">
-        <a asp-controller="User" asp-action="Characters" asp-route-id="@Model.CurrentUser.Id" class="button button-fixed d-flex justify-content-center align-items-center  px-4  fs-4">Characters</a>
-
+        <a asp-controller="User" asp-action="Characters" asp-route-id="@Model.CurrentUser.Id" class="button button-fixed d-flex justify-content-center align-items-center px-4 fs-4">Characters</a>
     </div>
     <div class="row justify-content-center mb-3">
-        <a asp-controller="User" asp-action="Teams" asp-route-id="@Model.CurrentUser.Id" class="button button-fixed d-flex justify-content-center align-items-center  px-4  fs-3">Teams</a>
-
+        <a asp-controller="User" asp-action="Teams" asp-route-id="@Model.CurrentUser.Id" class="button button-fixed d-flex justify-content-center align-items-center px-4 fs-3">Teams</a>
     </div>
     <div class="row pb-5">
         <form asp-area="Account" asp-controller="Account" asp-action="Logout" method="post" class="d-flex justify-content-center">
