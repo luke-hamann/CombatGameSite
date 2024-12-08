@@ -15,21 +15,25 @@ namespace CombatGameSite.Controllers
         [NonAction]
         private User? GetCurrentUser()
         {
+            // Get the user object for the currently logged in user
             return _context.Users.Find(HttpContext.Session.GetInt32("userId"));
         }
 
         [NonAction]
         private void ValidateTeamEditViewModel(TeamEditViewModel model)
         {
+            // Ensure the team name is unique
             var team = _context.Teams
-                .Where(t => t.Id != model.Team.Id && t.Name == model.Team.Name)
+                .Where(t => t.Id != model.Team!.Id && t.Name == model.Team.Name)
                 .FirstOrDefault();
+
             if (team != null)
             {
                 ModelState.AddModelError("Name", "You already have a team with that name.");
             }
 
-            if (model.Team.CharacterIds.Count() == 0)
+            // Ensure the team has at least 1 character, and no character appears more than once
+            if (model.Team!.CharacterIds.Count() == 0)
             {
                 ModelState.AddModelError("Character1Id", "A team must have at least 1 character.");
             }
@@ -38,11 +42,13 @@ namespace CombatGameSite.Controllers
                 ModelState.AddModelError("Character1Id", "A character can only appear once.");
             }
 
+            // Ensure the team includes only characters the user owns
             foreach (int id in model.Team.CharacterIds)
             {
                 var character = _context.Characters
-                    .Where(c => c.Id == id && c.UserId == model.CurrentUser.Id)
+                    .Where(c => c.Id == id && c.UserId == model.CurrentUser!.Id)
                     .FirstOrDefault();
+
                 if (character == null)
                 {
                     ModelState.AddModelError("Character1Id", "An unavailable character is included.");
@@ -67,6 +73,7 @@ namespace CombatGameSite.Controllers
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
 
+            // Get a list of all the user's available characters
             model.Characters = _context.Characters
                 .Where(c => c.UserId == model.CurrentUser.Id)
                 .OrderBy(c => c.Name)
@@ -106,7 +113,6 @@ namespace CombatGameSite.Controllers
             _context.SaveChanges();
 
             TempData["message"] = $"You just added the team {model.Team.Name}.";
-
             return RedirectToAction("Teams", "User", new { id = model.CurrentUser.Id });
         }
 
@@ -125,6 +131,7 @@ namespace CombatGameSite.Controllers
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
 
+            // Ensure the team exists
             model.Team = _context.Teams
                 .Where(t => t.Id == id && t.UserId == model.CurrentUser.Id)
                 .FirstOrDefault();
@@ -146,14 +153,17 @@ namespace CombatGameSite.Controllers
         [Route("/team/{id}/edit/")]
         public IActionResult Edit(int id, TeamEditViewModel model)
         {
+            // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
-
             if (model.CurrentUser == null)
             {
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
 
-            var team = _context.Teams.Find(id);
+            // Ensure the team exists and is owned by the user
+            var team = _context.Teams
+                .Where(t => t.Id == id && t.UserId == model.CurrentUser.Id)
+                .FirstOrDefault();
             _context.ChangeTracker.Clear();
 
             if (team == null)
@@ -161,7 +171,7 @@ namespace CombatGameSite.Controllers
                 return NotFound();
             }
 
-            model.Team.Id = team.Id;
+            model.Team!.Id = team.Id;
             model.Team.UserId = team.UserId;
             model.Team.Score = team.Score;
 
@@ -181,7 +191,6 @@ namespace CombatGameSite.Controllers
             _context.SaveChanges();
 
             TempData["message"] = $"You just edited the team {model.Team.Name}.";
-
             return RedirectToAction("Teams", "User", new { id = model.Team.UserId });
         }
 
@@ -189,6 +198,7 @@ namespace CombatGameSite.Controllers
         [Route("/team/{id}/delete/")]
         public IActionResult Delete(int id)
         {
+            // Ensure the user is logged in
             var model = new TeamDeleteViewModel()
             {
                 CurrentUser = GetCurrentUser()
@@ -199,6 +209,7 @@ namespace CombatGameSite.Controllers
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
 
+            // Ensure the team exists and is owned by the user
             model.Team = _context.Teams
                 .Where(t => t.Id == id && t.UserId == model.CurrentUser.Id)
                 .FirstOrDefault();
@@ -215,13 +226,14 @@ namespace CombatGameSite.Controllers
         [Route("/team/{id}/delete/")]
         public IActionResult Delete(int id, TeamEditViewModel model)
         {
+            // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
-
             if (model.CurrentUser == null)
             {
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
 
+            // Ensure the team exists and is owned by the user
             var team = _context.Teams
                 .Where(t => t.Id == id && t.UserId == model.CurrentUser.Id)
                 .FirstOrDefault();
@@ -236,7 +248,6 @@ namespace CombatGameSite.Controllers
             _context.SaveChanges();
 
             TempData["message"] = $"You just deleted the team {team.Name}.";
-
             return RedirectToAction("Teams", "User", new { id = team.UserId });
         }
     }

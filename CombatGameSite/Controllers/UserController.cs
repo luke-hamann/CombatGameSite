@@ -1,5 +1,6 @@
 ﻿using CombatGameSite.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using static System.Collections.Specialized.BitVector32;
 
@@ -16,7 +17,12 @@ namespace CombatGameSite.Controllers
 
         [NonAction]
         public User? GetCurrentUser()
+<<<<<<< HEAD
         {//Method to get userId from Session data.
+=======
+        {
+            // Get the user object for the currently logged in user
+>>>>>>> 3dfeb007882367ce2422f694bf40d570137e07ee
             return _context.Users.Find(HttpContext.Session.GetInt32("userId"));
         }
 
@@ -111,7 +117,20 @@ namespace CombatGameSite.Controllers
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
 
+            // Ignore the user name and password since the form does not modify them
+            ModelState["User.Name"].ValidationState = ModelValidationState.Valid;
+            ModelState["User.Password"].ValidationState = ModelValidationState.Valid;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // Update the current user based on the form
             model.CurrentUser.Tagline = model.User.Tagline;
+            model.CurrentUser.FavoriteBook = model.User.FavoriteBook;
+            model.CurrentUser.FavoriteGame = model.User.FavoriteGame;
+            model.CurrentUser.FavoriteMovie = model.User.FavoriteMovie;
 
             _context.Update(model.CurrentUser);
             _context.SaveChanges();

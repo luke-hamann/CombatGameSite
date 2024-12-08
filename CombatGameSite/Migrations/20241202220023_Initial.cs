@@ -36,7 +36,10 @@ namespace CombatGameSite.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Tagline = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Tagline = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FavoriteBook = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FavoriteGame = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FavoriteMovie = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -181,13 +184,13 @@ namespace CombatGameSite.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Name", "Password", "Tagline" },
+                columns: new[] { "Id", "FavoriteBook", "FavoriteGame", "FavoriteMovie", "Name", "Password", "Tagline" },
                 values: new object[,]
                 {
-                    { 1, "alice", "password", "Hello, world!" },
-                    { 2, "bob", "password", "Catchphrase." },
-                    { 3, "charlie", "password", "Super smashing success." },
-                    { 4, "dave", "password", "Game on." }
+                    { 1, "Alice in Wonderland", "Kingdom Hearts 2", "The Lion King", "alice", "password", "Hello, world!" },
+                    { 2, "The Unofficial Guide to Fortnite", "Fortnite", "Fortnite: The Movie", "bob", "password", "Catchphrase." },
+                    { 3, "Jumpmap", "Super Mario Bros", "Terminator", "charlie", "password", "Super smashing success." },
+                    { 4, "x86 For Professionals", "Roller Coaster Tycoon", "A Student Film", "dave", "password", "It's not broke. You're just bad." }
                 });
 
             migrationBuilder.InsertData(

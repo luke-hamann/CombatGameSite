@@ -2,10 +2,12 @@
 @{
     ViewData["Title"] = "Confirm Delete";
 }
-<h1>
-    Confirm Delete
-</h1>
-<form asp-action="Delete" method="post">
+<div class="row">
+    <h1 class="heading text-center">
+        Confirm Delete
+    </h1>
+</div>
+<form asp-action="Delete" method="post" class="col-md-4 offset-md-4 wooden-form p-5">
     <p>
         Are you sure you want to delete @Model.Character.Name?
     </p>
@@ -21,8 +23,8 @@
             }
         </ul>
     }
-    <div>
-        <input type="submit" value="Yes" />
-        <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Character.Id">No</a>
+    <div class="text-center">
+        <input type="submit" value="Yes" class="button d-inline-block p-3" />
+        <a asp-controller="Character" asp-action="Index" asp-route-id="@Model.Character.Id" class="button d-inline-block p-3 ms-2">No</a>
     </div>
 </form>

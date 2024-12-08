@@ -19,28 +19,40 @@ namespace CombatGameSite.Models
                     Id = 1,
                     Name = "alice",
                     Password = "password",
-                    Tagline = "Hello, world!"
+                    Tagline = "Hello, world!",
+                    FavoriteBook = "Alice in Wonderland",
+                    FavoriteGame = "Kingdom Hearts 2",
+                    FavoriteMovie = "The Lion King"
                 },
                 new User
                 {
                     Id = 2,
                     Name = "bob",
                     Password = "password",
-                    Tagline = "Catchphrase."
+                    Tagline = "Catchphrase.",
+                    FavoriteBook = "The Unofficial Guide to Fortnite",
+                    FavoriteGame = "Fortnite",
+                    FavoriteMovie = "Fortnite: The Movie"
                 },
                 new User
                 {
                     Id = 3,
                     Name = "charlie",
                     Password = "password",
-                    Tagline = "Super smashing success."
+                    Tagline = "Super smashing success.",
+                    FavoriteBook = "Jumpmap",
+                    FavoriteGame = "Super Mario Bros",
+                    FavoriteMovie = "Terminator"
                 },
                 new User
                 {
                     Id = 4,
                     Name = "dave",
                     Password = "password",
-                    Tagline = "Game on."
+                    Tagline = "It's not broke. You're just bad.",
+                    FavoriteBook = "x86 For Professionals",
+                    FavoriteGame = "Roller Coaster Tycoon",
+                    FavoriteMovie = "A Student Film"
                 }
             );
 

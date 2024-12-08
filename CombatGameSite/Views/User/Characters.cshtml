@@ -2,28 +2,33 @@
 @{
     Layout = "_Base";
 }
-<h2>
-    Characters
-</h2>
+
+<div class="row">
+    <h2 class="heading d-flex justify-content-center align-items-center p-0">Characters</h2>
+</div>
+
 @if (TempData.Keys.Contains("message"))
 {
-    <p>
+    <div class="col-md-4 offset-md-4 alert alert-info alert-dismissible fade show" role="alert">
         @TempData["message"]
-    </p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 }
 @if (Model.CurrentUser?.Id == Model.SelectedUser.Id)
 {
-    <p>
-        <a asp-controller="Character" asp-action="Add">Create Character</a>
-    </p>
+    <div class="col-md-4 offset-md-4">
+        <a asp-controller="Character" asp-action="Add" class="button button-fixed mx-auto">Create Character</a>
+    </div>
 }
-<p>
-    @Model.Characters.Count
-    character@(Model.Characters.Count == 1 ? "" : "s")
-</p>
-@foreach (Character character in Model.Characters)
-{
-    <p>
-        <a asp-controller="Character" asp-action="Index" asp-route-id="@character.Id">@character.Name</a>
-    </p>
-}
+<div class="col-md-4 offset-md-4 wooden-form p-5">
+    <h3>
+        @Model.Characters.Count
+        character@(Model.Characters.Count == 1 ? "" : "s")
+    </h3>
+    @foreach (Character character in Model.Characters)
+    {
+        <p>
+            <a asp-controller="Character" asp-action="Index" asp-route-id="@character.Id" class="text-light text-decoration-none">@character.Name</a>
+        </p>
+    }
+</div>

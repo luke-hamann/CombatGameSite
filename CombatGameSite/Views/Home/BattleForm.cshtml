@@ -4,25 +4,33 @@
     ViewData["Title"] = "Battle";
 }
 
-<h1>
-    Battle
-</h1>
+<div class="row pt-5 mb-3">
+    <h1 class="heading text-center">Battle</h1>
+</div>
 
-<form asp-action="Battle" method="post">
-    <div asp-validation-summary="All"></div>
-    <div>
-        <label asp-for="Team1Id">
-            Team 1
-        </label>
-        <select asp-for="Team1Id" asp-items="@(new SelectList(Model.Teams, "Id", "Name"))"></select>
+<form asp-action="Battle" method="post" class="pb-5">
+    <div class="wooden-form mb-5 p-5">
+        <div asp-validation-summary="All" class="battle-errors text-light text-center"></div>
+        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center">
+            <div>
+                <label asp-for="Team1Id" class="form-label w-100 text-center">
+                    Team 1
+                </label>
+                <select asp-for="Team1Id" asp-items="@(new SelectList(Model.Teams, "Id", "Name"))" class="form-select"></select>
+            </div>
+            <h2 class="px-5">
+                VS
+            </h2>
+            <div>
+                <label asp-for="Team2Id" class="form-label w-100 text-center">
+                    Team 2
+                </label>
+                <select asp-for="Team2Id" asp-items="@(new SelectList(Model.Teams, "Id", "Name"))" class="form-select"></select>
+            </div>
+        </div>
     </div>
-    <div>
-        <label asp-for="Team2Id">
-            Team 2
-        </label>
-        <select asp-for="Team2Id" asp-items="@(new SelectList(Model.Teams, "Id", "Name"))"></select>
-    </div>
-    <div>
-        <input type="submit" value="BATTLE!!!" />
+    <div class="d-flex flex-column align-items-center">
+        <input type="submit" value="BATTLE!!!" class="button button-fixed d-flex justify-content-center align-items-center fs-5 mb-3" />
+        <a asp-action="Index" class="button button-fixed d-flex justify-content-center align-items-center fs-5">Cancel</a>
     </div>
 </form>

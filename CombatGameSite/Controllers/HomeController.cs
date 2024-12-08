@@ -15,21 +15,22 @@ namespace CombatGameSite.Controllers
 
         [NonAction]
         private User? GetCurrentUser()
-        {//Function to get user based on Session Data
+        {
+            // Get the user object for the currently logged in user
             return _context.Users.Find(HttpContext.Session.GetInt32("userId"));
         }
 
         [HttpGet]
         [Route("/")]
-        public IActionResult Index()
-        {//Default page if no routing is given
+        public ViewResult Index()
+        {
             return View(new { CurrentUser = GetCurrentUser() });
         }
 
         [HttpGet]
         [Route("/leaderboard/")]
-        public IActionResult Leaderboard()
-        { //Views the leaderboard page
+        public ViewResult Leaderboard()
+        {
             var model = new LeaderboardViewModel()
             { //Setup viewmodel with a current user and Ordered list of teams.
                 CurrentUser = GetCurrentUser(),
@@ -43,14 +44,14 @@ namespace CombatGameSite.Controllers
                     .OrderByDescending(t => t.Score)
                     .ToList()
             };
-            //Return the leaderboard.cshtml with the model passed to it.
+
             return View(model);
         }
 
         [HttpGet]
         [Route("/battle/")]
         public ViewResult Battle()
-        {// Send a list of ordered teams (as determined by CurrentUser) to the BattleForm.cshtml
+        {
             var model = new BattleFormViewModel
             {
                 CurrentUser = GetCurrentUser(),
@@ -63,14 +64,16 @@ namespace CombatGameSite.Controllers
         [HttpPost]
         [Route("/battle/")]
         public ViewResult Battle(BattleFormViewModel battleFormViewModel)
-        { //Conduct a battle between two teams. 
+        {
             battleFormViewModel.CurrentUser = GetCurrentUser();
 
+            // Verify two different teams were selected
             if (battleFormViewModel.Team1Id == battleFormViewModel.Team2Id)
             {//Check that the same team hasen't been chosen twice. Display an error if it has happened.
                 ModelState.AddModelError("", "Please select 2 different teams.");
             }
 
+            // Verify both teams exist
             var team1 = _context.Teams.Find(battleFormViewModel.Team1Id);
             var team2 = _context.Teams.Find(battleFormViewModel.Team2Id);
 
@@ -80,7 +83,7 @@ namespace CombatGameSite.Controllers
             }
 
             if (!ModelState.IsValid)
-            {//If the model state is invalid, send the model to BattleForm.cshtml for reselection
+            {
                 battleFormViewModel.Teams = _context.Teams.OrderBy(t => t.Name).ToList();
                 return View("BattleForm", battleFormViewModel);
             }
@@ -99,12 +102,13 @@ namespace CombatGameSite.Controllers
                 team2!.Score += 10;
                 team1!.Score -= 3;
             }
-            //Update and save battle changes
+
+            // Save the changes to the team scores and display the results
+
             _context.Update(team1);
             _context.Update(team2);
             _context.SaveChanges();
 
-            //Prep a model to be passed into BattleResult.cshtml
             var model = new BattleResultViewModel()
             {
                 CurrentUser = GetCurrentUser(),
