@@ -1,6 +1,5 @@
 ﻿using CombatGameSite.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace CombatGameSite.Controllers
