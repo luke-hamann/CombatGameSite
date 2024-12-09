@@ -17,12 +17,7 @@ namespace CombatGameSite.Controllers
 
         [NonAction]
         public User? GetCurrentUser()
-<<<<<<< HEAD
         {//Method to get userId from Session data.
-=======
-        {
-            // Get the user object for the currently logged in user
->>>>>>> 3dfeb007882367ce2422f694bf40d570137e07ee
             return _context.Users.Find(HttpContext.Session.GetInt32("userId"));
         }
 
