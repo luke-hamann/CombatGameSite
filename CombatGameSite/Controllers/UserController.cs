@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
-using static System.Collections.Specialized.BitVector32;
 
 namespace CombatGameSite.Controllers
 {
@@ -23,23 +22,23 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/user/{id}/")]
-        public IActionResult Index(int id)
-        {//Get character view with an ID from the route
+        public ActionResult Index(int id)
+        {
             return Characters(id);
         }
 
         [HttpGet]
         [Route("/user/{id}/characters/")]
-        public IActionResult Characters(int id)
-        {//Get list of characters based on user ID
+        public ActionResult Characters(int id)
+        {
             var model = new UserViewModel()
             {
                 CurrentUser = GetCurrentUser(),
                 SelectedUser = _context.Users.Find(id)
             };
 
-            if (model.SelectedUser ==  null)
-            { //Return an error page if there is no selected user.
+            if (model.SelectedUser == null)
+            {
                 return NotFound();
             }
 
@@ -54,8 +53,8 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/user/{id}/teams/")]
-        public IActionResult Teams(int id)
-        {//View a list of teams using an id from the route.
+        public ActionResult Teams(int id)
+        {
             var model = new UserViewModel()
             {
                 CurrentUser = GetCurrentUser(),
@@ -84,8 +83,8 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/user/edit/")]
-        public IActionResult Edit()
-        {//Display edit page
+        public ActionResult Edit()
+        {
             var model = new UserEditViewModel()
             {//Set the user to be displayed as the user in Session Data
                 CurrentUser = GetCurrentUser()
@@ -103,8 +102,8 @@ namespace CombatGameSite.Controllers
 
         [HttpPost]
         [Route("/user/edit/")]
-        public IActionResult Edit(UserEditViewModel model)
-        {// Update the database with the new User Tagline
+        public ActionResult Edit(UserEditViewModel model)
+        {
             model.CurrentUser = GetCurrentUser();
 
             if (model.CurrentUser == null)
@@ -112,9 +111,9 @@ namespace CombatGameSite.Controllers
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
 
-            // Ignore the user name and password since the form does not modify them
-            ModelState["User.Name"].ValidationState = ModelValidationState.Valid;
-            ModelState["User.Password"].ValidationState = ModelValidationState.Valid;
+            // Ignore the username and password
+            ModelState["User.Name"]!.ValidationState = ModelValidationState.Valid;
+            ModelState["User.Password"]!.ValidationState = ModelValidationState.Valid;
 
             if (!ModelState.IsValid)
             {
@@ -122,7 +121,7 @@ namespace CombatGameSite.Controllers
             }
 
             // Update the current user based on the form
-            model.CurrentUser.Tagline = model.User.Tagline;
+            model.CurrentUser.Tagline = model.User!.Tagline;
             model.CurrentUser.FavoriteBook = model.User.FavoriteBook;
             model.CurrentUser.FavoriteGame = model.User.FavoriteGame;
             model.CurrentUser.FavoriteMovie = model.User.FavoriteMovie;

@@ -4,11 +4,8 @@
     ViewData["Title"] = Model.Character!.Name;
 }
 
-<div class="row">
-    <h1 class="heading d-flex justify-content-center align-items-center p-0">
-        @Model.Character.Name
-    </h1>
-</div>
+<h1 class="heading text-center">@Model.Character.Name</h1>
+
 @if (TempData.Keys.Contains("message"))
 {
     <div class="col-md-4 offset-md-4 alert alert-info alert-dismissible fade show" role="alert">
@@ -16,92 +13,44 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
-@if (Model.Character.UserId == Model.CurrentUser?.Id){
+
+@if (Model.Character.UserId == Model.CurrentUser?.Id)
+{
     <div class="text-center">
-        <a asp-controller="Character" asp-action="Edit" asp-route-id="@Model.Character.Id" class="button d-inline-block p-3">Edit</a>
-        <a asp-controller="Character" asp-action="Delete" asp-route-id="@Model.Character.Id" class="button d-inline-block p-3">Delete</a>
+        <a asp-action="Edit" asp-route-id="@Model.Character.Id" class="button d-inline-block p-3">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model.Character.Id" class="button d-inline-block p-3 ms-2">Delete</a>
     </div>
 }
+
 <div class="col-md-4 offset-md-4 wooden-form p-5">
     <p>
         User:
-        <a asp-controller="User" asp-action="Index" asp-route-id="@Model.Character.User.Id" class="text-light text-decoration-none">
+        <a asp-controller="User" asp-action="Index" asp-route-id="@Model.Character.User!.Id" class="text-light text-decoration-none">
             @Model.Character.User.Name
         </a>
     </p>
-    <p>
-        Health: @Model.Character.Health
-    </p>
-    <p>
-        Type: @Model.Character.GetType()
-    </p>
-    <p>
-        Species: @Model.Character.Species
-    </p>
+    <p>Health: @Model.Character.Health</p>
+    <p>Type: @Model.Character.GetType()</p>
+    <p>Species: @Model.Character.Species</p>
 </div>
 
-<div class="row">
-    <h2 class="heading d-flex justify-content-center align-items-center p-0">
-        Skills
-    </h2>
-</div>
+<h2 class="heading text-center">Skills</h2>
 
 @if (Model.Character.SkillPrimary == null && Model.Character.SkillSecondary == null &&
     Model.Character.SkillTertiary == null)
 {
-    <div class="col-md-4 offset-md-4 wooden-form p-5">
-        No skills.
-    </div>
+    <div class="col-md-4 offset-md-4 wooden-form p-5">No skills.</div>
 }
 
 @if (Model.Character.SkillPrimary != null)
 {
-    <div class="col-md-4 offset-md-4 wooden-form p-5">
-        <h3>
-            @Model.Character.SkillPrimary.Name
-        </h3>
-        <ul>
-            <li>
-                @Model.Character.SkillPrimary.Description
-            </li>
-            <li>
-                Attack:
-                @Model.Character.SkillPrimary.Attack
-            </li>
-        </ul>
-    </div>
+    @await Html.PartialAsync("Skill", Model.Character.SkillPrimary)
 }
 @if (Model.Character.SkillSecondary != null)
 {
-    <div class="col-md-4 offset-md-4 wooden-form p-5">
-        <h3>
-            @Model.Character.SkillSecondary.Name
-        </h3>
-        <ul>
-            <li>
-                @Model.Character.SkillSecondary.Description
-            </li>
-            <li>
-                Attack:
-                @Model.Character.SkillSecondary.Attack
-            </li>
-        </ul>
-    </div>
+    @await Html.PartialAsync("Skill", Model.Character.SkillSecondary)
 }
 @if (Model.Character.SkillTertiary != null)
 {
-    <div class="col-md-4 offset-md-4 wooden-form p-5">
-        <h3>
-            @Model.Character.SkillTertiary.Name
-        </h3>
-        <ul>
-            <li>
-                @Model.Character.SkillTertiary.Description
-            </li>
-            <li>
-                Attack:
-                @Model.Character.SkillTertiary.Attack
-            </li>
-        </ul>
-    </div>
+    @await Html.PartialAsync("Skill", Model.Character.SkillTertiary)
 }

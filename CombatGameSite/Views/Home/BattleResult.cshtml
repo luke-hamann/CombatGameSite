@@ -3,9 +3,8 @@
     ViewData["Title"] = "Result";
 }
 
-<div class="row pt-5">
-    <h1 class="heading d-flex justify-content-center align-items-center p-0">Result</h1>
-</div>
+<h1 class="heading text-center pt-5">Result</h1>
+
 <div class="row pb-5">
     <div class="col-md-6 offset-md-3 p-5 text-center wooden-form">
         <div class="pt-5 pb-3">
@@ -23,12 +22,12 @@
         <div class="pb-3 d-flex justify-content-center">
             <a asp-action="Index" class="button button-fixed fs-5">Go Home</a>
         </div>
-        @if (Model.CombatLog.Count > 0) {
-            <h3 class="mb-3">
-                Combat Log
-            </h3>
+        @if (Model.CombatLog.Count > 0)
+        {
+            <h3 class="pt-2 pb-3">Combat Log</h3>
             <ol class="combat-log text-start pb-3">
-                @foreach (var logEntry in Model.CombatLog) {
+                @foreach (var logEntry in Model.CombatLog)
+                {
                     <li>@logEntry</li>
                 }
             </ol>

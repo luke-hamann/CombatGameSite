@@ -5,27 +5,28 @@ namespace CombatGameSite.Areas.Account.Models
 {
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please enter a username.")]
         public string? Username { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a password.")]
         public string? Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please confirm your password.")]
         public string? PasswordConfirm { get; set; }
 
         public string? Tagline { get; set; }
 
         public User? CurrentUser { get; set; }
 
-        public User toUser()
+        public User ToUser()
         {
-            var user = new User();
-            user.Id = 0;
-            user.Name = Username ?? "";
-            user.Password = Password ?? "";
-            user.Tagline = Tagline ?? "";
-            return user;
+            return new User()
+            {
+                Id = 0,
+                Name = Username ?? "",
+                Password = Password ?? "",
+                Tagline = Tagline ?? ""
+            };
         }
     }
 }

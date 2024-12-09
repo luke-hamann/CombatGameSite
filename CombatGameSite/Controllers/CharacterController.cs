@@ -16,7 +16,7 @@ namespace CombatGameSite.Controllers
         [NonAction]
         private User? GetCurrentUser()
         {
-            // Get the user object for the currenly logged in user
+            // Get the user object for the currently logged in user
             return _context.Users.Find(HttpContext.Session.GetInt32("userId"));
         }
 
@@ -43,9 +43,35 @@ namespace CombatGameSite.Controllers
             return character;
         }
 
+        [NonAction]
+        private void ValidateCharacterEditViewModel(CharacterEditViewModel model)
+        {
+            // Ensure the character name is unique for the current user
+            var character = _context.Characters
+                .Where(c => c.Id != model.Character!.Id && c.UserId == model.CurrentUser!.Id &&
+                       c.Name == model.Character.Name)
+                .FirstOrDefault();
+            _context.ChangeTracker.Clear();
+
+            if (character != null)
+            {
+                ModelState.AddModelError("Character.Name", "You already have a character with that name.");
+            }
+
+            // Set the character's skill ids based on the skill id list
+            model.SetSkills();
+
+            // Ensure the skill point distribution is valid
+            model.Character = PopulateCharacterWithSkills(model.Character!);
+            if (!model.Character.HasValidSkillPointDistribution())
+            {
+                ModelState.AddModelError("", "Not enough skill points.");
+            }
+        }
+
         [HttpGet]
         [Route("/character/{id}/")]
-        public IActionResult Index(int id)
+        public ActionResult Index(int id)
         {
             // Ensure the character exists
             Character? character = _context.Characters
@@ -62,8 +88,8 @@ namespace CombatGameSite.Controllers
             character = PopulateCharacterWithSkills(character);
             var model = new CharacterIndexViewModel
             {
-                CurrentUser = GetCurrentUser(),
-                Character = character
+                Character = character,
+                CurrentUser = GetCurrentUser()
             };
 
             return View(model);
@@ -71,7 +97,7 @@ namespace CombatGameSite.Controllers
 
         [HttpGet]
         [Route("/character/add/")]
-        public IActionResult Add() 
+        public ActionResult Add() 
         {
             // Ensure the user is logged in
             var model = new CharacterEditViewModel()
@@ -86,16 +112,15 @@ namespace CombatGameSite.Controllers
 
             // Show the add character form
             model.Mode = "Add";
-            model.Skills = _context.Skills
-                .OrderBy(s => s.Name)
-                .ToList();
+            model.Character = new Character { Health = 100 };
+            model.Skills = _context.Skills.OrderBy(s => s.Name).ToList();
 
             return View("Edit", model);
         }
 
         [HttpPost]
         [Route("/character/add/")]
-        public IActionResult Add(CharacterEditViewModel model)
+        public ActionResult Add(CharacterEditViewModel model)
         {
             // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
@@ -103,27 +128,10 @@ namespace CombatGameSite.Controllers
             {
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
-            model.Character.UserId = model.CurrentUser.Id;
 
-            // Ensure the character name is unique
-            var character = _context.Characters
-                .Where(c => c.UserId == model.CurrentUser.Id && c.Name == model.Character.Name)
-                .FirstOrDefault();
-            _context.ChangeTracker.Clear();
-            if (character != null)
-            {
-                ModelState.AddModelError("Character.Name", "You already have a character with that name.");
-            }
+            model.Character!.UserId = model.CurrentUser.Id;
 
-            // Set the character's skill ids based on the skill id list
-            model.SetSkills();
-
-            // Ensure the skill point distribution is valid
-            model.Character = PopulateCharacterWithSkills(model.Character);
-            if (!model.Character.hasValidSkillPointDistribution())
-            {
-                ModelState.AddModelError("", "Not enough skill points.");
-            }
+            ValidateCharacterEditViewModel(model);
 
             // Show the form again if there were validation errors
             if (!ModelState.IsValid)
@@ -139,14 +147,14 @@ namespace CombatGameSite.Controllers
             _context.Add(model.Character);
             _context.SaveChanges();
 
-            // Return to the user's character list
+            // Redirect to the index page of the new character
             TempData["message"] = $"You just created the character {model.Character.Name}.";
             return RedirectToAction("Index", "Character", new { id = model.Character.Id });
         }
 
         [HttpGet]
         [Route("/character/{id}/edit/")]
-        public IActionResult Edit(int id)
+        public ActionResult Edit(int id)
         {
             // Ensure the user is logged in
             var model = new CharacterEditViewModel()
@@ -177,7 +185,7 @@ namespace CombatGameSite.Controllers
 
         [HttpPost]
         [Route("/character/{id}/edit/")]
-        public IActionResult Edit(CharacterEditViewModel model, int id)
+        public ActionResult Edit(int id, CharacterEditViewModel model)
         {
             // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
@@ -190,35 +198,18 @@ namespace CombatGameSite.Controllers
             var character = _context.Characters
                 .Where(c => c.Id == id && c.UserId == model.CurrentUser.Id)
                 .FirstOrDefault();
+            _context.ChangeTracker.Clear();
+
             if (character == null)
             {
                 return NotFound();
             }
-            _context.ChangeTracker.Clear();
 
             // Update the model with the necessary ids
-            model.Character.Id = id;
+            model.Character!.Id = id;
             model.Character.UserId = model.CurrentUser.Id;
 
-            // Ensure the character name is unique
-            character = _context.Characters
-                .Where(c => c.Name == model.Character.Name && c.Id != id)
-                .FirstOrDefault();
-            if (character != null)
-            {
-                ModelState.AddModelError("Character.Name", "You already have a character with that name.");
-            }
-            _context.ChangeTracker.Clear();
-
-            // Set the character's skill ids based on the skill id list
-            model.SetSkills();
-
-            // Ensure the skill point distribution is valid
-            model.Character = PopulateCharacterWithSkills(model.Character);
-            if (!model.Character.hasValidSkillPointDistribution())
-            {
-                ModelState.AddModelError("", "Not enough skill points.");
-            }
+            ValidateCharacterEditViewModel(model);
 
             // Show the form again if there were validation errors
             if (!ModelState.IsValid)
@@ -232,14 +223,14 @@ namespace CombatGameSite.Controllers
             _context.Update(model.Character);
             _context.SaveChanges();
 
-            // Return to the user's character list page
+            // Redirect to the index page of the edited character
             TempData["message"] = $"You just edited the character {model.Character.Name}.";
             return RedirectToAction("Index", "Character", new { id = model.Character.Id });
         }
 
         [HttpGet]
         [Route("/character/{id}/delete/")]
-        public IActionResult Delete(int id)
+        public ActionResult Delete(int id)
         {
             // Ensure the user is logged in
             var model = new CharacterDeleteViewModel()
@@ -265,7 +256,6 @@ namespace CombatGameSite.Controllers
 
             // Get all the teams the character is a part of
             model.Teams = _context.Teams
-                .Where(t => t.UserId == model.CurrentUser.Id)
                 .Where(t => t.Character1Id == id || t.Character2Id == id || t.Character3Id == id ||
                             t.Character4Id == id || t.Character5Id == id)
                 .OrderBy(t => t.Name)
@@ -276,9 +266,9 @@ namespace CombatGameSite.Controllers
 
         [HttpPost]
         [Route("/character/{id}/delete/")]
-        public IActionResult Delete(int id, CharacterDeleteViewModel model)
+        public ActionResult Delete(int id, CharacterDeleteViewModel model)
         {
-            // Verify the user is logged in
+            // Ensure the user is logged in
             model.CurrentUser = GetCurrentUser();
             if (model.CurrentUser == null)
             {
@@ -299,8 +289,9 @@ namespace CombatGameSite.Controllers
             // delete teams that only consist of the character
 
             var teams = _context.Teams
-                .Where(t => t.Character1Id == character.Id || t.Character2Id == character.Id || t.Character3Id == character.Id ||
-                            t.Character4Id == character.Id || t.Character5Id == character.Id)
+                .Where(t => t.Character1Id == character.Id || t.Character2Id == character.Id ||
+                            t.Character3Id == character.Id || t.Character4Id == character.Id ||
+                            t.Character5Id == character.Id)
                 .ToList();
 
             foreach (Team team in teams)

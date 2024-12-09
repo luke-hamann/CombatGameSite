@@ -9,16 +9,14 @@
         public string? Description { get; set; }
         public int? Attack { get; set; }
 
-        public new string GetType()
-        {
-            switch (TypeId)
+        public new string GetType() =>
+            TypeId switch
             {
-                case 1: return "Water";
-                case 2: return "Fire";
-                case 3: return "Wind";
-                case 4: return "Earth";
-                default: return "";
-            }
-        }
+                1 => "Water",
+                2 => "Fire",
+                3 => "Wind",
+                4 => "Earth",
+                _ => "",
+            };
     }
 }

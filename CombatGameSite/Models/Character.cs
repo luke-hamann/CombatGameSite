@@ -14,16 +14,16 @@ namespace CombatGameSite.Models
         [Required(ErrorMessage = "Please enter a name.")]
         public string? Name { get; set; }
 
-        [Required(ErrorMessage = "Please select an element type.")]
-        [Range(1, 4, ErrorMessage = "Please select an element type.")]
-        public int? TypeId { get; set; }
-
         [Required(ErrorMessage = "Please enter a health value.")]
-        [Range(0, 200)]
+        [Range(0, 200, ErrorMessage = "Health must be between 0 and 200.")]
         public int? Health { get; set; }
 
         [Required(ErrorMessage = "Please enter a species.")]
         public string? Species { get; set; }
+
+        [Required(ErrorMessage = "Please select an element type.")]
+        [Range(1, 4, ErrorMessage = "Please select an element type.")]
+        public int? TypeId { get; set; }
 
         public string? SkillPrimaryId { get; set; }
         public Skill? SkillPrimary { get; set; }
@@ -34,27 +34,22 @@ namespace CombatGameSite.Models
         public string? SkillTertiaryId { get; set; }   
         public Skill? SkillTertiary { get; set; }
 
-
-
-        public new string GetType()
-        {
-            switch (TypeId)
+        public new string GetType() =>
+            TypeId switch
             {
-                case 1: return "Water";
-                case 2: return "Fire";
-                case 3: return "Wind";
-                case 4: return "Earth";
-                default: return "";
-            }
-        }
+                1 => "Water",
+                2 => "Fire",
+                3 => "Wind",
+                4 => "Earth",
+                _ => "",
+            };
 
-        public bool hasValidSkillPointDistribution()
+        public bool HasValidSkillPointDistribution()
         {
-            int total =(int)(((Health ?? 0) - 100) / 2 +
-                (SkillPrimary?.Cost != null ? SkillPrimary.Cost : 0) +
-                (SkillSecondary?.Cost != null ? SkillSecondary.Cost : 0) +
-                (SkillTertiary?.Cost != null ? SkillTertiary.Cost : 0)
-                );
+            int total = ((Health ?? 0) - 100) / 2 +
+                (SkillPrimary?.Cost ?? 0) +
+                (SkillSecondary?.Cost ?? 0) +
+                (SkillTertiary?.Cost ?? 0);
             return total <= MAX_SKILL_POINTS;
         }
     }
