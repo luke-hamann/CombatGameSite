@@ -1,6 +1,5 @@
 ﻿using CombatGameSite.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace CombatGameSite.Controllers
@@ -110,10 +109,6 @@ namespace CombatGameSite.Controllers
             {// Check if the current user is valid
                 return RedirectToAction("Login", "Account", new { Area = "Account" });
             }
-
-            // Ignore the username and password
-            ModelState["User.Name"]!.ValidationState = ModelValidationState.Valid;
-            ModelState["User.Password"]!.ValidationState = ModelValidationState.Valid;
 
             if (!ModelState.IsValid)
             {

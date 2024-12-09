@@ -58,6 +58,12 @@ namespace CombatGameSite.Controllers
                 ModelState.AddModelError("Character.Name", "You already have a character with that name.");
             }
 
+            // Ensure that no skills appear more than once
+            if (!model.Character!.HasUniqueSkills())
+            {
+                ModelState.AddModelError("", "A skill can only appear once.");
+            }
+
             // Set the character's skill ids based on the skill id list
             model.SetSkills();
 

@@ -26,7 +26,7 @@
     <p>
         User:
         <a asp-controller="User" asp-action="Index" asp-route-id="@Model.Character.User!.Id" class="text-light text-decoration-none">
-            @Model.Character.User.Name
+            @Model.Character.User!.Name
         </a>
     </p>
     <p>Health: @Model.Character.Health</p>

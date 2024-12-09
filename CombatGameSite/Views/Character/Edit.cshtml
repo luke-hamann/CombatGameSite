@@ -8,7 +8,7 @@
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script>
         const MAX_SKILL_SELECTIONS = 3;
-        const MAX_SKILL_POINTS = @Character.MAX_SKILL_POINTS;
+        const MAX_SKILL_POINTS = @(Character.MAX_SKILL_POINTS + ";")
     </script>
     <script src="~/js/skillSelector.js"></script>
 }
@@ -29,22 +29,22 @@
         <div class="validation" asp-validation-summary="All"></div>
         <div class="form-floating char-input">
             <input asp-for="@Model.Character!.Name" class="form-control" placeholder="Name" />
-            <label asp-for="@Model.Character.Name" class="col-form-label">Name</label>
+            <label asp-for="@Model.Character!.Name" class="col-form-label">Name</label>
         </div>
         <div class="char-image pt-2">
             <img src="~/assets/character.png" alt="Image of character">
         </div>
         <div class="form-floating my-3 char-input">
-            <input asp-for="@Model.Character.Health" id="health" onchange="updateCost()" class="form-control" />
-            <label asp-for="@Model.Character.Health" class="col-form-label">Health</label>
+            <input asp-for="@Model.Character!.Health" id="health" onchange="updateCost()" class="form-control" />
+            <label asp-for="@Model.Character!.Health" class="col-form-label">Health</label>
         </div>
         <div class="form-floating my-3 char-input">
-            <input asp-for="@Model.Character.Species" class="form-control" placeholder="Species" />
-            <label asp-for="@Model.Character.Species" class="col-form-label">Species</label>
+            <input asp-for="@Model.Character!.Species" class="form-control" placeholder="Species" />
+            <label asp-for="@Model.Character!.Species" class="col-form-label">Species</label>
         </div>
         <div class="my-2 char-input">
-            <label asp-for="@Model.Character.TypeId" class="col-form-label">Type</label>
-            <select asp-for="@Model.Character.TypeId" class="form-select">
+            <label asp-for="@Model.Character!.TypeId" class="col-form-label">Type</label>
+            <select asp-for="@Model.Character!.TypeId" class="form-select">
                 <option value="0">-</option>
                 <option value="1">Water</option>
                 <option value="2">Fire</option>
