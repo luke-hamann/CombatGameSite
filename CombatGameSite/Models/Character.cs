@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿    using System.ComponentModel.DataAnnotations;
 
 namespace CombatGameSite.Models
 {
@@ -43,6 +43,13 @@ namespace CombatGameSite.Models
                 4 => "Earth",
                 _ => "",
             };
+
+        public bool HasUniqueSkills()
+        {
+            var skillList = new List<string?>([SkillPrimaryId, SkillSecondaryId, SkillTertiaryId]);
+            skillList = skillList.Where(s => s != null).ToList();
+            return skillList.Count == skillList.Distinct().ToList().Count;
+        }
 
         public bool HasValidSkillPointDistribution()
         {
