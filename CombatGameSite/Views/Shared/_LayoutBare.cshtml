@@ -7,17 +7,16 @@
     <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/audio.js" type="module"></script>
     @RenderSection("scripts", false)
     <title>@ViewData["Title"]</title>
 </head>
 <body>
-    <audio style="display: none;" controls loop id="myAudio">
-        <source src="~/assets/song.mp3" type="audio/mp3">
+    <audio loop id="myAudio">
+        <source src="~/assets/song.mp3" type="audio/mp3" />
     </audio>
     <main class="container-fluid">
         @RenderBody()
     </main>
-    <script src="~/js/audio.js"></script>
-
 </body>
 </html>

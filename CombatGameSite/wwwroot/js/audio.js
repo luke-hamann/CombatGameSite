@@ -1,9 +1,9 @@
 ﻿let audio = document.getElementById("myAudio");
-//when page is loaded. play music
-document.addEventListener("DOMContentLoaded", () => {
-        audio.play();
-});
 
+// When page is loaded, play music
+document.addEventListener("DOMContentLoaded", () => {
+    audio.play();
+});
 
 // Check if there is a saved state in sessionStorage
 if (sessionStorage.getItem('audioState')) {
@@ -15,6 +15,7 @@ if (sessionStorage.getItem('audioState')) {
         audio.play();
     }
 }
+
 // Save the audio state before the page unloads
 window.addEventListener('beforeunload', () => {
     sessionStorage.setItem('audioState', JSON.stringify({

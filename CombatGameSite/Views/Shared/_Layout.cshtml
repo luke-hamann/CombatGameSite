@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <script src="~/js/audio.js" type="module"></script>
     <title>@ViewData["Title"]</title>
 </head>
 <body class="container-fluid">
@@ -42,12 +41,10 @@
         </nav>
     </header>
     <main>
-        <audio style="display: none;" controls loop id="myAudio">
-            <source src="~/assets/song.mp3" type="audio/mp3">
+        <audio loop id="myAudio">
+            <source src="~/assets/song.mp3" type="audio/mp3" />
         </audio>
         @RenderBody()
-        <script src="~/js/audio.js"></script>
-
     </main>
     <footer class="row py-5">
         <div class="col-md-4 offset-md-4 footer-nameplate text-center p-5">
