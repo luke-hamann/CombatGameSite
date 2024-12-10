@@ -3,14 +3,14 @@ using CombatGameSite.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CombatGameSite.Areas.Account.Controllers
-{
+{ //Controller to handle account data
     [Area("Account")]
     public class AccountController : Controller
     {
         private readonly CombatContext _context;
 
         public AccountController(CombatContext context)
-        {
+        { //Constructor method for establishing context
             _context = context;
         }
 
@@ -24,7 +24,7 @@ namespace CombatGameSite.Areas.Account.Controllers
         [HttpGet]
         [Route("login")]
         public ActionResult Login()
-        {
+        { //Check that a user is logged in. Redirect to home page if there is a user logged in.
             var model = new LoginViewModel()
             {
                 CurrentUser = GetCurrentUser()
@@ -41,7 +41,7 @@ namespace CombatGameSite.Areas.Account.Controllers
         [HttpPost]
         [Route("login")]
         public ActionResult Login(LoginViewModel model)
-        {
+        { //Log a user in with their password and save their id in session data. Redirect to Index of Home controller if there is already a user logged in.
             model.CurrentUser = GetCurrentUser();
 
             if (model.CurrentUser != null)
@@ -73,7 +73,7 @@ namespace CombatGameSite.Areas.Account.Controllers
         [HttpGet]
         [Route("register")]
         public ActionResult Register()
-        {
+        {//Display the register form. Redirect to Index of Home controller if there is already a user logged in.
             var model = new RegisterViewModel()
             {
                 CurrentUser = GetCurrentUser()
@@ -90,10 +90,10 @@ namespace CombatGameSite.Areas.Account.Controllers
         [HttpPost]
         [Route("register")]
         public ActionResult Register(RegisterViewModel model)
-        {
+        {//Create a new user in the database. 
             model.CurrentUser = GetCurrentUser();
 
-            if (model.CurrentUser != null)
+            if (model.CurrentUser != null) //Redirect to Index action of Home controller if user is logged in
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -105,7 +105,7 @@ namespace CombatGameSite.Areas.Account.Controllers
                     .Where(u => u.Name == model.Username)
                     .FirstOrDefault();
 
-                if (conflictingUser != null)
+                if (conflictingUser != null) //Raise an error if the username is already taken
                 {
                     ModelState.AddModelError("", "Username is taken.");
                 }
@@ -133,7 +133,7 @@ namespace CombatGameSite.Areas.Account.Controllers
         [HttpPost]
         [Route("logout")]
         public RedirectToActionResult Logout()
-        {
+        { //Log user out by removing their id from session data. Redirect to Index action of Home controller.
             HttpContext.Session.SetInt32("userId", 0);
             return RedirectToAction("Index", "Home");
         }

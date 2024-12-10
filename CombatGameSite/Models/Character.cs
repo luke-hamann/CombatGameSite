@@ -1,7 +1,7 @@
 ﻿    using System.ComponentModel.DataAnnotations;
 
 namespace CombatGameSite.Models
-{
+{ //Character model for database
     public class Character
     {
         public const int MAX_SKILL_POINTS = 125;
@@ -42,14 +42,14 @@ namespace CombatGameSite.Models
                 3 => "Wind",
                 4 => "Earth",
                 _ => "",
-            };
+            }; //Return a type based on the TypeId.
 
         public bool HasUniqueSkills()
         {
             var skillList = new List<string?>([SkillPrimaryId, SkillSecondaryId, SkillTertiaryId]);
             skillList = skillList.Where(s => s != null).ToList();
             return skillList.Count == skillList.Distinct().ToList().Count;
-        }
+        } //Return how many skills the character has associated to them.
 
         public bool HasValidSkillPointDistribution()
         {
@@ -58,6 +58,6 @@ namespace CombatGameSite.Models
                 (SkillSecondary?.Cost ?? 0) +
                 (SkillTertiary?.Cost ?? 0);
             return total <= MAX_SKILL_POINTS;
-        }
+        } //Validates that a character has distributed their skill points correctly.
     }
 }

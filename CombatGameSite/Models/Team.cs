@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace CombatGameSite.Models
-{
+{ //Model for holding Team data
     public class Team
     {
         public int? Id { get; set; }
@@ -35,5 +35,6 @@ namespace CombatGameSite.Models
                 .Where(i => i != null)
                 .Select(i => (int)i!)
                 .ToList();
+        //Hold a list of all characterIds. Ex => {1,2,3,4,5}
     }
 }

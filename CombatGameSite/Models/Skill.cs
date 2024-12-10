@@ -1,5 +1,5 @@
 ﻿namespace CombatGameSite.Models
-{
+{ //Model for holding information about skills
     public class Skill
     {
         public string? Id { get; set; }
@@ -17,6 +17,6 @@
                 3 => "Wind",
                 4 => "Earth",
                 _ => "",
-            };
+            }; //Returns display text for TypeId.
     }
 }

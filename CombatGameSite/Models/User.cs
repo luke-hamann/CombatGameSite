@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace CombatGameSite.Models
-{
+{ //Model for holding User data
     public class User
     {
         public int Id { get; set; }

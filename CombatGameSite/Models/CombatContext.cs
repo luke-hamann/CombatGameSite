@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 namespace CombatGameSite.Models
-{
+{ //Seed default data into the database
     public class CombatContext(DbContextOptions<CombatContext> options) : DbContext(options)
     {
-        public required DbSet<User> Users { get; set; }
-        public required DbSet<Skill> Skills { get; set; }
-        public required DbSet<Character> Characters { get; set; }
-        public required DbSet<Team> Teams { get; set; }
+        public required DbSet<User> Users { get; set; } //List of all Users
+        public required DbSet<Skill> Skills { get; set; } //List of all Skills
+        public required DbSet<Character> Characters { get; set; } //List of all Characters
+        public required DbSet<Team> Teams { get; set; } //List of all Teams
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
