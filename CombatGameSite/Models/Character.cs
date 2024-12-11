@@ -49,7 +49,7 @@ namespace CombatGameSite.Models
             var skillList = new List<string?>([SkillPrimaryId, SkillSecondaryId, SkillTertiaryId]);
             skillList = skillList.Where(s => s != null).ToList();
             return skillList.Count == skillList.Distinct().ToList().Count;
-        } //Return how many skills the character has associated to them.
+        } //Return if the character's skills do not repeat.
 
         public bool HasValidSkillPointDistribution()
         {
